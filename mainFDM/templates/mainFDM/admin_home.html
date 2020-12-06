@@ -1,0 +1,25 @@
+{% extends 'mainFDM/base.html' %}
+
+{%block title%}Admin Home{%endblock%}
+
+{% block content %}
+    <h1>Welcome to your account {{user.username}}!</h1> <!-- we can call any method on the object we pass from the views here and access all of
+    it's attributes -->
+    <ul>
+
+        <li>First name: {{user.firstname}}</li>
+        <li>Surname: {{user.surname}}</li>
+        <li>Password: {{user.password}}</li>
+
+    </ul>
+
+{% endblock %}
+
+<html lang="">
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>Admin home page showing admins database contents for now --> %s</h1> %id
+</body>
+</html>
