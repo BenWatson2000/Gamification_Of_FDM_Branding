@@ -1,0 +1,61 @@
+.navbar {
+    padding: 0;
+    margin: 0;
+}
+
+#navigation{
+    border-top: 3px solid #1daded;
+    margin: 0;
+    background-color: #202025;
+}
+
+.navbar-brand{
+    position:relative;
+    right: 50px;
+}
+
+#fdm_logo_header{
+    width: 126px;
+    height: 60px;
+    border: 1px
+}
+
+.gradient-bar{
+    background: linear-gradient(40deg, rgba(21,65,200,1), rgba(136,32,187,1));
+    height: 14px;
+    padding: 0;
+    margin: 0;
+    opacity: 100%
+}
+
+#lower-bar{
+    position: absolute;
+    top: -14px;
+}
+
+.footer{
+    border-bottom: 8px solid #1daded;
+}
+
+.btn-grad{
+    border-radius: 50px;
+    background: #1541c8;
+    background: linear-gradient(40deg,#1541c8 0,#8820bb 100%);
+    font-weight: 600;
+    font-size: 12px;
+    color: white;
+    font-family: open sans, sans-serif;
+}
+
+#admin-login-btn{
+    display: block;
+}
+
+#licence{
+    color: white;
+    font-size:12px;
+    font-family: open sans, sans-serif;
+    font-weight: 300;
+    margin-left:10px
+}
+

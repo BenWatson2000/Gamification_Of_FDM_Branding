@@ -1,16 +1,51 @@
-{% extends 'mainFDM/base.html' %}
-
-{%block title%}Home{%endblock%}
-
-{% block content %}
-<h1>Home Page allowing admins to login and guest users to continue to stream selection</h1>
-{% endblock %}
-
-<html lang="">
+<!doctype html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'mainFDM/css/custom.css' %}">
+<html lang="en">
 <head>
-    <title></title>
+    <!-- requires meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Just me trying to do the home page" />
+    <meta name="author" content="Iga" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="/static/mainFDM/css/custom.css">
+
+    <title>Home</title>
 </head>
 <body>
-    <h1>Home Page allowing admins to login and guest users to continue to stream selection</h1>
+    <!-- navigation -->
+<nav class="navbar navbar-expand navbar-dark bg-dark p-3" id="navigation">
+  <div class="container">
+    <div class="navbar-brand" href="">
+        <img src="/static/mainFDM/images/fdm-logo-2018.png" id="fdm_logo_header" alt="FDM logo">
+    </div>
+  </div>
+</nav>
+
+    <div class="gradient-bar" id="upper-bar"></div>
+    <img src="/static/mainFDM/images/home-background.jpg" class="img-fluid" alt="Background Image">
+
+<footer class="footer footer-expand fixed-bottom footer-dark bg-dark py-5" id="footer">
+    <div class="gradient-bar fixed-bottom" id="lower-bar"></div>
+    <div class="container-fluid">
+        <div class="row align-items-md-center">
+            <div class="col" style="background-color: blue">
+                <button type="button" class="btn btn-grad btn-lg mx-auto" id="admin-login-btn">
+                    ADMIN LOGIN
+                </button>
+            </div>
+            <div class="col-md-7 col-sm-1" style="background-color: snow">HALLO</div>
+            <div class="col" style="background-color: aquamarine">
+                <span id="licence">@FDM Group 2020</span>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>

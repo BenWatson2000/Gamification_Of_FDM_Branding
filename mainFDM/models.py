@@ -12,3 +12,6 @@ class AdminAccounts(models.Model):
 
     def __str__(self):
         return self.username
+
+# class GameSession(models.Model):
+#     player = models.CharField(max_length=)
