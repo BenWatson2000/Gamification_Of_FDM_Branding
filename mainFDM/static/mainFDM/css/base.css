@@ -16,8 +16,7 @@ html {
 }
 
 body {
-  min-height: 60rem; /*this causes the page to scroll*/
-    padding-bottom: 8rem;
+  /*min-height: 60rem; !*this causes the page to scroll*!*/
   padding-top: 6rem;
     background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');
     background-position: bottom right;

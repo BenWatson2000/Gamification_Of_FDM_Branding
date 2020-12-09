@@ -6,8 +6,12 @@ from .models import AdminAccounts
 # Create your views here.
 
 # view of the intro to FDM Technical Graduate Programmes page
+def index(request):
+    return render(request, 'mainFDM/index.html')
+
+
 def base(response):
-    return render(response, 'mainFDM/base.html', {})
+    return render(response, 'mainFDM/base.html')
 
 
 def home(response):
