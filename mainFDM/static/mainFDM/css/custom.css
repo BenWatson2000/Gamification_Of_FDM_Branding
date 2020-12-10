@@ -10,6 +10,7 @@ body {
 }*/
 
 /*When the page is bigger and needs a scroll use this to keep the footer down*/
+
 html {
   position: relative;
   min-height: 100%;
@@ -21,7 +22,8 @@ body {
   padding-top: 6rem;
     background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');
     background-position: bottom right;
-    background-color: #202025;
+    background-color: #000000;
+    background-repeat: repeat-y;
     font-family: open sans, sans-serif;
 }
 
@@ -110,7 +112,6 @@ body {
 
 .card{
     background-clip:padding-box;
-    /*min-height: 350px;*/
     border: 10px solid rgba(255, 255, 255, 0.5);
     border-radius: 30px;
 }
