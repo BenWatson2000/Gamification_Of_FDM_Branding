@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Cable Game</title>
+         <script type="text/javascript" src="../../static/js/phaser.min.js"></script>
+    </head>
+    <body>
+         <script type="text/javascript">
+                 var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 0 }
+                }
+            },
+            scene: {
+                preload: preload,
+                create: create
+            }
+        };
+
+        var game = new Phaser.Game(config);
+        var images;
+
+        var lineActive = false;
+        var line;
+        var lines = [];
+        var firstSelected = null;
+        var reset = false;
+        var completedNodes = [];
+
+        function preload ()
+        {
+            this.load.image('background',"{% static "images/background.jpg" %}")
+            this.load.image('questioncable1','{% static "images/QuestionCable.png" %}')
+            this.load.image('questioncable2','{% static "images/QuestionCable.png" %}')
+            this.load.image('questioncable3','{% static "images/QuestionCable.png" %}')
+            this.load.image('answercable1','{% static "images/AnswerCable.png" %}')
+            this.load.image('answercable2','{% static "images/AnswerCable.png" %}')
+            this.load.image('answercable3','{% static "images/AnswerCable.png" %}')
+        }
+
+        function create ()
+        {
+
+
+            var main = this;
+            var bg = this.add.image(400, 300, 'background').setInteractive();
+            images = [
+                this.add.image(95, 250, 'questioncable1').setInteractive({useHandCursor: true}).setData('match', 'answercable1').setData('name', 'questioncable1'),
+                this.add.image(95, 100, 'questioncable2').setInteractive({useHandCursor: true}).setData('match', 'answercable2').setData('name', 'questioncable2'),
+                this.add.image(95, 400, 'questioncable3').setInteractive({useHandCursor: true}).setData('match', 'answercable3').setData('name', 'questioncable3'),
+                this.add.image(704, 100, 'answercable1').setInteractive({useHandCursor: true}).setData('match', 'questioncable1').setData('name', 'answercable1'),
+                this.add.image(704, 250, 'answercable2').setInteractive({useHandCursor: true}).setData('match', 'questioncable2').setData('name', 'answercable2'),
+                this.add.image(704, 400, 'answercable3').setInteractive({useHandCursor: true}).setData('match', 'questioncable3').setData('name', 'answercable3'),
+            ];
+
+            images.forEach(function(image) {
+                image.on('pointerdown', function (pointer) {
+                    this.setTint(0x888888);
+
+                    // If one object has already been selected, a line is active following the mouse cursor.
+                    if(lineActive === true ) {
+                        main.input.removeListener('pointermove');
+                        if(image.getData('name') === firstSelected.getData('match')) {
+                            line.setTo(firstSelected.x, firstSelected.y, image.x, image.y);
+                            completedNodes.push(firstSelected.getData('name'));
+                            completedNodes.push(image.getData('name'));
+                            lines.push(line);
+                            lineActive = false;
+                            image.setData('selected', true);
+                            firstSelected = null;
+                        } else {
+                            line.destroy();
+                            lineActive = false;
+                            firstSelected = null;
+                            reset = true;
+                        }
+                    }
+
+                    // Nothing has been selected yet
+                    if(lineActive === false && !image.getData('selected') && !reset) {
+                        // Make sure it's not one that's already been completed
+                        if(!completedNodes.includes(image.getData('name'))) {
+                            line = main.add.line(0, 0, image.x, image.y, pointer.x, pointer.y, 0xd50102).setOrigin(0, 0);
+                            line.setLineWidth(2);
+                            main.input.on('pointermove', function (pointer, gameObject) {
+                                line.setTo(image.x, image.y, pointer.x, pointer.y);
+                            });
+                            lineActive = true;
+                            image.setData('selected', true);
+                            firstSelected = image;
+                        }
+                    }
+
+                    // Unselect any failed attempts
+                    image.setData('selected',false);
+                    reset = false;
+                })
+
+                image.on('pointerout', function (pointer) {
+                    this.clearTint();
+                });
+
+                image.on('pointerup', function (pointer) {
+                    this.clearTint();
+                });
+            });
+
+
+            // Clicking the background causes the current line to disappear and reset related objects/images
+            bg.on('pointerdown',function(pointer) {
+                if(lineActive) {
+                    if(line) {
+                        line.destroy();
+                        main.input.removeListener('pointermove');
+                    }
+                    lineActive = false;
+                    firstSelected.setData('selected',false);
+                    firstSelected = null;
+                    reset = false;
+                }
+            });
+        }
+         </script>
+    </body>
+</html>
