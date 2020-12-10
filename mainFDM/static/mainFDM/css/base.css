@@ -16,11 +16,13 @@ html {
 }
 
 body {
-  /*min-height: 60rem; !*this causes the page to scroll*!*/
+  min-height: 60rem; /*this causes the page to scroll*/
+    padding-bottom: 8rem;
   padding-top: 6rem;
-    background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');
+    /*background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');*/
     background-position: bottom right;
-    background-color: #202025;
+    background-color: #000000;
+    background-repeat: repeat-y;
     font-family: open sans, sans-serif;
 }
 
@@ -59,6 +61,7 @@ body {
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
   margin-bottom: 0;
+    height: 45em;
   /*background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');
     !*height: 530px;*!
     !*width: fit-content;*!
