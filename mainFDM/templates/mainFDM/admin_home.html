@@ -1,25 +1,132 @@
-{% extends 'mainFDM/base.html' %}
+<!doctype html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'mainFDM/css/custom.css' %}">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin home page">
+    <meta name="author" content="Iga">
+    <link rel="icon" href="../../../../favicon.ico">
 
-{%block title%}Admin Home{%endblock%}
+    <title>Admin Home</title>
 
-<!--{% block content %}
-    <h1>Welcome to your account {{user.username}}!</h1> &lt;!&ndash; we can call any method on the object we pass from the views here and access all of
-    it's attributes &ndash;&gt;
-    <ul>
+    <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-        <li>First name: {{user.firstname}}</li>
-        <li>Surname: {{user.surname}}</li>
-        <li>Password: {{user.password}}</li>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/static/mainFDM/css/custom.css">
+  </head>
 
-    </ul>
+    <body id="admin">
+        <header>
+          <!-- fixed navbar -->
+          <nav class="navbar navbar-expand-md fixed-top navbar-dark p-2">
+            <div class="container-fluid">
+              <a class="navbar-brand mx-5 my-1" href="/">
+              <img src="/static/mainFDM/images/fdm-logo-2018.png" id="fdm_logo_header" alt="FDM logo">
+              </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarsExample07"
+                      aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+              <div class="collapse navbar-collapse justify-content-end">
+                  <a class="nav-link link-light" href="/">Home <span class="sr-only"></span></a>
+                  <ul class="navbar-nav me-5">
+                  <!--<li class="nav-item active">-->
+                  <!--</li>-->
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- gradient bar below navbar -->
+          <div class="gradient-bar" id="upper-bar"></div>
+        </header>
 
-{% endblock %}-->
+<!-- begin page content -->
+    <main role="main">
 
-<html lang="">
-<head>
-    <title></title>
-</head>
-<body>
-    <h1>Admin home page showing admins database contents for now --> %s</h1> %id
-</body>
+        <section class="jumbotron m-0 pt-3 text-center">
+        <!-- container with the header  -->
+        <div class="container">
+            <p id="admin-header">Admin Page</p>
+        </div>
+            <div class="container px-5">
+
+              <!-- row of 2 columns with 2 forms -->
+              <div class="row justify-content-around pt-4">
+                <!-- admin question adding from -->
+                <div class="col-sm-auto col-md-5 p-4 form-col" id="form-col">
+                    <h3 class="form-title" id="form-title">Add a question</h3>
+                    <form >
+                        <select class="form-select mb-3" aria-label="Default select example">
+                          <option selected>Select Stream Type</option>
+                          <option value="1">Technical Operations</option>
+                          <option value="2">Business Intelligence</option>
+                          <option value="3">Software Testing</option>
+                        </select>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" style="height:100px" placeholder="Add your question here!" id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Question</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea type="text" class="form-control" style="height: 70px" placeholder="Add the correct answer here" id="floatingAnswer"></textarea>
+                            <label for="floatingAnswer">Correct Answer</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea type="text" class="form-control" style="height: 70px" placeholder="Add the first incorrect answer here" id="floatingWrong1"></textarea>
+                            <label for="floatingWrong1">Incorrect 1</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea type="text" class="form-control" style="height: 70px" placeholder="Add the second incorrect answer here" id="floatingWrong2"></textarea>
+                            <label for="floatingWrong2">Incorrect 2</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea type="text" class="form-control" style="height: 70px" placeholder="Add the third incorrect answer here" id="floatingWrong3"></textarea>
+                            <label for="floatingWrong3">Incorrect 3</label>
+                        </div>
+                         <button type="submit" class="btn btn-grad btn-lg" id="form-btn">Submit</button>
+                    </form>
+                  </div>
+                  <div class="col-sm-auto col-md-5">
+                      <div class="container form-col p-4">
+                          <h3 class="form-title">Retrieve Scores</h3>
+                          <form>
+                              <div class="row g-2 align-items-center">
+                                  <div class="col">
+                                    <button type="button" class="btn btn-grad text-nowrap" id="get-scores">Get Highest Score</button>
+                                  </div>
+                                  <div class="col">
+                                    <input type="text" class="form-control" placeholder="Highest Score" aria-label="Highest Score" readonly>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- footer  -->
+    <footer class="footer py-0 py-sm-3 py-md-4 py-lg-4 py-xl-4 py-xxl-5 bg-dark">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col">
+            </div>
+            <div class="col-md-7 col-sm-auto">HALLO</div>
+            <div class="col text-center">
+                <span id="licence">@FDM Group 2020</span>
+            </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <script>
+
+    </script>
+    </body>
 </html>

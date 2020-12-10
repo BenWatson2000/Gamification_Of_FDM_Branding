@@ -18,26 +18,15 @@
     <link rel="stylesheet" href="/static/mainFDM/css/custom.css">
   </head>
 
-  <body>
+  <body id="home">
 
     <header>
       <!-- fixed navbar -->
       <nav class="navbar navbar-expand-md fixed-top navbar-dark p-2">
         <div class="container-fluid">
-          <a class="navbar-brand mx-5 my-1" href="#">
+          <a class="navbar-brand mx-5 my-1" href="/">
           <img src="/static/mainFDM/images/fdm-logo-2018.png" id="fdm_logo_header" alt="FDM logo">
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarsExample07"
-                  aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-            <div class="nav-item dropdown my-2 my-md-0">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Languages</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown07">
-                  <a class="dropdown-item" href="#">English</a>
-                  <a class="dropdown-item" href="#">Deutsch</a>
-                </div>
-            </div>
           </div>
         </nav>
       <!-- gradient bar below navbar -->
@@ -48,7 +37,7 @@
     <main role="main">
 
 
-      <section class="jumbotron m-0 text-center">
+      <section class="jumbotron m-0 text-center" id="jumbotron-home">
         <!-- container with the header and intro txt -->
         <div class="container">
           <h1 class="jumbotron-heading">Bringing people and technology together</h1>
@@ -108,14 +97,12 @@
 
     <!-- close the gap to the bottom of the page -->
     <footer class="footer py-0 py-sm-3 py-md-4 py-lg-4 py-xl-4 py-xxl-5 bg-dark">
-      <!-- TODO fix the lower bar or get rid of it entirely
-        <div class="gradient-bar" id="lower-bar"></div> -->
       <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col">
-                <button type="button" class="btn btn-grad btn-lg mt-sm-auto mt-2 mx-auto" id="admin-login-btn">
+                <a href="admin_home/" style="text-decoration: none"><button type="button" class="btn btn-grad btn-lg mt-sm-auto mt-2 mx-auto" href="admin_home/" id="admin-login-btn">
                     ADMIN LOGIN
-                </button>
+                </button></a>
             </div>
             <div class="col-md-7 col-sm-auto">HALLO</div>
             <div class="col text-center">

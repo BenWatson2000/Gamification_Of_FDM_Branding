@@ -18,9 +18,8 @@ def home(response):
     return render(response, 'mainFDM/home.html', {})
 
 
-def admin_home(response, id):
-    user = AdminAccounts.objects.get(id=id)
-    return render(response, 'mainFDM/admin_home.html', {"user":user})
+def admin_home(response):
+    return render(response, 'mainFDM/admin_home.html')
 
 
 def stream_select(request):
