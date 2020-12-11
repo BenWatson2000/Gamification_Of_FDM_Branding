@@ -6,15 +6,15 @@ from django.forms import ModelForm
 
 # stream choices
 STREAM_TYPES = (
-    ("Select", "Select Stream Type"),
-    ("TOP", "Technical Operations"),
-    ("BI", "Business Intelligence"),
-    ("ST", "Software Testing"),
+    ('Select', 'Select Stream Type'),
+    ('TOP', 'Technical Operations'),
+    ('BI', 'Business Intelligence'),
+    ('ST', 'Software Testing'),
 )
 
 
 # Create your models here.
-class AdminAccounts(models.Model):
+class AdminAccount(models.Model):
     # this is just a mock so it will use the auto created id as PK
     username = models.CharField(max_length=20, unique=True)
     firstname = models.CharField(max_length=40, unique=False)
@@ -25,13 +25,15 @@ class AdminAccounts(models.Model):
         return self.username
 
 
-class GameQuestions(models.Model):
+class GameQuestion(models.Model):
     stream_type = models.CharField(max_length=200)
     question = models.TextField()
     answer = models.TextField()
-    incorrect1 = models.TextField()
-    incorrect2 = models.TextField()
-    incorrect3 = models.TextField()
 
     def __str__(self):
         return self.question
+
+
+class Score(models.Model):
+    game_type = models.CharField(max_length=200)
+    score = models.CharField(max_length=10)

@@ -1,6 +1,5 @@
 <!doctype html>
 {% load static %}
-{% load crispy_forms_tags %}
 <link rel="stylesheet" type="text/css" href="{% static 'mainFDM/css/custom.css' %}">
 <html lang="en">
   <head>
@@ -59,46 +58,31 @@
 
                 <!-- admin question adding form column -->
                 <div class="col-sm-auto col-md-5 p-4 form-col" id="form-col">
-                    <!-- form title -->
-                    <h3 class="form-title" id="form-title">Add a question</h3>
-                    <!-- the form starts here -->
-                    <form method="post" action="admin_home/">
-                         {% csrf_token %}
-                        <select class="form-select mb-3" aria-label="Default select example">
-                          <option selected>Select Stream Type</option>
-                          <option value="1">Technical Operations</option>
-                          <option value="2">Business Intelligence</option>
-                          <option value="3">Software Testing</option>
-                        </select>
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" style="height:100px" placeholder="Add your question here!" id="floatingTextarea"></textarea>
-                            <label for="floatingTextarea">Question</label>
+                    <div class="row">
+                        <h3 class="form-title">Add a question</h3>
+                        <div class="col">
+                            <form method="post" name=question" action="/admin_home/">
+                                {% csrf_token %}
+                                {{ q_form.as_p}}
+                                <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
+                            </form>
                         </div>
-                        <div class="form-floating mb-3">
-                            <textarea type="text" class="form-control" style="height: 70px" placeholder="Add the correct answer here" id="floatingAnswer"></textarea>
-                            <label for="floatingAnswer">Correct Answer</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <textarea type="text" class="form-control" style="height: 70px" placeholder="Add the first incorrect answer here" id="floatingWrong1"></textarea>
-                            <label for="floatingWrong1">Incorrect 1</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <textarea type="text" class="form-control" style="height: 70px" placeholder="Add the second incorrect answer here" id="floatingWrong2"></textarea>
-                            <label for="floatingWrong2">Incorrect 2</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <textarea type="text" class="form-control" style="height: 70px" placeholder="Add the third incorrect answer here" id="floatingWrong3"></textarea>
-                            <label for="floatingWrong3">Incorrect 3</label>
-                        </div>
-                         <button type="submit" class="btn btn-grad btn-lg" id="form-btn">Submit</button>
-                    </form>
-                    <!-- end of form -->
-                  </div>
+                    </div>
+                </div>
 
                   <div class="col-sm-auto col-md-5">
                       <div class="container form-col p-4">
                           <h3 class="form-title">Retrieve Scores</h3>
-                          <form>
+                          <form method="post" name="score" action="/admin_home/">
+                              {% csrf_token %}
+                              {{ s_form }}
+                              <p>{{ maybe }}</p>
+                              <button type="button" class="btn btn-grad text-nowrap" id="get-scores">Get Highest Score</button>
+                          </form>
+                        <!--  {% for score in scores %}
+                          <p> {{score.game_type}} &#45;&#45; {{score.score}}</p>
+                          {% endfor %}-->
+ <!--                         <form>
                               <div class="row g-2 align-items-center">
                                   <div class="col">
                                     <button type="button" class="btn btn-grad text-nowrap" id="get-scores">Get Highest Score</button>
@@ -107,19 +91,7 @@
                                     <input type="text" class="form-control" placeholder="Highest Score" aria-label="Highest Score" readonly>
                                   </div>
                               </div>
-                          </form>
-                      </div>
-                      <div class="container form-col mt-4 p-4">
-                          <div class="row">
-                              <h3 class="form-title">Add q's with Django.forms</h3>
-                              <div class="col bg-light">
-                                    <form method="post" action="/admin_home/">
-                                        {% csrf_token %}
-                                        {{ form|crispy }}
-                                        <button type="submit" class="btn btn-grad btn-lg" >Submit</button>
-                                    </form>
-                              </div>
-                          </div>
+                          </form>-->
                       </div>
                   </div>
               </div>
