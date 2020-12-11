@@ -80,7 +80,7 @@ DATABASES = {
         'USER': 'team4admin',
         'PASSWORD': 'our3ChipDoor',
         'HOST': 'fdminstance.cwflfkfpqivv.us-east-2.rds.amazonaws.com',
-        'PORT': '3306',
+        'PORT': '3306'
     }
 }
 
