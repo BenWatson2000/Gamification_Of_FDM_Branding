@@ -55,10 +55,14 @@
 
               <!-- row of 2 columns with 2 forms -->
               <div class="row justify-content-around pt-4">
-                <!-- admin question adding from -->
+
+                <!-- admin question adding form column -->
                 <div class="col-sm-auto col-md-5 p-4 form-col" id="form-col">
+                    <!-- form title -->
                     <h3 class="form-title" id="form-title">Add a question</h3>
-                    <form >
+                    <!-- the form starts here -->
+                    <form method="post" action="admin_home/">
+                         {% csrf_token %}
                         <select class="form-select mb-3" aria-label="Default select example">
                           <option selected>Select Stream Type</option>
                           <option value="1">Technical Operations</option>
@@ -87,7 +91,9 @@
                         </div>
                          <button type="submit" class="btn btn-grad btn-lg" id="form-btn">Submit</button>
                     </form>
+                    <!-- end of form -->
                   </div>
+
                   <div class="col-sm-auto col-md-5">
                       <div class="container form-col p-4">
                           <h3 class="form-title">Retrieve Scores</h3>
@@ -100,6 +106,14 @@
                                     <input type="text" class="form-control" placeholder="Highest Score" aria-label="Highest Score" readonly>
                                   </div>
                               </div>
+                          </form>
+                      </div>
+                      <div class="container form-col mt-4 p-4">
+                          <h3 class="form-title">Add q's with Django.forms</h3>
+                          <form method="post" action="/admin_home/">
+                              {% csrf_token %}
+                              {{form.as_p}}
+                              <button type="submit" class="btn btn-grad btn-lg" >Submit</button>
                           </form>
                       </div>
                   </div>

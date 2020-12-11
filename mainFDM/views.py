@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import AdminAccounts
+from .forms import AddQuestion
 
 
 # Create your views here.
@@ -19,7 +20,11 @@ def home(response):
 
 
 def admin_home(response):
-    return render(response, 'mainFDM/admin_home.html')
+    if response.method == "POST":
+        form = AddQuestion(response.POST)
+
+    form = AddQuestion()
+    return render(response, 'mainFDM/admin_home.html', {"form": form})
 
 
 def stream_select(request):
