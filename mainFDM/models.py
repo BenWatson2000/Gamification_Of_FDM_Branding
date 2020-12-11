@@ -26,21 +26,12 @@ class AdminAccounts(models.Model):
 
 
 class GameQuestions(models.Model):
-    stream_type = models.CharField(max_length=3, choices=STREAM_TYPES)
-    question = models.CharField()
-    answer = models.CharField()
-    incorrect1 = models.CharField()
-    incorrect2 = models.CharField()
-    incorrect3 = models.CharField()
+    stream_type = models.CharField(max_length=200)
+    question = models.TextField()
+    answer = models.TextField()
+    incorrect1 = models.TextField()
+    incorrect2 = models.TextField()
+    incorrect3 = models.TextField()
 
     def __str__(self):
         return self.question
-
-class QuestionForm(ModelForm):
-    class Meta:
-        model: GameQuestions
-        fields = ['stream_type', 'question', 'answer', 'incorrect1', 'incorrect2', 'incorrect3']
-
-
-# class GameSession(models.Model):
-#     player = models.CharField(max_length=)

@@ -20,9 +20,6 @@ def home(response):
 
 
 def admin_home(response):
-    if response.method == "POST":
-        form = AddQuestion(response.POST)
-
     form = AddQuestion()
     return render(response, 'mainFDM/admin_home.html', {"form": form})
 

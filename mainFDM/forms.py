@@ -1,4 +1,5 @@
 from django import forms
+from .models import GameQuestions
 
 STREAM_TYPES = (
     ("Select", "Select Stream Type"),
@@ -7,12 +8,12 @@ STREAM_TYPES = (
     ("ST", "Software Testing"),
 )
 
+
 class AddQuestion(forms.Form):
     stream_type = forms.ChoiceField(widget=forms.Select, choices=STREAM_TYPES)
-    question = forms.CharField()
-    answer = forms.CharField()
-    incorrect1 = forms.CharField()
-    incorrect2 = forms.CharField()
+    question = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Write the question here', 'rows': '3'}))
+    answer = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Write the correct answer here', 'rows': '2'}))
+
 
 # dictionary variable for specifying all initial fields
 # f = AddQuestion(initial={'qustion': 'Question'})
