@@ -8,13 +8,6 @@
     </head>
     <body>
 
-
-{##}
-{#    {% block content %}#}
-{#        {% for c in content1 %}#}
-{#        {% endfor %}#}
-{#    {% endblock %}#}
-
     <p id="mytext"></p>
 
      <form name="cablegame" method="post">
@@ -29,11 +22,18 @@
                     type: Phaser.AUTO,
                     width: 1200,
                     height: 741,
+
                     physics: {
                         default: 'arcade',
                         arcade: {
                             gravity: { y: 0 }
                         }
+                    },
+                     scale: {
+                    // Fit to window
+                    mode: Phaser.Scale.FIT,
+                    // Center vertically and horizontally
+                    autoCenter: Phaser.Scale.CENTER_BOTH
                     },
                 scene: {
                     preload: preload,
@@ -43,6 +43,7 @@
 
             var game = new Phaser.Game(config);
 
+            var imagesCon=[];
             var line;
             var lineActive = false;
             var lines = [];
@@ -56,12 +57,21 @@
             {
                 this.load.json('qnadata', "{% static "json/QnA.json" %}");
                 this.load.image('background',"{% static "images/background.jpg" %}")
-                this.load.image('questioncable1','{% static "images/QuestionCable.png" %}')
-                this.load.image('questioncable2','{% static "images/QuestionCable.png" %}')
-                this.load.image('questioncable3','{% static "images/QuestionCable.png" %}')
-                this.load.image('answercable1','{% static "images/AnswerCable.png" %}')
-                this.load.image('answercable2','{% static "images/AnswerCable.png" %}')
-                this.load.image('answercable3','{% static "images/AnswerCable.png" %}')
+
+                this.load.image('questioncable','{% static "images/QuestionCable.png" %}')
+                this.load.image('answercable','{% static "images/AnswerCable.png" %}')
+
+                this.load.image('questionConcable','{% static "images/ConnCableQuestion.png" %}')
+                this.load.image('answerConcable','{% static "images/ConnCableAnswer.png" %}')
+
+                this.load.image('q1a1', '{% static "images/q1a1f.png" %}')
+                this.load.image('q1a2', '{% static "images/q1a2f.png" %}')
+                this.load.image('q1a3', '{% static "images/q1a3f.png" %}')
+                this.load.image('q1a4', '{% static "images/q1a4f.png" %}')
+                this.load.image('q2a1', '{% static "images/q2a1f.png" %}')
+                this.load.image('q3a1', '{% static "images/q3a1f.png" %}')
+                this.load.image('q4a1', '{% static "images/q4a1f.png" %}')
+
                 this.load.image('textBorder','{% static "images/text-border.png" %}')
             }
 
@@ -78,7 +88,7 @@
                 this.qnaData = this.cache.json.get('qnadata');
                 console.log(this.qnaData);
 
-                // set all questions and answers into different variables
+                // set all questions and answers from json file into different variables
                 var question1 = this.qnaData.Cable1.q1
                 var answer1 = this.qnaData.Cable1.a1
 
@@ -88,8 +98,11 @@
                 var question3 = this.qnaData.Cable3.q3
                 var answer3 = this.qnaData.Cable3.a3
 
+                var question4 = this.qnaData.Cable4.q4
+                var answer4 = this.qnaData.Cable4.a4
+
                 // array with coordinates for question cables
-                var array = [93,278,463]
+                var array = [93,278,463,648]
 
                 // function to shuffle array
                 var shuffle = function (array){
@@ -112,7 +125,6 @@
                 this.add.image(151,463,'textBorder')
                 this.add.image(151,648,'textBorder')
 
-
                 this.add.image(1049,93,'textBorder')
                 this.add.image(1049,278,'textBorder')
                 this.add.image(1049,463,'textBorder')
@@ -122,28 +134,91 @@
                 this.add.text(151,newArray[0],question1)
                 this.add.text(151,newArray[1],question2)
                 this.add.text(151,newArray[2],question3)
+                this.add.text(151,newArray[3],question4)
+
 
                 // set positions for answer texts
                 this.add.text(1049,93,answer1)
                 this.add.text(1049,278,answer2)
                 this.add.text(1049,463,answer3)
+                this.add.text(1049,648,answer4)
 
 
 
-
-                //this.add.text(22,52,question1)
+                //array of connected cable images
+                imagesCon = [
+                    this.add.image(397, newArray[0], 'questionConcable'),
+                    this.add.image(397, newArray[1], 'questionConcable'),
+                    this.add.image(397, newArray[2], 'questionConcable'),
+                    this.add.image(397, newArray[3], 'questionConcable'),
+                    this.add.image(803, 93, 'answerConcable'),
+                    this.add.image(803, 278, 'answerConcable'),
+                    this.add.image(803, 463, 'answerConcable'),
+                    this.add.image(803, 648, 'answerConcable'),
+                ]
 
 
 
                 //array of all images and their matches and randomizing question cables
                 images = [
-                    this.add.image(397, newArray[0], 'questioncable1').setInteractive({useHandCursor: true}).setData('match', 'answercable1').setData('name', 'questioncable1'),
-                    this.add.image(397, newArray[1], 'questioncable2').setInteractive({useHandCursor: true}).setData('match', 'answercable2').setData('name', 'questioncable2'),
-                    this.add.image(397, newArray[2], 'questioncable3').setInteractive({useHandCursor: true}).setData('match', 'answercable3').setData('name', 'questioncable3'),
-                    this.add.image(803, 93, 'answercable1').setInteractive({useHandCursor: true}).setData('match', 'questioncable1').setData('name', 'answercable1'),
-                    this.add.image(803, 278, 'answercable2').setInteractive({useHandCursor: true}).setData('match', 'questioncable2').setData('name', 'answercable2'),
-                    this.add.image(803, 463, 'answercable3').setInteractive({useHandCursor: true}).setData('match', 'questioncable3').setData('name', 'answercable3'),
+                    this.add.image(397, newArray[0], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable1').setData('name', 'questioncable1'),
+                    this.add.image(397, newArray[1], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable2').setData('name', 'questioncable2'),
+                    this.add.image(397, newArray[2], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable3').setData('name', 'questioncable3'),
+                    this.add.image(397, newArray[3], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable4').setData('name', 'questioncable4'),
+                    this.add.image(803, 93, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable1').setData('name', 'answercable1'),
+                    this.add.image(803, 278, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable2').setData('name', 'answercable2'),
+                    this.add.image(803, 463, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable3').setData('name', 'answercable3'),
+                    this.add.image(803, 648, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable4').setData('name', 'answercable4'),
                 ];
+
+                // adding images for when cables connect and setting the invisible
+                var q1a1=this.add.image(600, 315, 'q1a1');
+                q1a1.visible = false;
+
+                var q2a2=this.add.image(600, 500, 'q1a1');
+                q2a2.visible = false;
+
+                var q3a3=this.add.image(600, 686, 'q1a1');
+                q3a3.visible = false;
+
+                var q4a4=this.add.image(600, 870, 'q1a1');
+                q4a4.visible = false;
+
+                var q1a2=this.add.image(600, 370, 'q1a2');
+                q1a2.visible = false;
+
+                var q2a3=this.add.image(600, 555,'q1a2')
+                q2a3.visible = false;
+
+                var q3a4=this.add.image(600, 740,'q1a2')
+                q3a4.visible = false;
+
+                var q1a3=this.add.image(600, 368,'q1a3')
+                q1a3.visible = false;
+
+                var q2a4=this.add.image(600, 553,'q1a3')
+                q2a4.visible = false;
+
+                var q1a4=this.add.image(600, 370,'q1a4')
+                q1a4.visible = false;
+
+                var q2a1=this.add.image(600, 369,'q2a1')
+                q2a1.visible = false;
+
+                var q3a2=this.add.image(600, 554,'q2a1')
+                q3a2.visible = false;
+
+                var q4a3=this.add.image(600, 739,'q2a1')
+                q4a3.visible = false;
+
+                var q3a1=this.add.image(600, 369,'q3a1')
+                q3a1.visible = false;
+
+                var q4a2=this.add.image(600, 554,'q3a1')
+                q4a2.visible = false;
+
+                var q4a1=this.add.image(600, 369,'q4a1')
+                q4a1.visible = false;
 
                 //implementing listeners for all images in array
                 images.forEach(function(image) {
@@ -165,9 +240,50 @@
                                 // add successful line to lines array
                                 lines.push(line);
 
+                                // destroy images when cables connect
+                                image.destroy()
+                                firstSelected.destroy()
+                                line.destroy()
+
+                                // if cables connect turn connected cable images visible
+                                if(image.y===93 && firstSelected.y===93){
+                                    q1a1.visible = true;
+                                }else if (image.y===278 && firstSelected.y===278){
+                                    q2a2.visible = true;
+                                }else if(image.y===463 && firstSelected.y===463){
+                                    q3a3.visible= true;
+                                }else if(image.y===648 && firstSelected.y===648){
+                                    q4a4.visible= true;
+                                }else if(image.y===278 && firstSelected.y===93){
+                                    q1a2.visible = true;
+                                }else if(image.y===463 && firstSelected.y===278){
+                                    q2a3.visible = true;
+                                }else if(image.y===648 && firstSelected.y===463){
+                                    q3a4.visible = true;
+                                }else if(image.y===463 && firstSelected.y===93){
+                                    q1a3.visible = true;
+                                }else if(image.y===648 && firstSelected.y===278){
+                                    q2a4.visible = true;
+                                }else if(image.y===648 && firstSelected.y===93){
+                                    q1a4.visible = true;
+                                }else if(image.y===93 && firstSelected.y===278){
+                                    q2a1.visible = true;
+                                }else if(image.y===278 && firstSelected.y===463){
+                                    q3a2.visible = true;
+                                }else if(image.y===463 && firstSelected.y===648){
+                                    q4a3.visible = true;
+                                }else if(image.y===93 && firstSelected.y===463){
+                                    q3a1.visible = true;
+                                }else if(image.y===278 && firstSelected.y===648){
+                                    q4a2.visible = true;
+                                }else if(image.y===93 && firstSelected.y===648){
+                                    q4a1.visible = true;
+                                }
+
                                 lineActive = false;
                                 image.setData('selected', true);
                                 firstSelected = null;
+
                             } else {
                                 line.destroy();
                                 lineActive = false;
