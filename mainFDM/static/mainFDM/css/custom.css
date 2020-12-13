@@ -126,10 +126,29 @@ body {
   max-width: 100%;
 }
 
+/*.form-select:focus{
+    border-color: #FF0000;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.3);
+    outline: 0;
+    outline: thin dotted \9;
+    border-width: 2px;
+}*/
+
+.form-control:focus, .form-select:focus{
+    border-color: #1541c8;
+    box-shadow: inset 0 0 3px 1px rgba(21, 65, 200, 1), 0 0 2px 3px rgba(21, 65, 200, 1);
+    border-width: 1px;
+}
+
+.form-control::placeholder{
+    color: #202025;
+}
+
 .form-col{
     background: #1daded;
     border-radius: 30px;
     background-clip: border-box;
+    margin-bottom: 20px;
 }
 
 .form-title{
@@ -140,6 +159,14 @@ body {
     text-shadow: 0 4px 2px #212026;
 }
 
+.btn-grad{
+    border-radius: 50px;
+    background: #1541c8;
+    background: linear-gradient(40deg,#1541c8 0,#8820bb 100%);
+    color: white;
+    border: none;
+}
+
 #form-btn{
     font-size: 1.3rem;
     padding: 10px;
@@ -147,12 +174,12 @@ body {
     font-weight: 300;
 }
 
-
-#get-scores{
+#get-h-score{
     font-size: 1.3rem;
     padding-inline: 15%;
     font-weight: 300;
 }
+
 
 .card{
     background-clip:padding-box;
@@ -223,18 +250,9 @@ body {
     top: -12px;
 }*/
 
-.btn-grad{
-    border-radius: 50px;
-    background: #1541c8;
-    background: linear-gradient(40deg,#1541c8 0,#8820bb 100%);
+#admin-login-btn{
     font-weight: 600;
     font-size: 12px;
-    color: white;
-    font-family: open sans, sans-serif;
-    border: none;
-}
-
-#admin-login-btn{
     display: block;
 }
 

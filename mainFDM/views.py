@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db.models import Max
 from .models import GameQuestion, Score
-from .forms import AddQuestion, HighestScore
+from .forms import AddQuestion
 
 
 # Create your views here.
@@ -23,7 +24,6 @@ def admin_home(request):
     # the question form functionality
     if request.method == "POST":
         q_form = AddQuestion(request.POST)
-        s_form = HighestScore(request.POST)
         if q_form.is_valid():
             question = GameQuestion()
             question.stream_type = q_form.cleaned_data.get("stream_type")
@@ -32,15 +32,17 @@ def admin_home(request):
             question.save()
         else:
             q_form = AddQuestion()
-            s_form = HighestScore()
 
     q_form = AddQuestion()
-    s_form = HighestScore()
+
+    # the highest score functionality
+    score_dict = Score.objects.filter(game_type='Memory').aggregate(Max('score'))
+    highest_score = score_dict.get('score__max')
 
     # pass stuff to the page
     context = {
         'q_form': q_form,
-        's_form': s_form,
+        'highest_score': highest_score
     }
 
     return render(request, 'mainFDM/admin_home.html', context)
