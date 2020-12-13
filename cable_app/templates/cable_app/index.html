@@ -17,19 +17,19 @@
          {#phaser game#}
          <script type="text/javascript">
 
-                 // create game scene
-                 var config = {
-                    type: Phaser.AUTO,
-                    width: 1200,
-                    height: 741,
+             // create game scene
+             var config = {
+                 type: Phaser.AUTO,
+                 width: 1200,
+                 height: 741,
 
-                    physics: {
-                        default: 'arcade',
-                        arcade: {
-                            gravity: { y: 0 }
-                        }
-                    },
-                     scale: {
+                 physics: {
+                     default: 'arcade',
+                     arcade: {
+                         gravity: { y: 0 }
+                     }
+                 },
+                 scale: {
                     // Fit to window
                     mode: Phaser.Scale.FIT,
                     // Center vertically and horizontally
@@ -37,7 +37,8 @@
                     },
                 scene: {
                     preload: preload,
-                    create: create
+                    create: create,
+                    update: update
                 }
             };
 
@@ -51,6 +52,7 @@
             var completedNodes = [];
             var reset = false;
             var images=[];
+
 
             // load images to use in create
             function preload ()
@@ -72,274 +74,366 @@
                 this.load.image('q3a1', '{% static "images/q3a1f.png" %}')
                 this.load.image('q4a1', '{% static "images/q4a1f.png" %}')
 
+                this.load.image('timer','{% static "images/timer.png" %}')
+
+                this.load.image('play','{% static "images/play-button.png" %}')
+
                 this.load.image('textBorder','{% static "images/text-border.png" %}')
             }
 
             //create main game
             function create ()
             {
+
+
                 var main = this;
 
                 //create background image
                 var bg = this.add.image(400, 300, 'background').setInteractive();
-                bg.setScale(2)
+                bg.setScale(2);
+
 
                 // get data from mock json file
-                this.qnaData = this.cache.json.get('qnadata');
-                console.log(this.qnaData);
+                    this.qnaData = this.cache.json.get('qnadata');
+                    console.log(this.qnaData);
 
-                // set all questions and answers from json file into different variables
-                var question1 = this.qnaData.Cable1.q1
-                var answer1 = this.qnaData.Cable1.a1
+                    // set all questions and answers from json file into different variables
+                    var question1 = this.qnaData.Cable1.q1
+                    var answer1 = this.qnaData.Cable1.a1
 
-                var question2 = this.qnaData.Cable2.q2
-                var answer2 = this.qnaData.Cable2.a2
+                    var question2 = this.qnaData.Cable2.q2
+                    var answer2 = this.qnaData.Cable2.a2
 
-                var question3 = this.qnaData.Cable3.q3
-                var answer3 = this.qnaData.Cable3.a3
+                    var question3 = this.qnaData.Cable3.q3
+                    var answer3 = this.qnaData.Cable3.a3
 
-                var question4 = this.qnaData.Cable4.q4
-                var answer4 = this.qnaData.Cable4.a4
+                    var question4 = this.qnaData.Cable4.q4
+                    var answer4 = this.qnaData.Cable4.a4
 
-                // array with coordinates for question cables
-                var array = [93,278,463,648]
+                    // array with coordinates for randomizing question cables
+                    var array = [93, 278, 463, 648]
 
-                // function to shuffle array
-                var shuffle = function (array){
-                                for (var i = array.length - 1; i > 0; i--) {
-                                var j = Math.floor(Math.random() * (i + 1));
-                                var temp = array[i];
-                                array[i] = array[j];
-                                array[j] = temp;
-                                }
-                                return array;
-                              };
-                // new shuffled array
-                var newArray = shuffle(array)
-
-
-
-                // create borders for text
-                this.add.image(151,93,'textBorder')
-                this.add.image(151,278,'textBorder')
-                this.add.image(151,463,'textBorder')
-                this.add.image(151,648,'textBorder')
-
-                this.add.image(1049,93,'textBorder')
-                this.add.image(1049,278,'textBorder')
-                this.add.image(1049,463,'textBorder')
-                this.add.image(1049,648,'textBorder')
-
-                // set random positions for question texts
-                this.add.text(151,newArray[0],question1)
-                this.add.text(151,newArray[1],question2)
-                this.add.text(151,newArray[2],question3)
-                this.add.text(151,newArray[3],question4)
-
-
-                // set positions for answer texts
-                this.add.text(1049,93,answer1)
-                this.add.text(1049,278,answer2)
-                this.add.text(1049,463,answer3)
-                this.add.text(1049,648,answer4)
-
-
-
-                //array of connected cable images
-                imagesCon = [
-                    this.add.image(397, newArray[0], 'questionConcable'),
-                    this.add.image(397, newArray[1], 'questionConcable'),
-                    this.add.image(397, newArray[2], 'questionConcable'),
-                    this.add.image(397, newArray[3], 'questionConcable'),
-                    this.add.image(803, 93, 'answerConcable'),
-                    this.add.image(803, 278, 'answerConcable'),
-                    this.add.image(803, 463, 'answerConcable'),
-                    this.add.image(803, 648, 'answerConcable'),
-                ]
-
-
-
-                //array of all images and their matches and randomizing question cables
-                images = [
-                    this.add.image(397, newArray[0], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable1').setData('name', 'questioncable1'),
-                    this.add.image(397, newArray[1], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable2').setData('name', 'questioncable2'),
-                    this.add.image(397, newArray[2], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable3').setData('name', 'questioncable3'),
-                    this.add.image(397, newArray[3], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable4').setData('name', 'questioncable4'),
-                    this.add.image(803, 93, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable1').setData('name', 'answercable1'),
-                    this.add.image(803, 278, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable2').setData('name', 'answercable2'),
-                    this.add.image(803, 463, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable3').setData('name', 'answercable3'),
-                    this.add.image(803, 648, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable4').setData('name', 'answercable4'),
-                ];
-
-                // adding images for when cables connect and setting the invisible
-                var q1a1=this.add.image(600, 315, 'q1a1');
-                q1a1.visible = false;
-
-                var q2a2=this.add.image(600, 500, 'q1a1');
-                q2a2.visible = false;
-
-                var q3a3=this.add.image(600, 686, 'q1a1');
-                q3a3.visible = false;
-
-                var q4a4=this.add.image(600, 870, 'q1a1');
-                q4a4.visible = false;
-
-                var q1a2=this.add.image(600, 370, 'q1a2');
-                q1a2.visible = false;
-
-                var q2a3=this.add.image(600, 555,'q1a2')
-                q2a3.visible = false;
-
-                var q3a4=this.add.image(600, 740,'q1a2')
-                q3a4.visible = false;
-
-                var q1a3=this.add.image(600, 368,'q1a3')
-                q1a3.visible = false;
-
-                var q2a4=this.add.image(600, 553,'q1a3')
-                q2a4.visible = false;
-
-                var q1a4=this.add.image(600, 370,'q1a4')
-                q1a4.visible = false;
-
-                var q2a1=this.add.image(600, 369,'q2a1')
-                q2a1.visible = false;
-
-                var q3a2=this.add.image(600, 554,'q2a1')
-                q3a2.visible = false;
-
-                var q4a3=this.add.image(600, 739,'q2a1')
-                q4a3.visible = false;
-
-                var q3a1=this.add.image(600, 369,'q3a1')
-                q3a1.visible = false;
-
-                var q4a2=this.add.image(600, 554,'q3a1')
-                q4a2.visible = false;
-
-                var q4a1=this.add.image(600, 369,'q4a1')
-                q4a1.visible = false;
-
-                //implementing listeners for all images in array
-                images.forEach(function(image) {
-                    image.on('pointerdown', function (pointer) {
-                        //set tint for when image is clicked
-                        this.setTint(0x888888);
-
-
-                        // if an object is already selected
-                        if(lineActive === true ) {
-                            main.input.removeListener('pointermove');
-                            // if images match
-                            if(image.getData('name') === firstSelected.getData('match')) {
-                                // line coordinates
-                                line.setTo(firstSelected.x, firstSelected.y, image.x, image.y);
-                                // add image successful set to completed Nodes array
-                                completedNodes.push(firstSelected.getData('name'));
-                                completedNodes.push(image.getData('name'));
-                                // add successful line to lines array
-                                lines.push(line);
-
-                                // destroy images when cables connect
-                                image.destroy()
-                                firstSelected.destroy()
-                                line.destroy()
-
-                                // if cables connect turn connected cable images visible
-                                if(image.y===93 && firstSelected.y===93){
-                                    q1a1.visible = true;
-                                }else if (image.y===278 && firstSelected.y===278){
-                                    q2a2.visible = true;
-                                }else if(image.y===463 && firstSelected.y===463){
-                                    q3a3.visible= true;
-                                }else if(image.y===648 && firstSelected.y===648){
-                                    q4a4.visible= true;
-                                }else if(image.y===278 && firstSelected.y===93){
-                                    q1a2.visible = true;
-                                }else if(image.y===463 && firstSelected.y===278){
-                                    q2a3.visible = true;
-                                }else if(image.y===648 && firstSelected.y===463){
-                                    q3a4.visible = true;
-                                }else if(image.y===463 && firstSelected.y===93){
-                                    q1a3.visible = true;
-                                }else if(image.y===648 && firstSelected.y===278){
-                                    q2a4.visible = true;
-                                }else if(image.y===648 && firstSelected.y===93){
-                                    q1a4.visible = true;
-                                }else if(image.y===93 && firstSelected.y===278){
-                                    q2a1.visible = true;
-                                }else if(image.y===278 && firstSelected.y===463){
-                                    q3a2.visible = true;
-                                }else if(image.y===463 && firstSelected.y===648){
-                                    q4a3.visible = true;
-                                }else if(image.y===93 && firstSelected.y===463){
-                                    q3a1.visible = true;
-                                }else if(image.y===278 && firstSelected.y===648){
-                                    q4a2.visible = true;
-                                }else if(image.y===93 && firstSelected.y===648){
-                                    q4a1.visible = true;
-                                }
-
-                                lineActive = false;
-                                image.setData('selected', true);
-                                firstSelected = null;
-
-                            } else {
-                                line.destroy();
-                                lineActive = false;
-                                firstSelected = null;
-                                reset = true;
-                            }
+                    // function to shuffle array
+                    var shuffle = function (array) {
+                        for (var i = array.length - 1; i > 0; i--) {
+                            var j = Math.floor(Math.random() * (i + 1));
+                            var temp = array[i];
+                            array[i] = array[j];
+                            array[j] = temp;
                         }
+                        return array;
+                    };
+                    // new shuffled array
+                    var newArray = shuffle(array)
 
-                         // if nothing is being selected yet
-                        if(lineActive === false && !image.getData('selected') && !reset) {
-                            // Make sure it's not one that's already been completed
-                            if(!completedNodes.includes(image.getData('name'))) {
-                                // create line in those coordinates
-                                line = main.add.line(0, 0, image.x, image.y, pointer.x, pointer.y, 0xd50102).setOrigin(0, 0);
-                                // set line's width
-                                line.setLineWidth(1);
-                                // line follows cursor
-                                main.input.on('pointermove', function (pointer, gameObject) {
-                                    line.setTo(image.x, image.y, pointer.x, pointer.y);
-                                });
-                                lineActive = true;
-                                image.setData('selected', true);
-                                firstSelected = image;
-                            }
-                        }
 
-                        // Unselect any failed attempts
-                        image.setData('selected',false);
-                        reset = false;
+                    // create borders for text
+                    this.add.image(151, 93, 'textBorder')
+                    this.add.image(151, 278, 'textBorder')
+                    this.add.image(151, 463, 'textBorder')
+                    this.add.image(151, 648, 'textBorder')
+
+                    this.add.image(1049, 93, 'textBorder')
+                    this.add.image(1049, 278, 'textBorder')
+                    this.add.image(1049, 463, 'textBorder')
+                    this.add.image(1049, 648, 'textBorder')
+
+                    // set random positions for question texts
+                    this.add.text(151, newArray[0], question1)
+                    this.add.text(151, newArray[1], question2)
+                    this.add.text(151, newArray[2], question3)
+                    this.add.text(151, newArray[3], question4)
+
+
+                    // set positions for answer texts
+                    this.add.text(1049, 93, answer1)
+                    this.add.text(1049, 278, answer2)
+                    this.add.text(1049, 463, answer3)
+                    this.add.text(1049, 648, answer4)
+
+
+                    //array of connected cable images
+                    imagesCon = [
+                        this.add.image(397, newArray[0], 'questionConcable'),
+                        this.add.image(397, newArray[1], 'questionConcable'),
+                        this.add.image(397, newArray[2], 'questionConcable'),
+                        this.add.image(397, newArray[3], 'questionConcable'),
+                        this.add.image(803, 93, 'answerConcable'),
+                        this.add.image(803, 278, 'answerConcable'),
+                        this.add.image(803, 463, 'answerConcable'),
+                        this.add.image(803, 648, 'answerConcable'),
+                    ]
+
+
+                    //array of all images and their matches and randomizing question cables
+                    images = [
+                        this.add.image(397, newArray[0], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable1').setData('name', 'questioncable1'),
+                        this.add.image(397, newArray[1], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable2').setData('name', 'questioncable2'),
+                        this.add.image(397, newArray[2], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable3').setData('name', 'questioncable3'),
+                        this.add.image(397, newArray[3], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable4').setData('name', 'questioncable4'),
+                        this.add.image(803, 93, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable1').setData('name', 'answercable1'),
+                        this.add.image(803, 278, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable2').setData('name', 'answercable2'),
+                        this.add.image(803, 463, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable3').setData('name', 'answercable3'),
+                        this.add.image(803, 648, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable4').setData('name', 'answercable4'),
+                    ];
+
+                    // adding images for when cables connect and setting them invisible
+                    var q1a1 = this.add.image(600, 315, 'q1a1');
+                    q1a1.visible = false;
+
+                    var q2a2 = this.add.image(600, 500, 'q1a1');
+                    q2a2.visible = false;
+
+                    var q3a3 = this.add.image(600, 686, 'q1a1');
+                    q3a3.visible = false;
+
+                    var q4a4 = this.add.image(600, 870, 'q1a1');
+                    q4a4.visible = false;
+
+                    var q1a2 = this.add.image(600, 370, 'q1a2');
+                    q1a2.visible = false;
+
+                    var q2a3 = this.add.image(600, 555, 'q1a2')
+                    q2a3.visible = false;
+
+                    var q3a4 = this.add.image(600, 740, 'q1a2')
+                    q3a4.visible = false;
+
+                    var q1a3 = this.add.image(600, 368, 'q1a3')
+                    q1a3.visible = false;
+
+                    var q2a4 = this.add.image(600, 553, 'q1a3')
+                    q2a4.visible = false;
+
+                    var q1a4 = this.add.image(600, 370, 'q1a4')
+                    q1a4.visible = false;
+
+                    var q2a1 = this.add.image(600, 369, 'q2a1')
+                    q2a1.visible = false;
+
+                    var q3a2 = this.add.image(600, 554, 'q2a1')
+                    q3a2.visible = false;
+
+                    var q4a3 = this.add.image(600, 739, 'q2a1')
+                    q4a3.visible = false;
+
+                    var q3a1 = this.add.image(600, 369, 'q3a1')
+                    q3a1.visible = false;
+
+                    var q4a2 = this.add.image(600, 554, 'q3a1')
+                    q4a2.visible = false;
+
+                    var q4a1 = this.add.image(600, 369, 'q4a1')
+                    q4a1.visible = false;
+
+
+                    {#// timer for when user changes tab#}
+                    {#this.hiddenTimeStamp = 0;#}
+                    {#this.game.events.on('hidden', () => {#}
+                    {#    this.hiddenTimeStamp = performance.now();});#}
+                    {##}
+                    {#// timer for when user goes back to game tab#}
+                    {#this.game.events.on('visible', () => {#}
+                    {#    let elapsedTime = Math.floor((performance.now() - this.hiddenTimeStamp) / 1000); //seconds#}
+                    {#    this.initialTime -= elapsedTime;})#}
+
+                    console.log('create');
+                    // 2:00 in seconds
+                    this.initialTime = 120;
+
+                    var clock = this.add.image(593, 53, 'timer')
+                    clock.setScale(0.13)
+
+                    text = this.add.text(573, 45, formatTime(this.initialTime), {fill: "#000000 "});
+
+                    //intro
+                    var bg2 = this.add.image(400, 300, 'background');
+                    bg2.setScale(2);
+
+                    // game rules
+                    var rules = this.add.text(500, 100, 'Cable Game', {
+                        font: "35px Arial",
+                        fill: "#000000",
+                        align: "center"
                     })
 
-                    //clear tint
-                    image.on('pointerout', function (pointer) {
-                        this.clearTint();
-                    });
-                    //clear tint
-                    image.on('pointerup', function (pointer) {
-                        this.clearTint();
-                    });
-                });
+                    var rules2 = this.add.text(320, 150, ' In this game you have to connect the right side cables\nwith' +
+                        ' the left side ones before the timer reaches 0. Each\ncable corresponds to the question or the answer that is\nbeside it. ' +
+                        'On the right side you have the questions and\non the left side the answers. Each time you choose a\nwrong answer you lose 1 ' +
+                        'second from your time. Your\nscore will depend on the time left after you finish the game.\nIf the timer reaches 0 before you connect ' +
+                        'all the cables\nyou lose the game and you get a 0 score. Press the play\nbutton bellow to start the game.\n\n                       ' +
+                        '          Good Luck!', {
+                        font: "25px Arial",
+                        fill: "#000000"
+                    })
 
+                    var play = this.add.image(610 , 600 , 'play').setInteractive({useHandCursor: true}).on('pointerdown', function () {
+                     timedEvent.paused = false;
+                     bg2.visible = false;
+                     play.visible = false;
+                     rules.visible = false;
+                     rules2.visible = false;
 
-                // Clicking the background causes the current line to disappear and reset related objects/images
-                bg.on('pointerdown',function(pointer) {
-                    if(lineActive) {
-                        if(line) {
-                            line.destroy();
-                            main.input.removeListener('pointermove');
-                        }
-                        lineActive = false;
-                        firstSelected.setData('selected',false);
-                        firstSelected = null;
-                        reset = false;
+                    })
+
+                    // Each 1000 ms call onEvent
+                    if (this.initialTime > 0) {
+                        timedEvent = this.time.addEvent({
+                            delay: 1000,
+                            callback: onEvent,
+                            callbackScope: this,
+                            loop: true
+                        });
+                        timedEvent.paused = true;
                     }
-                });
+
+
+
+                    //for each image in array images
+                    images.forEach(function (image) {
+                        image.on('pointerdown', function (pointer) {
+                            //set tint for when image is clicked
+                            this.setTint(0x888888);
+
+
+                            // if an object is already selected
+                            if (lineActive === true) {
+                                main.input.removeListener('pointermove');
+                                // if images match
+                                if (image.getData('name') === firstSelected.getData('match')) {
+                                    // line coordinates
+                                    line.setTo(firstSelected.x, firstSelected.y, image.x, image.y);
+                                    // add image successful set to completed Nodes array
+                                    completedNodes.push(firstSelected.getData('name'));
+                                    completedNodes.push(image.getData('name'));
+                                    // add successful line to lines array
+                                    lines.push(line);
+
+                                    // destroy images when cables connect
+                                    image.destroy()
+                                    firstSelected.destroy()
+                                    line.destroy()
+
+                                    // if cables connect turn connected cable images visible
+                                    if (image.y === 93 && firstSelected.y === 93) {
+                                        q1a1.visible = true;
+                                    } else if (image.y === 278 && firstSelected.y === 278) {
+                                        q2a2.visible = true;
+                                    } else if (image.y === 463 && firstSelected.y === 463) {
+                                        q3a3.visible = true;
+                                    } else if (image.y === 648 && firstSelected.y === 648) {
+                                        q4a4.visible = true;
+                                    } else if (image.y === 278 && firstSelected.y === 93) {
+                                        q1a2.visible = true;
+                                    } else if (image.y === 463 && firstSelected.y === 278) {
+                                        q2a3.visible = true;
+                                    } else if (image.y === 648 && firstSelected.y === 463) {
+                                        q3a4.visible = true;
+                                    } else if (image.y === 463 && firstSelected.y === 93) {
+                                        q1a3.visible = true;
+                                    } else if (image.y === 648 && firstSelected.y === 278) {
+                                        q2a4.visible = true;
+                                    } else if (image.y === 648 && firstSelected.y === 93) {
+                                        q1a4.visible = true;
+                                    } else if (image.y === 93 && firstSelected.y === 278) {
+                                        q2a1.visible = true;
+                                    } else if (image.y === 278 && firstSelected.y === 463) {
+                                        q3a2.visible = true;
+                                    } else if (image.y === 463 && firstSelected.y === 648) {
+                                        q4a3.visible = true;
+                                    } else if (image.y === 93 && firstSelected.y === 463) {
+                                        q3a1.visible = true;
+                                    } else if (image.y === 278 && firstSelected.y === 648) {
+                                        q4a2.visible = true;
+                                    } else if (image.y === 93 && firstSelected.y === 648) {
+                                        q4a1.visible = true;
+                                    }
+
+                                    lineActive = false;
+                                    image.setData('selected', true);
+                                    firstSelected = null;
+
+                                } else {
+                                    line.destroy();
+                                    lineActive = false;
+                                    firstSelected = null;
+                                    reset = true;
+                                }
+                            }
+
+                            // if nothing is being selected yet
+                            if (lineActive === false && !image.getData('selected') && !reset) {
+                                // Make sure it's not one that's already been completed
+                                if (!completedNodes.includes(image.getData('name'))) {
+                                    // create line in those coordinates
+                                    line = main.add.line(0, 0, image.x, image.y, pointer.x, pointer.y, 0xd50102).setOrigin(0, 0);
+                                    // set line's width
+                                    line.setLineWidth(1);
+                                    // line follows cursor
+                                    main.input.on('pointermove', function (pointer, gameObject) {
+                                        line.setTo(image.x, image.y, pointer.x, pointer.y);
+                                    });
+                                    lineActive = true;
+                                    image.setData('selected', true);
+                                    firstSelected = image;
+                                }
+                            }
+
+                            // Unselect any failed attempts
+                            image.setData('selected', false);
+                            reset = false;
+                        })
+
+                        //clear tint
+                        image.on('pointerout', function (pointer) {
+                            this.clearTint();
+                        });
+                        //clear tint
+                        image.on('pointerup', function (pointer) {
+                            this.clearTint();
+                        });
+                    });
+
+
+                    // Clicking the background causes the current line to disappear and reset related objects/images
+                    bg.on('pointerdown', function (pointer) {
+                        if (lineActive) {
+                            if (line) {
+                                line.destroy();
+                                main.input.removeListener('pointermove');
+                            }
+                            lineActive = false;
+                            firstSelected.setData('selected', false);
+                            firstSelected = null;
+                            reset = false;
+                        }
+                    });
+
+
             }
+
+            // create time format
+            function formatTime(seconds){
+                // Minutes
+                var minutes = Math.floor(seconds/60);
+                // Seconds
+                var partInSeconds = seconds%60;
+                // Adds left zeros to seconds
+                partInSeconds = partInSeconds.toString().padStart(2,'0');
+                // Returns formatted time
+                return `${minutes}:${partInSeconds}`;
+            }
+
+            function onEvent (){
+                if(this.initialTime > 0) {
+                    // - 1 second
+                    this.initialTime -= 1;
+                    text.setText(formatTime(this.initialTime));
+                }
+            }
+
+            function update() {
+                 }
          </script>
 
          </form>
