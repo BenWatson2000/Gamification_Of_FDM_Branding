@@ -66,13 +66,21 @@
                 this.load.image('questionConcable','{% static "images/ConnCableQuestion.png" %}')
                 this.load.image('answerConcable','{% static "images/ConnCableAnswer.png" %}')
 
-                this.load.image('q1a1', '{% static "images/q1a1f.png" %}')
-                this.load.image('q1a2', '{% static "images/q1a2f.png" %}')
-                this.load.image('q1a3', '{% static "images/q1a3f.png" %}')
-                this.load.image('q1a4', '{% static "images/q1a4f.png" %}')
-                this.load.image('q2a1', '{% static "images/q2a1f.png" %}')
-                this.load.image('q3a1', '{% static "images/q3a1f.png" %}')
-                this.load.image('q4a1', '{% static "images/q4a1f.png" %}')
+                this.load.image('q1a1', '{% static "images/q1a1r.png" %}')
+                this.load.image('q1a2', '{% static "images/q1a2r.png" %}')
+                this.load.image('q1a3', '{% static "images/q1a3r.png" %}')
+                this.load.image('q1a4', '{% static "images/q1a4r.png" %}')
+                this.load.image('q2a1', '{% static "images/q2a1r.png" %}')
+                this.load.image('q3a1', '{% static "images/q3a1r.png" %}')
+                this.load.image('q4a1', '{% static "images/q4a1r.png" %}')
+
+                this.load.image('q1a1f', '{% static "images/q1a1f.png" %}')
+                this.load.image('q1a2f', '{% static "images/q1a2f.png" %}')
+                this.load.image('q1a3f', '{% static "images/q1a3f.png" %}')
+                this.load.image('q1a4f', '{% static "images/q1a4f.png" %}')
+                this.load.image('q2a1f', '{% static "images/q2a1f.png" %}')
+                this.load.image('q3a1f', '{% static "images/q3a1f.png" %}')
+                this.load.image('q4a1f', '{% static "images/q4a1f.png" %}')
 
                 this.load.image('timer','{% static "images/timer.png" %}')
 
@@ -177,7 +185,7 @@
                         this.add.image(803, 648, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable4').setData('name', 'answercable4'),
                     ];
 
-                    // adding images for when cables connect and setting them invisible
+                    // adding images for when cables connect right  and setting them invisible
                     var q1a1 = this.add.image(600, 315, 'q1a1');
                     q1a1.visible = false;
 
@@ -226,16 +234,61 @@
                     var q4a1 = this.add.image(600, 369, 'q4a1')
                     q4a1.visible = false;
 
+                    console.log('create');
+                    // 2:00 in seconds
+                    this.initialTime = 120;
 
-                    {#// timer for when user changes tab#}
-                    {#this.hiddenTimeStamp = 0;#}
-                    {#this.game.events.on('hidden', () => {#}
-                    {#    this.hiddenTimeStamp = performance.now();});#}
-                    {##}
-                    {#// timer for when user goes back to game tab#}
-                    {#this.game.events.on('visible', () => {#}
-                    {#    let elapsedTime = Math.floor((performance.now() - this.hiddenTimeStamp) / 1000); //seconds#}
-                    {#    this.initialTime -= elapsedTime;})#}
+                    var clock = this.add.image(593, 53, 'timer')
+                    clock.setScale(0.13)
+
+                    // adding images for when cables connect wrong  and setting them invisible
+                    var q1a1f = this.add.image(600, 315, 'q1a1f');
+                    q1a1f.visible = false;
+
+                    var q2a2f = this.add.image(600, 500, 'q1a1f');
+                    q2a2f.visible = false;
+
+                    var q3a3f = this.add.image(600, 686, 'q1a1f');
+                    q3a3f.visible = false;
+
+                    var q4a4f = this.add.image(600, 870, 'q1a1f');
+                    q4a4f.visible = false;
+
+                    var q1a2f = this.add.image(600, 370, 'q1a2f');
+                    q1a2f.visible = false;
+
+                    var q2a3f = this.add.image(600, 555, 'q1a2f')
+                    q2a3f.visible = false;
+
+                    var q3a4f = this.add.image(600, 740, 'q1a2f')
+                    q3a4f.visible = false;
+
+                    var q1a3f = this.add.image(600, 368, 'q1a3f')
+                    q1a3f.visible = false;
+
+                    var q2a4f = this.add.image(600, 553, 'q1a3f')
+                    q2a4f.visible = false;
+
+                    var q1a4f = this.add.image(600, 370, 'q1a4f')
+                    q1a4f.visible = false;
+
+                    var q2a1f = this.add.image(600, 369, 'q2a1f')
+                    q2a1f.visible = false;
+
+                    var q3a2f = this.add.image(600, 554, 'q2a1f')
+                    q3a2f.visible = false;
+
+                    var q4a3f = this.add.image(600, 739, 'q2a1f')
+                    q4a3f.visible = false;
+
+                    var q3a1f = this.add.image(600, 369, 'q3a1f')
+                    q3a1f.visible = false;
+
+                    var q4a2f = this.add.image(600, 554, 'q3a1f')
+                    q4a2f.visible = false;
+
+                    var q4a1f = this.add.image(600, 369, 'q4a1f')
+                    q4a1f.visible = false;
 
                     console.log('create');
                     // 2:00 in seconds
@@ -295,7 +348,6 @@
                             //set tint for when image is clicked
                             this.setTint(0x888888);
 
-
                             // if an object is already selected
                             if (lineActive === true) {
                                 main.input.removeListener('pointermove');
@@ -314,39 +366,87 @@
                                     firstSelected.destroy()
                                     line.destroy()
 
-                                    // if cables connect turn connected cable images visible
+                                    // if cables connect turn green cable images visible and all the other wrong choices invisible
                                     if (image.y === 93 && firstSelected.y === 93) {
                                         q1a1.visible = true;
+                                        q1a2f.visible =false;
+                                        q1a3f.visible =false;
+                                        q1a4f.visible =false;
                                     } else if (image.y === 278 && firstSelected.y === 278) {
                                         q2a2.visible = true;
+                                        q2a1f.visible =false;
+                                        q2a3f.visible =false;
+                                        q2a4f.visible =false;
                                     } else if (image.y === 463 && firstSelected.y === 463) {
                                         q3a3.visible = true;
+                                        q3a1f.visible =false;
+                                        q3a2f.visible =false;
+                                        q3a4f.visible =false;
                                     } else if (image.y === 648 && firstSelected.y === 648) {
                                         q4a4.visible = true;
+                                        q4a1f.visible =false;
+                                        q4a2f.visible =false;
+                                        q4a3f.visible =false;
                                     } else if (image.y === 278 && firstSelected.y === 93) {
                                         q1a2.visible = true;
+                                        q1a1f.visible =false;
+                                        q1a3f.visible =false;
+                                        q1a4f.visible =false;
                                     } else if (image.y === 463 && firstSelected.y === 278) {
                                         q2a3.visible = true;
+                                        q2a1f.visible =false;
+                                        q2a2f.visible =false;
+                                        q2a4f.visible =false;
                                     } else if (image.y === 648 && firstSelected.y === 463) {
                                         q3a4.visible = true;
+                                        q3a1f.visible =false;
+                                        q3a2f.visible =false;
+                                        q3a3f.visible =false;
                                     } else if (image.y === 463 && firstSelected.y === 93) {
                                         q1a3.visible = true;
+                                        q1a1f.visible =false;
+                                        q1a2f.visible =false;
+                                        q1a4f.visible =false;
                                     } else if (image.y === 648 && firstSelected.y === 278) {
                                         q2a4.visible = true;
+                                        q2a1f.visible =false;
+                                        q2a2f.visible =false;
+                                        q2a3f.visible =false;
                                     } else if (image.y === 648 && firstSelected.y === 93) {
                                         q1a4.visible = true;
+                                        q1a1f.visible =false;
+                                        q1a2f.visible =false;
+                                        q1a3f.visible =false;
                                     } else if (image.y === 93 && firstSelected.y === 278) {
                                         q2a1.visible = true;
+                                        q2a2f.visible =false;
+                                        q2a3f.visible =false;
+                                        q2a4f.visible =false;
                                     } else if (image.y === 278 && firstSelected.y === 463) {
                                         q3a2.visible = true;
+                                        q3a1f.visible =false;
+                                        q3a3f.visible =false;
+                                        q3a4f.visible =false;
                                     } else if (image.y === 463 && firstSelected.y === 648) {
                                         q4a3.visible = true;
+                                        q4a1f.visible =false;
+                                        q4a2f.visible =false;
+                                        q4a4f.visible =false;
                                     } else if (image.y === 93 && firstSelected.y === 463) {
                                         q3a1.visible = true;
+                                        q3a2f.visible =false;
+                                        q3a3f.visible =false;
+                                        q3a4f.visible =false;
                                     } else if (image.y === 278 && firstSelected.y === 648) {
                                         q4a2.visible = true;
+                                        q4a1f.visible =false;
+                                        q4a3f.visible =false;
+                                        q4a4f.visible =false;
                                     } else if (image.y === 93 && firstSelected.y === 648) {
                                         q4a1.visible = true;
+                                        q4a2f.visible =false;
+                                        q4a3f.visible =false;
+                                        q4a4f.visible =false;
                                     }
 
                                     lineActive = false;
@@ -354,6 +454,88 @@
                                     firstSelected = null;
 
                                 } else {
+                                    // if cables DON'T connect turn red cable images visible and all the other wrong choices invisible
+                                    if (image.y === 93 && firstSelected.y === 93) {
+                                        q1a1f.visible = true;
+                                        q1a2f.visible =false;
+                                        q1a3f.visible =false;
+                                        q1a4f.visible =false;
+                                    } else if (image.y === 278 && firstSelected.y === 278) {
+                                        q2a2f.visible = true;
+                                        q2a1f.visible =false;
+                                        q2a3f.visible =false;
+                                        q2a4f.visible =false;
+                                    } else if (image.y === 463 && firstSelected.y === 463) {
+                                        q3a3f.visible = true;
+                                        q3a1f.visible =false;
+                                        q3a2f.visible =false;
+                                        q3a4f.visible =false;
+                                    } else if (image.y === 648 && firstSelected.y === 648) {
+                                        q4a4f.visible = true;
+                                        q4a1f.visible =false;
+                                        q4a2f.visible =false;
+                                        q4a3f.visible =false;
+                                    } else if (image.y === 278 && firstSelected.y === 93) {
+                                        q1a2f.visible = true;
+                                        q1a1f.visible =false;
+                                        q1a3f.visible =false;
+                                        q1a4f.visible =false;
+                                    } else if (image.y === 463 && firstSelected.y === 278) {
+                                        q2a3f.visible = true;
+                                        q2a1f.visible =false;
+                                        q2a2f.visible =false;
+                                        q2a4f.visible =false;
+                                    } else if (image.y === 648 && firstSelected.y === 463) {
+                                        q3a4f.visible = true;
+                                        q3a1f.visible =false;
+                                        q3a2f.visible =false;
+                                        q3a3f.visible =false;
+                                    } else if (image.y === 463 && firstSelected.y === 93) {
+                                        q1a3f.visible = true;
+                                        q1a1f.visible =false;
+                                        q1a2f.visible =false;
+                                        q1a4f.visible =false;
+                                    } else if (image.y === 648 && firstSelected.y === 278) {
+                                        q2a4f.visible = true;
+                                        q2a1f.visible =false;
+                                        q2a2f.visible =false;
+                                        q2a3f.visible =false;
+                                    } else if (image.y === 648 && firstSelected.y === 93) {
+                                        q1a4f.visible = true;
+                                        q1a1f.visible =false;
+                                        q1a2f.visible =false;
+                                        q1a3f.visible =false;
+                                    } else if (image.y === 93 && firstSelected.y === 278) {
+                                        q2a1f.visible = true;
+                                        q2a2f.visible =false;
+                                        q2a3f.visible =false;
+                                        q2a4f.visible =false;
+                                    } else if (image.y === 278 && firstSelected.y === 463) {
+                                        q3a2f.visible = true;
+                                        q3a1f.visible =false;
+                                        q3a3f.visible =false;
+                                        q3a4f.visible =false;
+                                    } else if (image.y === 463 && firstSelected.y === 648) {
+                                        q4a3f.visible = true;
+                                        q4a1f.visible =false;
+                                        q4a2f.visible =false;
+                                        q4a4f.visible =false;
+                                    } else if (image.y === 93 && firstSelected.y === 463) {
+                                        q3a1f.visible = true;
+                                        q3a2f.visible =false;
+                                        q3a3f.visible =false;
+                                        q3a4f.visible =false;
+                                    } else if (image.y === 278 && firstSelected.y === 648) {
+                                        q4a2f.visible = true;
+                                        q4a1f.visible =false;
+                                        q4a3f.visible =false;
+                                        q4a4f.visible =false;
+                                    } else if (image.y === 93 && firstSelected.y === 648) {
+                                        q4a1f.visible = true;
+                                        q4a2f.visible =false;
+                                        q4a3f.visible =false;
+                                        q4a4f.visible =false;
+                                    }
                                     line.destroy();
                                     lineActive = false;
                                     firstSelected = null;
