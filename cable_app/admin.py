@@ -1,9 +1,9 @@
 from django.contrib import admin
-from cable_app.models import AccessRecord, Topic, Webpage
+from .models import AdminAccount, Score, GameQuestion
 
 # Register your models here.
 
-admin.site.register(AccessRecord)
-admin.site.register(Topic)
-admin.site.register(Webpage)
+admin.site.register(AdminAccount)
+admin.site.register(Score)
+admin.site.register(GameQuestion)
 

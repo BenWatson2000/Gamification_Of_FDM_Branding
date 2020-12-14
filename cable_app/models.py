@@ -1,27 +1,39 @@
 from django.db import models
+from django.forms import ModelForm
 
 # Create your models here.
 
 
-class Topic(models.Model):
-    top_name = models.CharField(max_length=264,unique=True)
+# stream choices
+STREAM_TYPES = (
+    ('Select', 'Select Stream Type'),
+    ('TOP', 'Technical Operations'),
+    ('BI', 'Business Intelligence'),
+    ('ST', 'Software Testing'),
+)
+
+
+# Create your models here.
+class AdminAccount(models.Model):
+    # this is just a mock so it will use the auto created id as PK
+    username = models.CharField(max_length=20, unique=True)
+    firstname = models.CharField(max_length=40, unique=False)
+    surname = models.CharField(max_length=40, unique=False)
+    password = models.CharField(max_length=15, unique=True)
 
     def __str__(self):
-        return self.top_name
+        return self.username
 
 
-class Webpage(models.Model):
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    name = models.CharField(max_length=264, unique=True)
-    url = models.URLField(unique=True)
-
-    def __str__(self):
-        return self.name
-
-
-class AccessRecord(models.Model):
-    name = models.ForeignKey(Webpage, on_delete=models.CASCADE)
-    date = models.DateField()
+class GameQuestion(models.Model):
+    stream_type = models.CharField(max_length=200)
+    question = models.TextField()
+    answer = models.TextField()
 
     def __str__(self):
-        return str(self.date)
+        return self.question
+
+
+class Score(models.Model):
+    game_type = models.CharField(max_length=200)
+    score = models.CharField(max_length=10)

@@ -312,15 +312,16 @@
 
                     var rules2 = this.add.text(290, 150, ' In this game you have to connect the right side cables\nwith' +
                         ' the left side ones before the timer reaches 0. Each\ncable corresponds to the question or the answer that is\nbeside it. ' +
-                        'On the right side you have the questions and\non the left side the answers. Each time you choose a\nwrong answer you lose 1 ' +
-                        'second from your time. Your\nscore will depend on the time left after you finish the game.\nIf the timer reaches 0 before you connect ' +
+                        'On the left side you have the questions and\non the right side the answers. Each time you choose a\nwrong answer the cables ' +
+                        'connect with red color and you\nlose 5 seconds from your time. When you choose a right\nanswer the cables  connect with green color.' +
+                        ' Your score\nwill depend on the time left after you finish the game. If\nthe timer reaches 0 before you connect ' +
                         'all the cables\nyou lose the game and you get a 0 score. Press the play\nbutton bellow to start the game.\n\n                       ' +
                         '          Good Luck!', {
                         font: "25px Arial",
                         fill: "#000000"
                     })
 
-                    var play = this.add.image(583 , 600 , 'play').setInteractive({useHandCursor: true}).on('pointerdown', function () {
+                    var play = this.add.image(583 , 640 , 'play').setInteractive({useHandCursor: true}).on('pointerdown', function () {
                      timedEvent.paused = false;
                      bg2.visible = false;
                      play.visible = false;
@@ -348,8 +349,8 @@
                             //set tint for when image is clicked
                             this.setTint(0x888888);
 
-                            // if an object is already selected
-                            if (lineActive === true) {
+                            // if an object is already selected and second object is answer
+                            if (lineActive === true && image.x===803) {
                                 main.input.removeListener('pointermove');
                                 // if images match
                                 if (image.getData('name') === firstSelected.getData('match')) {
@@ -362,8 +363,8 @@
                                     lines.push(line);
 
                                     // destroy images when cables connect
-                                    image.destroy()
-                                    firstSelected.destroy()
+                                    image.visible=false;
+                                    firstSelected.visible = false;
                                     line.destroy()
 
                                     // if cables connect turn green cable images visible and all the other wrong choices invisible
@@ -454,8 +455,9 @@
                                     firstSelected = null;
 
                                 } else {
+
                                     // if cables DON'T connect turn red cable images visible and all the other wrong choices invisible
-                                    if (image.y === 93 && firstSelected.y === 93) {
+                                    if (image.y === 93 && firstSelected.y === 93 && image.x===803) {
                                         q1a1f.visible = true;
                                         q1a2f.visible =false;
                                         q1a3f.visible =false;
