@@ -254,6 +254,8 @@ body {
     font-weight: 600;
     font-size: 12px;
     display: block;
+    max-width: max-content;
+    padding-inline: 20px;
 }
 
 #licence{

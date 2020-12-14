@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.db.models import Max
 from .models import GameQuestion, Score
 from .forms import AddQuestion
@@ -48,9 +47,9 @@ def admin_home(request):
     return render(request, 'mainFDM/admin_home.html', context)
 
 
-def stream_select(request):
+def admin_login(request):
     # using the django.shortcut render to add templates
-    return render(request, 'mainFDM/stream_select.html', {})  # passing information into our intro_tgp template
+    return render(request, 'mainFDM/admin_login.html', {})  # passing information into our intro_tgp template
 
 
 # view of the pre-stream quiz page
