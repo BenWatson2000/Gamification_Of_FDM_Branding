@@ -36,7 +36,7 @@ def admin_home(request):
     q_form = AddQuestion()
 
     # the highest score functionality
-    score_dict = Score.objects.filter(game_type='Memory').aggregate(Max('score'))
+    score_dict = Score.objects.filter().aggregate(Max('score'))
     highest_score = score_dict.get('score__max')
 
     # pass stuff to the page
