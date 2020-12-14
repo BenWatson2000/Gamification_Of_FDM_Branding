@@ -251,13 +251,13 @@
                     bg2.setScale(2);
 
                     // game rules
-                    var rules = this.add.text(500, 100, 'Cable Game', {
+                    var rules = this.add.text(490, 100, 'Cable Game', {
                         font: "35px Arial",
                         fill: "#000000",
                         align: "center"
                     })
 
-                    var rules2 = this.add.text(320, 150, ' In this game you have to connect the right side cables\nwith' +
+                    var rules2 = this.add.text(290, 150, ' In this game you have to connect the right side cables\nwith' +
                         ' the left side ones before the timer reaches 0. Each\ncable corresponds to the question or the answer that is\nbeside it. ' +
                         'On the right side you have the questions and\non the left side the answers. Each time you choose a\nwrong answer you lose 1 ' +
                         'second from your time. Your\nscore will depend on the time left after you finish the game.\nIf the timer reaches 0 before you connect ' +
@@ -267,7 +267,7 @@
                         fill: "#000000"
                     })
 
-                    var play = this.add.image(610 , 600 , 'play').setInteractive({useHandCursor: true}).on('pointerdown', function () {
+                    var play = this.add.image(583 , 600 , 'play').setInteractive({useHandCursor: true}).on('pointerdown', function () {
                      timedEvent.paused = false;
                      bg2.visible = false;
                      play.visible = false;
@@ -363,8 +363,8 @@
 
                             // if nothing is being selected yet
                             if (lineActive === false && !image.getData('selected') && !reset) {
-                                // Make sure it's not one that's already been completed
-                                if (!completedNodes.includes(image.getData('name'))) {
+                                // Make sure it's not one that's already been completed and the first option is a question
+                                if (!completedNodes.includes(image.getData('name')) && image.x===397) {
                                     // create line in those coordinates
                                     line = main.add.line(0, 0, image.x, image.y, pointer.x, pointer.y, 0xd50102).setOrigin(0, 0);
                                     // set line's width
