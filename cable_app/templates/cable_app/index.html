@@ -52,6 +52,8 @@
             var completedNodes = [];
             var reset = false;
             var images=[];
+            var deduct = false;
+            var qnaCount = 0;
 
 
             // load images to use in create
@@ -330,6 +332,9 @@
 
                     })
 
+
+
+
                     // Each 1000 ms call onEvent
                     if (this.initialTime > 0) {
                         timedEvent = this.time.addEvent({
@@ -361,6 +366,13 @@
                                     completedNodes.push(image.getData('name'));
                                     // add successful line to lines array
                                     lines.push(line);
+
+                                    // count right answers
+                                    qnaCount = qnaCount +1
+                                    if(qnaCount===4){
+                                        timedEvent.paused = true;
+                                        //TODO add players score
+                                    }
 
                                     // destroy images when cables connect
                                     image.visible=false;
@@ -455,6 +467,7 @@
                                     firstSelected = null;
 
                                 } else {
+                                     deduct=true;
 
                                     // if cables DON'T connect turn red cable images visible and all the other wrong choices invisible
                                     if (image.y === 93 && firstSelected.y === 93 && image.x===803) {
@@ -609,10 +622,17 @@
             }
 
             function onEvent (){
-                if(this.initialTime > 0) {
+                // timer count normal
+                if(this.initialTime > 0 && deduct===false) {
                     // - 1 second
                     this.initialTime -= 1;
                     text.setText(formatTime(this.initialTime));
+                    //timer deduct 5 seconds and then keep counting normal
+                }else if(this.initialTime > 0 && deduct===true){
+                    // - 5 second
+                    this.initialTime -= 5;
+                    text.setText(formatTime(this.initialTime));
+                    deduct=false;
                 }
             }
 
