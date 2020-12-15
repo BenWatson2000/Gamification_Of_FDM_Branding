@@ -37,3 +37,6 @@ class GameQuestion(models.Model):
 class Score(models.Model):
     game_type = models.CharField(max_length=200)
     score = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.game_type, self.score
