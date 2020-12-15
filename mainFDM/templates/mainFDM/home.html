@@ -1,0 +1,118 @@
+<!doctype html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'mainFDM/css/custom.css' %}">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Home Page for FDM project">
+    <meta name="author" content="Iga">
+    <!--<link rel="icon" href="../../../../favicon.ico">-->
+
+    <title>Home</title>
+
+    <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/static/mainFDM/css/custom.css">
+  </head>
+
+  <body id="home">
+
+    <header>
+      <!-- fixed navbar -->
+      <nav class="navbar navbar-expand-md fixed-top navbar-dark p-2">
+        <div class="container-fluid">
+          <a class="navbar-brand mx-5 my-1" href="/">
+          <img src="/static/mainFDM/images/fdm-logo-2018.png" id="fdm_logo_header" alt="FDM logo">
+          </a>
+          </div>
+        </nav>
+      <!-- gradient bar below navbar -->
+      <div class="gradient-bar" id="upper-bar"></div>
+    </header>
+
+    <!-- begin page content -->
+    <main role="main">
+
+
+      <section class="jumbotron m-0 text-center" id="jumbotron-home">
+        <!-- container with the header and intro txt -->
+        <div class="container">
+          <h1 class="jumbotron-heading">Bringing people and technology together</h1>
+          <p class="lead" id="intro">Choose one of our Technical Graduate Programmes to kick-start your career!</p>
+        </div>
+        <!-- container with the cards of streams -->
+        <div class="album pt-4 px-5 justify-content-around">
+          <div class="container px-5">
+
+              <!-- rowe of cards -->
+              <div class="row justify-content-center gx-5">
+
+                <div class="col-sm-auto col-md-4 px-4" style="max-width: 500px; min-width: 350px">
+                  <div class="card text-start mb-4 box-shadow">
+                    <img class="card-img" src="https://www.fdmgroup.com/wp-content/uploads/techop.jpg" alt="">
+                    <div class="card-img-overlay">
+                      <a href="#" class="card-link">Technical Operations</a>
+                      <a href="#" class="btn stream_btn btn-primary">+</a>
+                      </div>
+                    </div>
+                  </div>
+
+
+                <div class="col-sm-auto col-md-4 px-4" style="max-width: 500px; min-width: 350px">
+                  <div class="card text-start mb-4 box-shadow">
+                    <img class="card-img" src="https://www.fdmgroup.com/wp-content/uploads/infosec.jpg" alt="">
+                    <div class="card-img-overlay">
+                      <a href="#" class="card-link">Business Intelligence</a>
+                      <a href="#" class="btn stream_btn btn-primary">+</a>
+                      </div>
+                    </div>
+                  </div>
+
+                <div class="col-sm-auto col-md-4 px-sm-4" style="max-width: 500px; min-width: 350px">
+                  <div class="card text-start mb-4 box-shadow">
+                    <img class="card-img" src="https://www.fdmgroup.com/wp-content/uploads/test.jpg" alt="">
+                    <div class="card-img-overlay">
+                      <a href="#" class="card-link">Software Testing</a>
+                      <a href="#" class="btn stream_btn btn-primary">+</a>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+          </div>
+        </div>
+
+        <!-- container with the header and intro txt -->
+        <div class="container">
+          <a type="button" class="btn btn-light quiz-btn" href="quiz/">Unsure which Programme to choose?
+            Try our personality test to find out what area you would be the best in!</a>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- close the gap to the bottom of the page -->
+    <footer class="footer py-0 py-sm-3 py-md-4 py-lg-4 py-xl-4 py-xxl-5 bg-dark">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col justify-content-center">
+                <a href="admin_home/login/" style="text-decoration: none" type="button" class="btn btn-grad btn-lg mt-2 mx-auto" id="admin-login-btn">
+                    ADMIN LOGIN
+                </a>
+            </div>
+            <div class="col-md-7 col-sm-auto">HALLO</div>
+            <div class="col text-center">
+                <span id="licence">@FDM Group 2020</span>
+            </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  </body>
+</html>

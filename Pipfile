@@ -9,5 +9,6 @@ mysqlclient = "*"
 
 [packages]
 django = "*"
+mysqlclient = "*"
 [requires]
 python_version = "3.9"
