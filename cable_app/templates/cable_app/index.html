@@ -54,6 +54,7 @@
             var images=[];
             var deduct = false;
             var qnaCount = 0;
+            var spore;
 
 
             // load images to use in create
@@ -65,8 +66,8 @@
                 this.load.image('questioncable','{% static "images/QuestionCable.png" %}')
                 this.load.image('answercable','{% static "images/AnswerCable.png" %}')
 
-                this.load.image('questionConcable','{% static "images/ConnCableQuestion.png" %}')
-                this.load.image('answerConcable','{% static "images/ConnCableAnswer.png" %}')
+                this.load.image('questionConcable','{% static "images/QuestionCable2.png" %}')
+                this.load.image('answerConcable','{% static "images/AnswerCable2.png" %}')
 
                 this.load.image('q1a1', '{% static "images/q1a1r.png" %}')
                 this.load.image('q1a2', '{% static "images/q1a2r.png" %}')
@@ -301,6 +302,7 @@
 
                     text = this.add.text(573, 45, formatTime(this.initialTime), {fill: "#000000 "});
 
+
                     //intro
                     var bg2 = this.add.image(400, 300, 'background');
                     bg2.setScale(2);
@@ -332,6 +334,14 @@
 
                     })
 
+                var score_border = this.add.image(600,370,'textBorder')
+                score = this.add.text(573, 360, this.initialTime, {fill: "#FFFFFF ",font: "30px Arial"});
+                var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Arial"})
+                score.visible = false;
+                score_border.visible = false;
+                score_text.visible = false;
+
+
 
 
 
@@ -345,8 +355,6 @@
                         });
                         timedEvent.paused = true;
                     }
-
-
 
                     //for each image in array images
                     images.forEach(function (image) {
@@ -366,13 +374,6 @@
                                     completedNodes.push(image.getData('name'));
                                     // add successful line to lines array
                                     lines.push(line);
-
-                                    // count right answers
-                                    qnaCount = qnaCount +1
-                                    if(qnaCount===4){
-                                        timedEvent.paused = true;
-                                        //TODO add players score
-                                    }
 
                                     // destroy images when cables connect
                                     image.visible=false;
@@ -460,6 +461,16 @@
                                         q4a2f.visible =false;
                                         q4a3f.visible =false;
                                         q4a4f.visible =false;
+                                    }
+
+                                     // count right answers
+                                    qnaCount = qnaCount +1
+                                    if(qnaCount===4){
+                                        timedEvent.paused = true;
+                                        score.visible = true;
+                                        score_border.visible = true;
+                                        score_text.visible = true;
+
                                     }
 
                                     lineActive = false;
@@ -626,12 +637,15 @@
                 if(this.initialTime > 0 && deduct===false) {
                     // - 1 second
                     this.initialTime -= 1;
-                    text.setText(formatTime(this.initialTime));
+                    text.setText(formatTime(this.initialTime)
+                    );
+                    score.setText(this.initialTime)
                     //timer deduct 5 seconds and then keep counting normal
                 }else if(this.initialTime > 0 && deduct===true){
                     // - 5 second
                     this.initialTime -= 5;
                     text.setText(formatTime(this.initialTime));
+                    score.setText(this.initialTime)
                     deduct=false;
                 }
             }
