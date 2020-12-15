@@ -17,7 +17,6 @@ html {
 }
 
 body {
-    min-height: 60rem; /*this causes the page to scroll*/
     padding-bottom: 8rem;
     padding-top: 6rem;
     font-family: open sans, sans-serif;
@@ -28,11 +27,12 @@ body {
     background-position: bottom right;
     background-color: #000000;
     background-repeat: repeat-y;
-
+    min-height: 60rem; /*this causes the page to scroll*/
 }
 
-#admin{
+#helper, #base{
     background-color: white;
+    min-height: 35rem;
 }
 
 .navbar {
@@ -101,7 +101,7 @@ body {
     text-shadow: 0 8px 4px #212026;
 }
 
-#admin-header{
+#helper-header{
     font-size: 4rem;
     font-weight: 300;
     color: #1daded;
@@ -138,6 +138,13 @@ body {
     border-color: #1541c8;
     box-shadow: inset 0 0 3px 1px rgba(21, 65, 200, 1), 0 0 2px 3px rgba(21, 65, 200, 1);
     border-width: 1px;
+}
+
+.form-label{
+    color: #ffffff;
+    font-weight: 550;
+    margin-inline: 20px;
+    text-shadow: 0 3px 2px #212026;
 }
 
 .form-control::placeholder{
@@ -250,7 +257,7 @@ body {
     top: -12px;
 }*/
 
-#admin-login-btn{
+#helper-login-btn{
     font-weight: 600;
     font-size: 12px;
     display: block;

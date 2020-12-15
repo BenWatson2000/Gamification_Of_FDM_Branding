@@ -19,7 +19,7 @@ def home(response):
     return render(response, 'mainFDM/home.html', {})
 
 
-def admin_home(request):
+def helper_home(request):
     # the question form functionality
     if request.method == "POST":
         q_form = AddQuestion(request.POST)
@@ -44,12 +44,12 @@ def admin_home(request):
         'highest_score': highest_score
     }
 
-    return render(request, 'mainFDM/admin_home.html', context)
+    return render(request, 'mainFDM/helper_home.html', context)
 
 
-def admin_login(request):
+def helper_login(request):
     # using the django.shortcut render to add templates
-    return render(request, 'mainFDM/admin_login.html', {})  # passing information into our intro_tgp template
+    return render(request, 'mainFDM/helper_login.html', {})  # passing information into our intro_tgp template
 
 
 # view of the pre-stream quiz page

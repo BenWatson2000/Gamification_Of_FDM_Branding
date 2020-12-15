@@ -14,7 +14,7 @@ STREAM_TYPES = (
 
 
 # Create your models here.
-class AdminAccount(models.Model):
+class HelperAccount(models.Model):
     # this is just a mock so it will use the auto created id as PK
     username = models.CharField(max_length=20, unique=True)
     firstname = models.CharField(max_length=40, unique=False)

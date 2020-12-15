@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/static/mainFDM/css/custom.css">
   </head>
 
-  <body>
+  <body id="base">
 
     <header>
           <!-- fixed navbar -->
@@ -49,24 +49,24 @@
       {% block main %}
 
 
-      <section class="jumbotron m-0 pt-5 bg-secondary text-center">
+      <section class="jumbotron m-0 py-5 text-center">
         <!-- container with the header  -->
         <div class="container">
-            <p id="admin-header">{%block header%}HEADER AND TITLE{%endblock%}</p>
+            <p id="helper-header">{%block header%}HEADER AND TITLE{%endblock%}</p>
         </div>
         <!-- container for columns/streams/cards -->
-        <div class="container bg-success px-5">
+        <div class="container  p-5 px-5">
             {% block forcolumns %}
           <!-- row of for columns -->
-          <div class="row justify-content-around py-4 bg-primary">
+          <div class="row justify-content-center py-4">
               {% block row1 %}ROW FOR COLUMNS{% endblock %}
           </div>
             {% endblock %}
         </div>
 
-        <!-- lower container -->
-        <div class="container p-4 my-2 bg-light">{% block lower %}BUTTON PANEL{% endblock %}
-        </div>
+<!--        &lt;!&ndash; lower container &ndash;&gt;-->
+<!--        <div class="container p-4 my-2">{% block lower %}BUTTON PANEL{% endblock %}-->
+<!--        </div>-->
 
       </section>
 
@@ -74,10 +74,11 @@
     </main>
 
     <!-- footer  -->
-    <footer class="footer py-3 py-sm-4 py-md-4 py-lg-4 py-xl-4 py-xxl-5 bg-dark">
+    <footer class="footer py-4 py-sm-5 py-md-5 py-lg-5 py-xl-5 py-xxl-5 bg-dark">
       <div class="container-fluid">
         <div class="row align-items-center">
-            <div class="col">
+            <div class="col justify-content-center">
+                BUTTON
             </div>
             <div class="col-md-7 col-sm-auto">HALLO</div>
             <div class="col text-center">
