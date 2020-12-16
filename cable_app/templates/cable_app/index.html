@@ -187,36 +187,36 @@
                     this.add.image(1049, 648, 'textBorder')
 
                     // set random positions for question texts
-                    this.add.text(30, newArray[0]-20, question1,{align: 'middle'})
-                    this.add.text(30, newArray[1]-20, question2,{align: 'middle'})
-                    this.add.text(30, newArray[2]-20, question3,{align: 'middle'})
-                    this.add.text(30, newArray[3]-20, question4,{align: 'middle'})
+                    this.add.text(8, newArray[0]-40, question1,{align: 'middle'})
+                    this.add.text(8, newArray[1]-40, question2,{align: 'middle'})
+                    this.add.text(8, newArray[2]-40, question3,{align: 'middle'})
+                    this.add.text(8, newArray[3]-40, question4,{align: 'middle'})
 
 
 
                     // set positions for answer texts depending on the length of each one
-                    if(answer1.length<21){
+                    if(answer1.length<31){
                          this.add.text(1010, 85, answer1)
                      }else{
-                         this.add.text(907, 30, answer1)
+                         this.add.text(907, 15, answer1)
                      }
 
                      if(answer2.length<21){
                          this.add.text(1010, 270, answer2)
                      }else{
-                         this.add.text(907, 215, answer2)
+                         this.add.text(907, 200, answer2)
                      }
 
                      if(answer3.length<21){
                          this.add.text(1010, 455, answer3)
                      }else{
-                         this.add.text(907, 400, answer3)
+                         this.add.text(907, 385, answer3)
                      }
 
                      if(answer4.length<21){
                          this.add.text(1010, 640, answer4)
                      }else{
-                         this.add.text(907, 585, answer4)
+                         this.add.text(907, 570, answer4)
                      }
 
                     //array of connected cable images
@@ -708,11 +708,11 @@
 
             // change line if string is longer than a certain length
              function lineBreak (strng){
-                 if (strng.length <30){
+                 if (strng.length <30 ){
                     return strng
                  }else{
                      for (i=0; i<strng.length;i++){
-                         if(i>18 && strng.charAt(i)===" "){
+                         if(i>15 && strng.charAt(i)===" "){
                              var finalS = strng.slice(0, i) + "\n" + lineBreak(strng.slice(i, strng.length));
 
                              return finalS
