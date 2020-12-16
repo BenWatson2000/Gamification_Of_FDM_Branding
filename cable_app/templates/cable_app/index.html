@@ -409,20 +409,14 @@
                     if (this.scale.isFullscreen)
                     {
                         button.setFrame(0);
-
                         this.scale.stopFullscreen();
                     }
                     else
                     {
                         button.setFrame(1);
-
                         this.scale.startFullscreen();
                     }
-
                 }, this);
-
-
-
 
 
                     // Each 1000 ms call onEvent
@@ -434,6 +428,36 @@
                             loop: true
                         });
                         timedEvent.paused = true;
+                    }
+
+                    // end game if timer reaches zero
+                    function endGame(){
+                                timedEvent.paused = true;
+                                score.visible = true;
+                                score_border.visible = true;
+                                score_text.visible = true;
+                            }
+
+                    // update clock
+                    function onEvent (){
+                        // timer count normal
+                        if(this.initialTime > 0 && deduct===false) {
+                            // - 1 second
+                            this.initialTime -= 1;
+                            text.setText(formatTime(this.initialTime)
+                            );
+                            score.setText(this.initialTime)
+                            //timer deduct 5 seconds and then keep counting normal
+                        }else if(this.initialTime > 0 && deduct===true){
+                            // - 5 second
+                            this.initialTime -= 5;
+                            text.setText(formatTime(this.initialTime));
+                            score.setText(this.initialTime)
+                            //reset deduction
+                            deduct=false;
+                        }else if(this.initialTime<=0){
+                            endGame()
+                        }
                     }
 
                     //for each image in array images
@@ -710,24 +734,6 @@
                 partInSeconds = partInSeconds.toString().padStart(2,'0');
                 // Returns formatted time
                 return `${minutes}:${partInSeconds}`;
-            }
-
-            function onEvent (){
-                // timer count normal
-                if(this.initialTime > 0 && deduct===false) {
-                    // - 1 second
-                    this.initialTime -= 1;
-                    text.setText(formatTime(this.initialTime)
-                    );
-                    score.setText(this.initialTime)
-                    //timer deduct 5 seconds and then keep counting normal
-                }else if(this.initialTime > 0 && deduct===true){
-                    // - 5 second
-                    this.initialTime -= 5;
-                    text.setText(formatTime(this.initialTime));
-                    score.setText(this.initialTime)
-                    deduct=false;
-                }
             }
 
             // change line if string is longer than a certain length
