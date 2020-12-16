@@ -9,10 +9,18 @@
     <body>
 
     <div>
-         {{ question_1 }}
-         {{ question_2 }}
-         {{ question_3 }}
-         {{ question_4 }}
+
+
+        <input  value="{{ question_1 }}" name="value" id='q1' type="hidden"/>
+        <input  value="{{ question_2 }}" name="value" id='q2' type="hidden"/>
+        <input  value="{{ question_3 }}" name="value" id='q3' type="hidden"/>
+        <input  value="{{ question_4 }}" name="value" id='q4' type="hidden"/>
+        <input  value="{{ answer_1 }}" name="value" id='a1' type="hidden"/>
+        <input  value="{{ answer_2 }}" name="value" id='a2' type="hidden"/>
+        <input  value="{{ answer_3 }}" name="value" id='a3' type="hidden"/>
+        <input  value="{{ answer_4 }}" name="value" id='a4' type="hidden"/>
+
+
     </div>
 
     <p id="mytext"></p>
@@ -23,6 +31,7 @@
 
          {#phaser game#}
          <script type="text/javascript">
+
 
              // create game scene
              var config = {
@@ -61,7 +70,31 @@
             var images=[];
             var deduct = false;
             var qnaCount = 0;
-            var spore;
+            var i;
+
+
+            //het all questions and answers from html input
+            var qst1 = document.getElementById('q1').value;
+            var qst2 = document.getElementById('q2').value;
+            var qst3 = document.getElementById('q3').value;
+            var qst4 = document.getElementById('q4').value;
+
+            var answ1 = document.getElementById('a1').value;
+            var answ2 = document.getElementById('a2').value;
+            var answ3 = document.getElementById('a3').value;
+            var answ4 = document.getElementById('a4').value;
+
+            // use lineBreak() function to change line to question and answer strings if their length is big
+            var finalQ1 = lineBreak(qst1);
+            var finalQ2 = lineBreak(qst2);
+            var finalQ3 = lineBreak(qst3);
+            var finalQ4 = lineBreak(qst4);
+
+            var finalA1 = lineBreak(answ1);
+            var finalA2 = lineBreak(answ2);
+            var finalA3 = lineBreak(answ3);
+            var finalA4 = lineBreak(answ4);
+
 
 
             // load images to use in create
@@ -111,22 +144,18 @@
                 bg.setScale(2);
 
 
-                // get data from mock json file
-                    this.qnaData = this.cache.json.get('qnadata');
-                    console.log(this.qnaData);
+                    // set all questions and answers
+                    var question1 = finalQ1 + "Q1"
+                    var answer1 = finalA1
 
-                    // set all questions and answers from json file into different variables
-                    var question1 = this.qnaData.Cable1.q1
-                    var answer1 = this.qnaData.Cable1.a1
+                    var question2 = finalQ2+"Q2"
+                    var answer2 = finalA2
 
-                    var question2 = this.qnaData.Cable2.q2
-                    var answer2 = this.qnaData.Cable2.a2
+                    var question3 = finalQ3+"Q3"
+                    var answer3 = finalA3
 
-                    var question3 = this.qnaData.Cable3.q3
-                    var answer3 = this.qnaData.Cable3.a3
-
-                    var question4 = this.qnaData.Cable4.q4
-                    var answer4 = this.qnaData.Cable4.a4
+                    var question4 = finalQ4+"Q4"
+                    var answer4 = finalA4
 
                     // array with coordinates for randomizing question cables
                     var array = [93, 278, 463, 648]
@@ -151,24 +180,44 @@
                     this.add.image(151, 463, 'textBorder')
                     this.add.image(151, 648, 'textBorder')
 
+
                     this.add.image(1049, 93, 'textBorder')
                     this.add.image(1049, 278, 'textBorder')
                     this.add.image(1049, 463, 'textBorder')
                     this.add.image(1049, 648, 'textBorder')
 
                     // set random positions for question texts
-                    this.add.text(151, newArray[0], question1)
-                    this.add.text(151, newArray[1], question2)
-                    this.add.text(151, newArray[2], question3)
-                    this.add.text(151, newArray[3], question4)
+                    this.add.text(30, newArray[0]-20, question1,{align: 'middle'})
+                    this.add.text(30, newArray[1]-20, question2,{align: 'middle'})
+                    this.add.text(30, newArray[2]-20, question3,{align: 'middle'})
+                    this.add.text(30, newArray[3]-20, question4,{align: 'middle'})
 
 
-                    // set positions for answer texts
-                    this.add.text(1049, 93, answer1)
-                    this.add.text(1049, 278, answer2)
-                    this.add.text(1049, 463, answer3)
-                    this.add.text(1049, 648, answer4)
 
+                    // set positions for answer texts depending on the length of each one
+                    if(answer1.length<21){
+                         this.add.text(1010, 85, answer1)
+                     }else{
+                         this.add.text(907, 30, answer1)
+                     }
+
+                     if(answer2.length<21){
+                         this.add.text(1010, 270, answer2)
+                     }else{
+                         this.add.text(907, 215, answer2)
+                     }
+
+                     if(answer3.length<21){
+                         this.add.text(1010, 455, answer3)
+                     }else{
+                         this.add.text(907, 400, answer3)
+                     }
+
+                     if(answer4.length<21){
+                         this.add.text(1010, 640, answer4)
+                     }else{
+                         this.add.text(907, 585, answer4)
+                     }
 
                     //array of connected cable images
                     imagesCon = [
@@ -657,8 +706,27 @@
                 }
             }
 
+            // change line if string is longer than a certain length
+             function lineBreak (strng){
+                 if (strng.length <30){
+                    return strng
+                 }else{
+                     for (i=0; i<strng.length;i++){
+                         if(i>18 && strng.charAt(i)===" "){
+                             var finalS = strng.slice(0, i) + "\n" + lineBreak(strng.slice(i, strng.length));
+
+                             return finalS
+                             break;
+                         }
+
+                     }
+                }
+             }
+
             function update() {
                  }
+
+
          </script>
 
          </form>
