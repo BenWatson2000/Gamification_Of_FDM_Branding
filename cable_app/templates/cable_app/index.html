@@ -100,7 +100,6 @@
             // load images to use in create
             function preload ()
             {
-                this.load.json('qnadata', "{% static "json/QnA.json" %}");
                 this.load.image('background',"{% static "images/background.jpg" %}")
 
                 this.load.image('questioncable','{% static "images/QuestionCable.png" %}')
@@ -130,6 +129,8 @@
                 this.load.image('play','{% static "images/play-button.png" %}')
 
                 this.load.image('textBorder','{% static "images/text-border.png" %}')
+
+                this.load.image('fullscreen','{% static "images/fullscreen.png" %}')
             }
 
             //create main game
@@ -397,6 +398,28 @@
                 score.visible = false;
                 score_border.visible = false;
                 score_text.visible = false;
+
+                // fullscreen button
+                var button = this.add.image(1165, 30, 'fullscreen').setInteractive();
+                button.setScale(0.1)
+
+                // set game to fullscreen
+                button.on('pointerup', function () {
+
+                    if (this.scale.isFullscreen)
+                    {
+                        button.setFrame(0);
+
+                        this.scale.stopFullscreen();
+                    }
+                    else
+                    {
+                        button.setFrame(1);
+
+                        this.scale.startFullscreen();
+                    }
+
+                }, this);
 
 
 
