@@ -4,12 +4,13 @@ from random import choices
 from django.http import HttpResponse
 # Create your views here.
 
+#TODO get 4 random questions and answers with them being "UNIQUE"!
 
 def index(request):
 
     question_list = GameQuestion.objects.filter()
 
-    questions_for_game = choices(question_list,k=4)
+    questions_for_game = choices(question_list,k=9)
 
     context = {
         'question_1': questions_for_game[0].question,
