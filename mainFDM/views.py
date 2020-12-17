@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.db.models import Max
 from .models import GameQuestion, Score
@@ -19,6 +20,7 @@ def home(response):
     return render(response, 'mainFDM/home.html', {})
 
 
+@login_required
 def helper_home(request):
     # the question form functionality
     if request.method == "POST":

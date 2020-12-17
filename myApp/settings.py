@@ -119,5 +119,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # redirect to helpers' home page after they log in successfully
+LOGIN_URL = '/helper/login/'
 LOGIN_REDIRECT_URL = '/helper/home/'
 LOGOUT_REDIRECT_URL = '/helper/login/'
