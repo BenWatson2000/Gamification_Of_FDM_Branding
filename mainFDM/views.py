@@ -1,8 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Max
 from .models import GameQuestion, Score
-from .forms import AddQuestion
+from .forms import AddQuestion, CreateHelperForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -18,6 +21,51 @@ def base(response):
 
 def home(response):
     return render(response, 'mainFDM/home.html', {})
+
+
+def helper_register(request):
+    if request.user.is_authenticated:
+        return redirect('helperHome')
+    else:
+        form = CreateHelperForm()
+
+        if request.method == 'POST':
+            form = CreateHelperForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                messages.success(request, username + ', you have successfully created a helper account!')
+                return redirect('helperLogin')
+
+        context = {'form': form}
+        return render(request, 'mainFDM/helper_register.html', context)
+
+
+def helper_login(request):
+    if request.user.is_authenticated:
+        return redirect('helperHome')
+    else:
+        form = AuthenticationForm()
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('helperHome')
+            else:
+                messages.info(request, 'Username or password is incorrect')
+
+        context = {'form': form}
+        # using the django.shortcut render to add templates
+        return render(request, 'mainFDM/helper_login.html', context)  # passing information into our intro_tgp template
+
+
+def helper_logout(request):
+    logout(request)
+    return redirect('helperLogin')
 
 
 @login_required
@@ -47,11 +95,6 @@ def helper_home(request):
     }
 
     return render(request, 'mainFDM/helper_home.html', context)
-
-
-def helper_login(request):
-    # using the django.shortcut render to add templates
-    return render(request, 'mainFDM/helper_login.html', {})  # passing information into our intro_tgp template
 
 
 # view of the pre-stream quiz page

@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 
 STREAM_TYPES = (
     ("Select", "Select Stream Type"),
@@ -23,6 +25,11 @@ class AddQuestion(forms.Form):
                                                           'title': 'Add the correct answer here!',
                                                           'id': 'floatingAnswer'}))
 
+
+class CreateHelperForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
 # This form has been replaced with a HTML version and it might stay like this but not deleting for now
 # class HighestScore(forms.Form):
