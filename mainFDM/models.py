@@ -24,8 +24,12 @@ class GameQuestion(models.Model):
 
 
 class Score(models.Model):
-    game_type = models.CharField(max_length=200)
-    score = models.CharField(max_length=10)
+    class Meta:
+        unique_together = (('username', 'game_type'),)
+
+    username = models.CharField(max_length=50, unique=False)
+    game_type = models.CharField(max_length=200, unique=False)
+    score = models.CharField(max_length=10, unique=False)
 
     def __str__(self):
-        return self.game_type, self.score
+        return self.username, self.game_type

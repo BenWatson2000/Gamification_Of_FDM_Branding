@@ -40,6 +40,7 @@ body {
     margin: 0;
     background-color: #202025;
     border-top: 3px solid #1daded;
+    font-size: 18px;
 }
 
 #fdm_logo_header{
@@ -143,8 +144,9 @@ body {
 .form-label{
     color: #ffffff;
     font-weight: 550;
-    margin-inline: 20px;
+    margin-left: 10px;
     text-shadow: 0 3px 2px #212026;
+    width: 8rem;
 }
 
 .form-control::placeholder{

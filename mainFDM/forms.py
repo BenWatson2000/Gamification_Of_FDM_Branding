@@ -32,6 +32,7 @@ class CreateHelperForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+
 # This form has been replaced with a HTML version and it might stay like this but not deleting for now
 # class HighestScore(forms.Form):
 #     highest_score = forms.CharField(widget=forms.TextInput(
