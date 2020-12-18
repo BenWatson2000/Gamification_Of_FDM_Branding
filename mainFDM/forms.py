@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 STREAM_TYPES = (
-    ("Select", "Select Stream Type"),
+    ("", "Select Stream Type"),
     ("TOP", "Technical Operations"),
     ("BI", "Business Intelligence"),
     ("ST", "Software Testing"),
@@ -13,6 +13,7 @@ STREAM_TYPES = (
 class AddQuestion(forms.Form):
     stream_type = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-select mb-3',
                                                                'title': 'Choose the stream type here!',
+                                                               'placeholder': 'Select Stream Type',
                                                                'aria-label': 'Default select', 'id': 'floatingSelect'}),
                                     choices=STREAM_TYPES)
     question = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'height:100px',

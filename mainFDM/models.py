@@ -1,17 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
 
-# TODO: Figure out how to change the view of the table to display the column names
-# TODO: also, figure out whether this is actually a table xdddd
-
-# stream choices
-STREAM_TYPES = (
-    ('Select', 'Select Stream Type'),
-    ('TOP', 'Technical Operations'),
-    ('BI', 'Business Intelligence'),
-    ('ST', 'Software Testing'),
-)
-
 
 # Create your models here.
 class HelperAccount(models.Model):
