@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="My draft sheet">
+    <meta name="description" content="Base template">
     <meta name="author" content="Iga">
 
 
-    <title>{%block title%}Draft page{%endblock%}</title>
+    <title>{%block title%}Base Template{%endblock%}</title>
 
     <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -51,19 +51,23 @@
 
 
       <section class="jumbotron m-0 py-5">
-        <!-- container with the header  -->
-        <div class="container text-center">
-            <p id="helper-header">{%block header%}HEADER AND TITLE{%endblock%}</p>
-        </div>
-        <!-- container for columns/streams/cards -->
-        <div class="container  p-5 px-5">
-            {% block forcolumns %}
-          <!-- row of for columns -->
-          <div class="row justify-content-center py-4">
-              {% block row1 %}ROW FOR COLUMNS{% endblock %}
+          <div class="container background-block" style="max-width: fit-content; padding-inline: 10%; background-color: #f8f8f8">
+            <!-- container with the header  -->
+            <div class="container text-center">
+                <p id="helper-header">{%block header%}HEADER AND TITLE{%endblock%}</p>
+            </div>
+            <!-- container for columns/streams/cards -->
+            <div class="container p-5 px-5">
+                {% block forcolumns %}
+              <!-- row of for columns -->
+              <div class="row justify-content-center py-4">
+                  {% block row1 %}ROW FOR COLUMNS{% endblock %}
+              </div>
+                {% endblock %}
+            </div>
           </div>
-            {% endblock %}
-        </div>
+
+
 
 <!--        &lt;!&ndash; lower container &ndash;&gt;-->
 <!--        <div class="container p-4 my-2">{% block lower %}BUTTON PANEL{% endblock %}-->
@@ -79,7 +83,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col justify-content-center">
-                BUTTON
+                {% block helper-button %}BUTTON{% endblock %}
             </div>
             <div class="col-md-7 col-sm-auto">HALLO</div>
             <div class="col text-center">
@@ -91,5 +95,10 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+  {% block scripts %}{% endblock %}
+
   </body>
 </html>
+
+

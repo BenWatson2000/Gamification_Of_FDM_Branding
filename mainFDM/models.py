@@ -28,7 +28,7 @@ class Score(models.Model):
         unique_together = (('username', 'game_type'),)
 
     username = models.CharField(max_length=50, unique=False)
-    game_type = models.CharField(max_length=200, unique=False)
+    game_type = models.CharField(max_length=50, unique=False)
     score = models.CharField(max_length=10, unique=False)
 
     def __str__(self):

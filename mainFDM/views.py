@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Max
 from .models import GameQuestion, Score
-from .forms import AddQuestion, CreateHelperForm
+from .forms import AddQuestion, CreateHelperForm, AddScores
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -100,3 +100,28 @@ def helper_home(request):
 # view of the pre-stream quiz page
 def quiz(request):
     return render(request, 'mainFDM/quiz.html', {})  # passing info to the quiz.html template
+
+
+# view of the pre-stream quiz page
+def results(request):
+    # # the question form functionality
+    # if request.method == "POST":
+    #     form = AddScores(request.POST)
+    #     if form.is_valid():
+    #         question = GameQuestion()
+    #         question.stream_type = q_form.cleaned_data.get("stream_type")
+    #         question.question = q_form.cleaned_data.get("question")
+    #         question.answer = q_form.cleaned_data.get("answer")
+    #         question.save()
+    #     else:
+    #         q_form = AddQuestion()
+
+    form = AddScores(initial={'game_type': 'Memory', 'score': 500})
+
+    # pass stuff to the page
+    context = {
+        'form': form,
+
+    }
+    return render(request, 'mainFDM/results.html', context)
+
