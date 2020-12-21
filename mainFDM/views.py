@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.db.models import Max
 from .models import GameQuestion, Score
@@ -104,31 +106,42 @@ def quiz(request):
 
 # view of the pre-stream quiz page
 def results(request):
-
     # the question form functionality
     if request.method == "POST":
         form = AddScores(request.POST)
-        print(form.errors)
-        if form.is_valid():
-            print("is valid")
-            score = Score()
-            # get the username
-            score.player_username = form.cleaned_data.get("player_username")
-            score.game_type = "Memory"
+        # print(form.errors)
+        print('tutaj')
+        try:
+            if form.is_valid():
+                print("is valid")
+                form.save()
+                # score = Score()
+                # # get the username
+                # score.player_username = form.cleaned_data.get("player_username")
+                # score.game_type = form.cleaned_data.get("game_type")
+                # score.score = form.cleaned_data.get("score")
+                #
+                # # if this username x game_type combination exists in the database:
+                # #     messages.info(request, 'It seems someone with this username has already played this game.'
+                # #                        'Choose a different one to save your score!')
+                # # else:
+                # score.save()
+                messages.info(request, 'Your score has been uploaded!')
+                return redirect('results')
+            else:
+                print('not valid')
+                if KeyError:
+                    print("we've got a key error")
+                    messages.info(request, 'It seems someone with this username has already played this game. '
+                                           'Choose a different one to save your score!')
+                else:
+                    print('some other errors')
+                    form = AddScores()
 
-            # if this username x game_type combination exists in the database:
-            #     messages.info(request, 'It seems someone with this username has already played this game.'
-            #                        'Choose a different one to save your score!')
-            # else:
-            score.score = 500
-            score.save()
-            return redirect('results')
+        except IntegrityError as e:
+            return render(request, 'mainFDM/results.html', {"message": e.args})
 
-        else:
-            print('not valid')
-            form = AddScores()
-
-    form = AddScores(initial={'game_type': 'Memory', 'score': 500})  #
+    form = AddScores(initial={'game_type': 'Memory', 'score': 500})  # initial={'game_type': 'Memory', 'score': 500}
 
     # pass stuff to the page
     context = {
@@ -136,4 +149,3 @@ def results(request):
 
     }
     return render(request, 'mainFDM/results.html', context)
-

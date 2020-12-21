@@ -142,6 +142,11 @@ body {
     border-width: 1px;
 }
 
+.form-readonly:focus{
+    border: none;
+    box-shadow: none;
+}
+
 .form-label{
     color: #ffffff;
     font-weight: 500;

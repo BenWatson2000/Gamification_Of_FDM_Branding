@@ -19,8 +19,20 @@
                     <form method="POST" action="">
                         {% csrf_token %}
 
-                        {{ form.errors }}
-                        {{ form.non_field_errors }}
+                        <!-- form field errors -->
+                        {%  for error in form.errors%}
+                            <p id="errors">{{ error }}</p>
+                        {% endfor %}
+
+                        <!-- non field form errors -->
+                        {%  for error in form.non_field_errors%}
+                            <p id="errors">{{ error }}</p>
+                        {% endfor %}
+
+                        <!-- messages -->
+                        {%  for message in messages %}
+                            <p id="messages">{{ message }}</p>
+                        {% endfor %}
 
                          <div class="mb-3">
                              <label class="form-label">{{ form.player_username.label }}</label>

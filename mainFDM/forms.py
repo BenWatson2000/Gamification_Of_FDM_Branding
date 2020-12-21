@@ -31,6 +31,7 @@ class AddQuestion(forms.Form):
                                                           'title': 'Add the correct answer here!',
                                                           'id': 'floatingAnswer'}))
 
+
 # TODO customise the login form in the same way (somehow)
 
 
@@ -77,25 +78,23 @@ class AddScores(ModelForm):
         }
         error_messages = {
             NON_FIELD_ERRORS: {
-                'unique_together': "%(username)s's %(game_type)s are not unique.",
+                'unique_together': "%(player_username)s's %(game_type)s are not unique.",
             }
         }
         widgets = {
             'player_username': forms.TextInput(attrs={'class': 'form-control',
-                                               'style': 'height:max-content',
-                                               'placeholder': 'Username',
-                                               'title': 'Enter your username here',
-                                               'id': 'floatingUsername'}),
-            'game_type': forms.TextInput(attrs={'type': "text", 'class': 'form-control', 'disabled': True,
-                                                'required': False,
+                                                      'style': 'height:max-content',
+                                                      'placeholder': 'Username',
+                                                      'title': 'Enter your username here',
+                                                      'id': 'floatingUsername'}),
+            'game_type': forms.TextInput(attrs={'type': "text", 'class': 'form-control form-readonly',
                                                 'style': 'height:max-content',
                                                 'placeholder': 'Game type',
                                                 'title': 'This is the game you played',
-                                                'id': 'floatingGame'}),
-            'score': forms.TextInput(attrs={'type': "text", 'class': 'form-control', 'disabled': True,
-                                            'required': False,
+                                                'id': 'floatingGame', 'readonly': True}),
+            'score': forms.TextInput(attrs={'type': "text", 'class': 'form-control form-readonly',
                                             'style': 'height:max-content',
                                             'placeholder': 'Your Score',
                                             'title': 'This is your score',
-                                            'id': 'floatingScore'})
+                                            'id': 'floatingScore', 'readonly': True})
         }
