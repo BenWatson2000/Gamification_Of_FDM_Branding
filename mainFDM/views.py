@@ -104,19 +104,31 @@ def quiz(request):
 
 # view of the pre-stream quiz page
 def results(request):
-    # # the question form functionality
-    # if request.method == "POST":
-    #     form = AddScores(request.POST)
-    #     if form.is_valid():
-    #         question = GameQuestion()
-    #         question.stream_type = q_form.cleaned_data.get("stream_type")
-    #         question.question = q_form.cleaned_data.get("question")
-    #         question.answer = q_form.cleaned_data.get("answer")
-    #         question.save()
-    #     else:
-    #         q_form = AddQuestion()
 
-    form = AddScores(initial={'game_type': 'Memory', 'score': 500})
+    # the question form functionality
+    if request.method == "POST":
+        form = AddScores(request.POST)
+        print(form.errors)
+        if form.is_valid():
+            print("is valid")
+            score = Score()
+            # get the username
+            score.username = form.cleaned_data.get("username")
+            score.game_type = "Memory"
+
+            # if this username x game_type combination exists in the database:
+            #     messages.info(request, 'It seems someone with this username has already played this game.'
+            #                        'Choose a different one to save your score!')
+            # else:
+            score.score = 500
+            score.save()
+            return redirect('results')
+
+        else:
+            print('not valid')
+            form = AddScores()
+
+    form = AddScores(initial={'game_type': 'Memory', 'score': 500})  #
 
     # pass stuff to the page
     context = {

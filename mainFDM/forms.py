@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import NON_FIELD_ERRORS
 from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 
@@ -68,11 +69,16 @@ class CreateHelperForm(UserCreationForm):
 class AddScores(ModelForm):
     class Meta:
         model = Score
-        fields = '__all__'
+        fields = ['username', 'game_type', 'score']
         labels = {
             'username': _('Please enter your username:'),
             'game_type': _('Game you played:'),
             'score': _('Your score:')
+        }
+        error_messages = {
+            NON_FIELD_ERRORS: {
+                'unique_together': "%(username)s's %(game_type)s are not unique.",
+            }
         }
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control',
@@ -81,11 +87,13 @@ class AddScores(ModelForm):
                                                'title': 'Enter your username here',
                                                'id': 'floatingUsername'}),
             'game_type': forms.TextInput(attrs={'type': "text", 'class': 'form-control', 'disabled': True,
+                                                'required': False,
                                                 'style': 'height:max-content',
                                                 'placeholder': 'Game type',
                                                 'title': 'This is the game you played',
                                                 'id': 'floatingGame'}),
             'score': forms.TextInput(attrs={'type': "text", 'class': 'form-control', 'disabled': True,
+                                            'required': False,
                                             'style': 'height:max-content',
                                             'placeholder': 'Your Score',
                                             'title': 'This is your score',

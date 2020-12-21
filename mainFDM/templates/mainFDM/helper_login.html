@@ -11,14 +11,14 @@
         <!-- helper login form: -->
         <h3 class="form-title">Log In</h3>
 
-        {{ form.errors }}
-
-        {%  for message in messages %}
-            <p id="messages">{{ message }}</p>
-        {% endfor %}
-
         <form method="post">
             {% csrf_token %}
+
+            {{ form.errors }}
+
+            {%  for message in messages %}
+                <p id="messages">{{ message }}</p>
+            {% endfor %}
             <div class="mb-3">
                 <label class="form-label">{{ form.username.label_tag }}</label>
                 {{ form.username }}
