@@ -25,11 +25,11 @@ class GameQuestion(models.Model):
 
 class Score(models.Model):
     class Meta:
-        unique_together = (('username', 'game_type'),)
+        unique_together = (('player_username', 'game_type'),)
 
-    username = models.CharField(max_length=50)
+    player_username = models.CharField(max_length=50)
     game_type = models.CharField(max_length=50, blank=True)
     score = models.CharField(max_length=10, blank=True)
 
     def __str__(self):
-        return self.username, self.game_type
+        return self.player_username, self.game_type

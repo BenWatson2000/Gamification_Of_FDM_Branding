@@ -69,9 +69,9 @@ class CreateHelperForm(UserCreationForm):
 class AddScores(ModelForm):
     class Meta:
         model = Score
-        fields = ['username', 'game_type', 'score']
+        fields = ['player_username', 'game_type', 'score']
         labels = {
-            'username': _('Please enter your username:'),
+            'player_username': _('Please enter your username:'),
             'game_type': _('Game you played:'),
             'score': _('Your score:')
         }
@@ -81,7 +81,7 @@ class AddScores(ModelForm):
             }
         }
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control',
+            'player_username': forms.TextInput(attrs={'class': 'form-control',
                                                'style': 'height:max-content',
                                                'placeholder': 'Username',
                                                'title': 'Enter your username here',

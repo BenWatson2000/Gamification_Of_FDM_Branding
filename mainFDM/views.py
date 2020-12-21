@@ -113,7 +113,7 @@ def results(request):
             print("is valid")
             score = Score()
             # get the username
-            score.username = form.cleaned_data.get("username")
+            score.player_username = form.cleaned_data.get("player_username")
             score.game_type = "Memory"
 
             # if this username x game_type combination exists in the database:
