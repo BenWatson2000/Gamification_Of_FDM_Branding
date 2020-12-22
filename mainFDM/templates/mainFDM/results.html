@@ -12,44 +12,49 @@
 
                   <!-- add scores -->
                   <div class="col-5 form-col p-4 justify-content-center">
-                    <!-- 'add scores' form title -->
-                    <h3 class="form-title" id="form-title">Upload</h3>
-                    <!-- the form starts here -->
 
-                    <form method="POST" action="">
-                        {% csrf_token %}
+                      {% if not submitted %}
+                          <!-- 'add scores' form starts here -->
+                          <form method="POST" action="">
+                              {% csrf_token %}
 
-                        <!-- form field errors -->
-                        {%  for error in form.errors%}
-                            <p id="errors">{{ error }}</p>
-                        {% endfor %}
+                              <!-- form title -->
+                              <h3 class="form-title" id="form-title">Upload</h3>
 
-                        <!-- non field form errors -->
-                        {%  for error in form.non_field_errors%}
-                            <p id="errors">{{ error }}</p>
-                        {% endfor %}
+                              <!-- form field errors -->
+                              {%  for error in form.errors%}
+                                <p class="errors">{{ error }}</p>
+                              {% endfor %}
 
-                        <!-- messages -->
-                        {%  for message in messages %}
-                            <p id="messages">{{ message }}</p>
-                        {% endfor %}
+                              <!-- non field form errors -->
+                              {%  for error in form.non_field_errors%}
+                                <p class="errors">{{ error }}</p>
+                              {% endfor %}
 
-                         <div class="mb-3">
-                             <label class="form-label">{{ form.player_username.label }}</label>
-                             {{ form.player_username }}
-                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">{{ form.game_type.label }}</label>
-                            {{ form.game_type }}
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">{{ form.score.label }}</label>
-                            {{ form.score }}
-                        </div>
-                        <div class="d-flex pt-1 justify-content-center">
-                           <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
-                        </div>
-                    </form>
+                              <!-- messages -->
+                              {%  for message in messages %}
+                                <p id="messages">{{ message }}</p>
+                              {% endfor %}
+
+                              <div class="mb-3">
+                                  <label class="form-label">{{ form.player_username.label }}</label>
+                                  {{ form.player_username }}
+                              </div>
+                              <div class="mb-3">
+                                  <label class="form-label">{{ form.game_type.label }}</label>
+                                  {{ form.game_type }}
+                              </div>
+                              <div class="mb-3">
+                                  <label class="form-label">{{ form.score.label }}</label>
+                                  {{ form.score }}
+                              </div>
+                              <div class="d-flex pt-1 justify-content-center">
+                                  <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
+                              </div>
+                          </form>
+                      {% else %}
+                      <p>submitted</p>
+                      {% endif %}
                     </div>
 
                   <!-- don't add scores -->
@@ -69,30 +74,5 @@
               </div>
 
                 {% endblock %}
-<!--{% block row1 %}-->
-<!--    <div class="col-6 form-col p-4 justify-content-center">-->
-<!--        &lt;!&ndash; add score form &ndash;&gt;-->
-<!--        <h3 class="form-title" id="form-title">Yes!</h3>-->
-<!--        &lt;!&ndash; the form starts here &ndash;&gt;-->
-<!--        <form method="post" action="admin_home/">-->
-<!--            {% csrf_token %}-->
-<!--             <div class="mb-3">-->
-<!--                 <label class="form-label">{{ form.username.label }}</label>-->
-<!--                 {{ form.username }}-->
-<!--             </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label class="form-label">{{ form.game_type.label }}</label>-->
-<!--                {{ form.game_type }}-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label class="form-label">{{ form.score.label }}</label>-->
-<!--                {{ form.score }}-->
-<!--            </div>-->
-<!--            <div class="d-flex pt-1 justify-content-center">-->
-<!--               <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>-->
-<!--            </div>-->
-<!--        </form>-->
-<!--        </div>-->
-<!--{% endblock %}-->
 
 {% block lower %}{% endblock %}

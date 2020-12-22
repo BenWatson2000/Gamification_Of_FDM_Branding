@@ -91,10 +91,10 @@ class AddScores(ModelForm):
                                                 'style': 'height:max-content',
                                                 'placeholder': 'Game type',
                                                 'title': 'This is the game you played',
-                                                'id': 'floatingGame', 'readonly': True}),
+                                                'id': 'floatingGame', 'disabled': True}),
             'score': forms.TextInput(attrs={'type': "text", 'class': 'form-control form-readonly',
                                             'style': 'height:max-content',
                                             'placeholder': 'Your Score',
                                             'title': 'This is your score',
-                                            'id': 'floatingScore', 'readonly': True})
+                                            'id': 'floatingScore', 'disabled': True})
         }
