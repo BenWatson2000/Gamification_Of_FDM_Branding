@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="My draft sheet">
+    <meta name="description" content="Base template">
     <meta name="author" content="Iga">
 
 
-    <title>{%block title%}Draft page{%endblock%}</title>
+    <title>{%block title%}Base Template{%endblock%}</title>
 
     <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/static/mainFDM/css/custom.css">
   </head>
 
-  <body>
+  <body id="base">
 
     <header>
           <!-- fixed navbar -->
@@ -32,11 +32,12 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>
               <div class="collapse navbar-collapse justify-content-end">
-                  <a class="nav-link link-light" href="/">Home <span class="sr-only"></span></a>
-                  <ul class="navbar-nav me-5">
-                  <!--<li class="nav-item active">-->
-                  <!--</li>-->
-                </ul>
+                  <span style="color: #1daded; font-size: 18px; margin-right: 20px">{% block user %}{% endblock %}</span>
+                  <a class="nav-link link-light mx-5" href="/">Home <span class="sr-only"></span></a>
+<!--                  <ul class="navbar-nav me-5">-->
+<!--                  &lt;!&ndash;<li class="nav-item active">&ndash;&gt;-->
+<!--                  &lt;!&ndash;</li>&ndash;&gt;-->
+<!--                </ul>-->
               </div>
             </div>
           </nav>
@@ -49,24 +50,28 @@
       {% block main %}
 
 
-      <section class="jumbotron m-0 pt-5 bg-secondary text-center">
-        <!-- container with the header  -->
-        <div class="container">
-            <p id="admin-header">{%block header%}HEADER AND TITLE{%endblock%}</p>
-        </div>
-        <!-- container for columns/streams/cards -->
-        <div class="container bg-success px-5">
-            {% block forcolumns %}
-          <!-- row of for columns -->
-          <div class="row justify-content-around py-4 bg-primary">
-              {% block row1 %}ROW FOR COLUMNS{% endblock %}
+      <section class="jumbotron m-0 py-5">
+          <div class="container background-block" style="max-width: fit-content; padding-inline: 6rem; background-color: #f8f8f8">
+            <!-- container with the header  -->
+            <div class="container text-center">
+                <p id="helper-header">{%block header%}HEADER AND TITLE{%endblock%}</p>
+            </div>
+            <!-- container for columns/streams/cards -->
+            <div class="container p-5 px-5">
+                {% block forcolumns %}
+              <!-- row of for columns -->
+              <div class="row justify-content-center py-4">
+                  {% block row1 %}ROW FOR COLUMNS{% endblock %}
+              </div>
+                {% endblock %}
+            </div>
           </div>
-            {% endblock %}
-        </div>
 
-        <!-- lower container -->
-        <div class="container p-4 my-2 bg-light">{% block lower %}BUTTON PANEL{% endblock %}
-        </div>
+
+
+<!--        &lt;!&ndash; lower container &ndash;&gt;-->
+<!--        <div class="container p-4 my-2">{% block lower %}BUTTON PANEL{% endblock %}-->
+<!--        </div>-->
 
       </section>
 
@@ -74,10 +79,11 @@
     </main>
 
     <!-- footer  -->
-    <footer class="footer py-3 py-sm-4 py-md-4 py-lg-4 py-xl-4 py-xxl-5 bg-dark">
+    <footer class="footer py-4 py-sm-5 py-md-5 py-lg-5 py-xl-5 py-xxl-5 bg-dark">
       <div class="container-fluid">
         <div class="row align-items-center">
-            <div class="col">
+            <div class="col justify-content-center">
+                {% block helper-button %}BUTTON{% endblock %}
             </div>
             <div class="col-md-7 col-sm-auto">HALLO</div>
             <div class="col text-center">
@@ -89,5 +95,10 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+  {% block javascript %}{% endblock %}
+
   </body>
 </html>
+
+
