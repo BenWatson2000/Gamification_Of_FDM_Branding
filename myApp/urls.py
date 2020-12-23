@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^cable_app/',include('cable_app.urls')),
     path('admin/', admin.site.urls),
+    path('',views.index,name="homepage"),
 ]
