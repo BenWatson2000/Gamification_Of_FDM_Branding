@@ -1,0 +1,89 @@
+{% extends 'mainFDM/base.html' %}
+
+{%block title%}Helper Home{%endblock%}
+
+{%block header%}Helper Page{%endblock%}
+
+{% block user %} Hello, {{ request.user }} {% endblock %}
+
+<!-- begin page content -->
+{% block main %}
+
+        <section class="jumbotron m-0 pt-4 text-center">
+            <div class="container background-block" style="max-width: fit-content; background-color: #f8f8f8">
+            <!-- container with the header  -->
+            <div class="container text-center">
+                <p id="helper-header">Helper Page</p>
+            </div>
+                <div class="container px-5">
+
+                  <!-- row of 2 columns with 2 forms -->
+                  <div class="row justify-content-around pt-5">
+
+                    <!-- helper question adding form column -->
+                    <div class="col-sm-auto col-md-5 p-4 form-col">
+                        <div class="row">
+                            <h3 class="form-title">Add a question</h3>
+                            <div class="col">
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        {{ q_form.stream_type }}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{ q_form.question }}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{ q_form.answer }}
+                                    </div>
+                                    <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                      <!-- column with the retrieving score form -->
+                      <div class="col-sm-auto col-md-5">
+                          <div class="container form-col p-4">
+                              <h3 class="form-title">Retrieve Scores</h3>
+                              <form class="row gy-2 py-2 align-items-center justify-content-center">
+                                  <div class="col-auto">
+                                      <input type="text" class="form-control" style="text-align: center; height: 2.7rem; box-shadow: none; border: none" placeholder="Highest Score" aria-label="Highest Score" disabled id="h-score">
+                                  </div>
+                                  <div class="w-100"></div>
+                                  <div class="col">
+                                      <button type="button" class="btn btn-grad text-nowrap" id="get-h-score">Get Highest Score</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
+
+
+<!-- footer  -->
+{% block helper-button %}
+<a href="/helper/logout/" style="text-decoration: none" type="button" class="btn btn-grad btn-lg mt-2 mx-auto text-nowrap" id="helper-login-btn">
+    HELPER LOGOUT
+</a>
+{% endblock %}
+
+
+
+{% block javascript %}
+
+    {{ highest_score|json_script:"highest_score" }}
+    <script>
+    const get_score = document.getElementById("get-h-score")
+    const show_score = document.getElementById("h-score")
+    const h_score = JSON.parse(document.getElementById('highest_score').textContent);
+
+    get_score.addEventListener("click", function () {
+        show_score.value = h_score
+    })
+    </script>
+
+{% endblock %}
