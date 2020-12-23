@@ -20,8 +20,13 @@ from cable_app import views
 from django.conf.urls import include
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^cable_app/',include('cable_app.urls')),
+
+    # url(r'^$', views.index, name='index'),  #Commented out so that first page loaded is homepage.
+    # url(r'^cable_app/',include('cable_app.urls')),
+    path('', include('mainFDM.urls')),
     path('admin/', admin.site.urls),
-    path('',views.index,name="homepage"),
+    path('cable/',include('cable_app.urls')),
+    path('memory/',include('memoryApp.urls')),
+    path('pipe/',include('pipeGameApp.urls')),
+
 ]
