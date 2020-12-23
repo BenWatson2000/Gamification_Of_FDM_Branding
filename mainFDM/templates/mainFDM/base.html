@@ -1,0 +1,104 @@
+<!doctype html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'mainFDM/css/custom.css' %}">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Base template">
+    <meta name="author" content="Iga">
+
+
+    <title>{%block title%}Base Template{%endblock%}</title>
+
+    <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/static/mainFDM/css/custom.css">
+  </head>
+
+  <body id="base">
+
+    <header>
+          <!-- fixed navbar -->
+          <nav class="navbar navbar-expand-md fixed-top navbar-dark p-2">
+            <div class="container-fluid">
+              <a class="navbar-brand mx-5 my-1" href="/">
+              <img src="/static/mainFDM/images/fdm-logo-2018.png" id="fdm_logo_header" alt="FDM logo">
+              </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarsExample07"
+                      aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+              <div class="collapse navbar-collapse justify-content-end">
+                  <span style="color: #1daded; font-size: 18px; margin-right: 20px">{% block user %}{% endblock %}</span>
+                  <a class="nav-link link-light mx-5" href="/">Home <span class="sr-only"></span></a>
+<!--                  <ul class="navbar-nav me-5">-->
+<!--                  &lt;!&ndash;<li class="nav-item active">&ndash;&gt;-->
+<!--                  &lt;!&ndash;</li>&ndash;&gt;-->
+<!--                </ul>-->
+              </div>
+            </div>
+          </nav>
+          <!-- gradient bar below navbar -->
+          <div class="gradient-bar" id="upper-bar"></div>
+        </header>
+
+    <!-- begin page content -->
+    <main role="main">
+      {% block main %}
+
+
+      <section class="jumbotron m-0 py-5">
+          <div class="container background-block" style="max-width: fit-content; padding-inline: 6rem; background-color: #f8f8f8">
+            <!-- container with the header  -->
+            <div class="container text-center">
+                <p id="helper-header">{%block header%}HEADER AND TITLE{%endblock%}</p>
+            </div>
+            <!-- container for columns/streams/cards -->
+            <div class="container p-5 px-5">
+                {% block forcolumns %}
+              <!-- row of for columns -->
+              <div class="row justify-content-center py-4">
+                  {% block row1 %}ROW FOR COLUMNS{% endblock %}
+              </div>
+                {% endblock %}
+            </div>
+          </div>
+
+
+
+<!--        &lt;!&ndash; lower container &ndash;&gt;-->
+<!--        <div class="container p-4 my-2">{% block lower %}BUTTON PANEL{% endblock %}-->
+<!--        </div>-->
+
+      </section>
+
+      {% endblock %}
+    </main>
+
+    <!-- footer  -->
+    <footer class="footer py-4 py-sm-5 py-md-5 py-lg-5 py-xl-5 py-xxl-5 bg-dark">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col justify-content-center">
+                {% block helper-button %}BUTTON{% endblock %}
+            </div>
+            <div class="col-md-7 col-sm-auto">HALLO</div>
+            <div class="col text-center">
+                <span id="licence">@FDM Group 2020</span>
+            </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+  {% block javascript %}{% endblock %}
+
+  </body>
+</html>
+
+
