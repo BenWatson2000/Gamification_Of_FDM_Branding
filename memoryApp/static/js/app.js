@@ -3,75 +3,75 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const PanelArray = [
         {
             name:'im 1',
-            img:'static/images/im 1.png'
+            img:'/static/images/im 1.png'
         },
         {
             name:'im 1',
-            img:'static/images/im 1.png'
+            img:'/static/images/im 1.png'
         },
         {
             name:'im 2',
-            img:'static/images/im 2.png'
+            img:'/static/images/im 2.png'
         },
         {
             name:'im 2',
-            img:'static/images/im 2.png'
+            img:'/static/images/im 2.png'
         },
         {
             name:'im 3',
-            img:'static/images/im 3.png'
+            img:'/static/images/im 3.png'
         },
         {
             name:'im 3',
-            img:'static/images/im 3.png'
+            img:'/static/images/im 3.png'
         },
         {
             name:'im 4',
-            img:'static/images/im 4.png'
+            img:'/static/images/im 4.png'
         },
         {
             name:'im 4',
-            img:'static/images/im 4.png'
+            img:'/static/images/im 4.png'
         },
         {
             name:'im 5',
-            img:'static/images/im 5.png'
+            img:'/static/images/im 5.png'
         },
         {
             name:'im 5',
-            img:'static/images/im 5.png'
+            img:'/static/images/im 5.png'
         },
         {
             name:'im 6',
-            img:'static/images/im 6.png'
+            img:'/static/images/im 6.png'
         },
         {
             name:'im 6',
-            img:'static/images/im 6.png'
+            img:'/static/images/im 6.png'
         },
         {
             name:'im 7',
-            img:'static/images/im 7.png'
+            img:'/static/images/im 7.png'
         },
         {
             name:'im 7',
-            img:'static/images/im 7.png'
+            img:'/static/images/im 7.png'
         },
         {
             name:'im 8',
-            img:'static/images/im 8.png'
+            img:'/static/images/im 8.png'
         },
         {
             name:'im 8',
-            img:'static/images/im 8.png'
+            img:'/static/images/im 8.png'
         },
         {
             name:'im 9',
-            img:'static/images/im 9.png'
+            img:'/static/images/im 9.png'
         },
         {
             name:'im 9',
-            img:'static/images/im 9.png'
+            img:'/static/images/im 9.png'
         }
     ]
 
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     function createGamePanel(){
         for (let i = 0; i< PanelArray.length; i++){
             var imgPanel = document.createElement('img')
-            imgPanel.setAttribute('src', 'static/images/grey.png')
+            imgPanel.setAttribute('src', '/static/images/grey.png')
             imgPanel.setAttribute('data-id', i)
             imgPanel.addEventListener('click',flipPanel)
             grid.appendChild(imgPanel)
@@ -102,16 +102,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if(chosenPanels[0] === chosenPanels[1]){
             alert('matching panels found')
             if(chosenPanels[0] === chosenPanels[1]) {
-                imgPanel[panelOneId].setAttribute('src', 'static/images/'+ chosenPanels[0]+ ' green.png')
-                imgPanel[panelTwoId].setAttribute('src', 'static/images/'+ chosenPanels[1]+ ' green.png')
+                imgPanel[panelOneId].setAttribute('src', '/static/images/'+ chosenPanels[0]+ ' green.png')
+                imgPanel[panelTwoId].setAttribute('src', '/static/images/'+ chosenPanels[1]+ ' green.png')
             }
             completedPanels.push(chosenPanels)
         }
         else{
-            imgPanel[panelOneId].setAttribute('src','static/images/'+ chosenPanels[0]+ ' red.png')
-            imgPanel[panelTwoId].setAttribute('src','static/images/'+ chosenPanels[1]+ ' red.png')
-            setTimeout(() => {  imgPanel[panelOneId].setAttribute('src','static/images/grey.png');
-                imgPanel[panelTwoId].setAttribute('src','static/images/grey.png');
+            imgPanel[panelOneId].setAttribute('src','/static/images/'+ chosenPanels[0]+ ' red.png')
+            imgPanel[panelTwoId].setAttribute('src','/static/images/'+ chosenPanels[1]+ ' red.png')
+            setTimeout(() => {  imgPanel[panelOneId].setAttribute('src','/static/images/grey.png');
+                imgPanel[panelTwoId].setAttribute('src','/static/images/grey.png');
             }, 1000);
 
         }
