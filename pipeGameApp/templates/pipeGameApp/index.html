@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../../static/css/stylesheet.css">
+    </head>
+
+        <div id="question">
+        <h6> {{ question_1 }}</h6>
+        </div>
+
+        <div id="grid"></div>
+
+        <script type="text/javascript" src="../../static/js/board.js"></script>
+        <div id="answers" class="my_answers">
+        <div id="answer1" class="answers">
+        <h6> 1</h6>
+            </div>
+        <div id="answer2" class="answers">
+        <h6> 2</h6>
+            </div>
+        <div id="answer3" class="answers">
+        <h6> 3</h6>
+            </div>
+            </div><br>
+    <div>
+        <input  value="{{ question_1 }}" name="value" id='q1' type="hidden"/>
+        <input  value="{{ answer_1 }}" name="value" id='a1' type="hidden"/>
+        <input  value="{{ answer_2 }}" name="value" id='a2' type="hidden"/>
+        <input  value="{{ answer_3 }}" name="value" id='a3' type="hidden"/>
+
+    </div>
+
+    <div id="timer"></div>
+    <script>
+
+    </script>
+
+
+
+
+
+
+    </body>
+</html>
