@@ -3,26 +3,25 @@
     <head>
         <link rel="stylesheet" href="../../static/css/stylesheet.css">
     </head>
-    <div id="board">
+
         <div id="question">
-        <h1> {{ question_1 }}</h1>
+        <h6> {{ question_1 }}</h6>
         </div>
 
         <div id="grid"></div>
 
         <script type="text/javascript" src="../../static/js/board.js"></script>
-        <div id="answers">
-        <div id="answer1">
-        <h1> {{ answer_1 }}</h1>
+        <div id="answers" class="my_answers">
+        <div id="answer1" class="answers">
+        <h6> 1</h6>
             </div>
-        <div id="answer2">
-        <h1> {{ answer_2 }}</h1>
+        <div id="answer2" class="answers">
+        <h6> 2</h6>
             </div>
-        <div id="answer3">
-        <h1> {{ answer_3 }}</h1>
+        <div id="answer3" class="answers">
+        <h6> 3</h6>
             </div>
-            </div>
-    </div><br>
+            </div><br>
     <div>
         <input  value="{{ question_1 }}" name="value" id='q1' type="hidden"/>
         <input  value="{{ answer_1 }}" name="value" id='a1' type="hidden"/>
@@ -32,6 +31,9 @@
     </div>
 
     <div id="timer"></div>
+    <script>
+
+    </script>
 
 
 
