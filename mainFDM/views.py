@@ -7,6 +7,7 @@ from .forms import AddQuestion, CreateHelperForm, AddScores
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -72,11 +73,6 @@ def helper_logout(request):
 @login_required
 def helper_home(request):
     # TODO log users out after they close their session
-    # keys = request.session.keys()
-    # user = request.session['_auth_user_id']
-    # items = request.session.items()
-    # print(user)
-    # print(items)
 
     # the question form functionality
     if request.method == "POST":
@@ -112,53 +108,62 @@ def quiz(request):
 
 # view of the pre-stream quiz page
 def results(request):
-    submitted = False
     # set the game type to the one the user played
     game_played = 'Cable'
     # set the score to the one the user got
     score_got = 734
+    # send data to ajax
+    data = {}
 
-    # the question form functionality
+    # the score adding form functionality
     if request.method == "POST":
         form = AddScores(request.POST)
         if form.is_valid():
             print("form is valid")
             score = Score()
             # get the username
-            score.player_username = form.cleaned_data.get("player_username")
+            score.player_username = request.POST.get('player_username')
             # manually set the game type and score to be added to the table as the fields are disabled
             score.game_type = game_played
             score.score = score_got
             try:
                 score.save()
-                messages.info(request, 'Your score has been uploaded!')
-                print('message sent')
-                # TODO find a way to either display a different thing on form submission or change the form submit
-                #  button to 'show leaderboard'
-                submitted = True
-                return redirect('results')
-                # this allows for displaying different content on the page after submission but is not the best way
-                # return render(request, 'mainFDM/results.html', {"submitted": submitted})
+
+                # leaderboard query set
+                leaderboard_set = Score.objects.filter(game_type=game_played).order_by('-score')[:10]
+                leaderboard_set_list = list(leaderboard_set.values())
+
+                data['result'] = 'Submitted'
+                data['message'] = 'Your score has been uploaded!'
+                data['leaderboard'] = leaderboard_set_list
+
+                return JsonResponse(data, safe=False)
+
             except IntegrityError as e:
                 print("we've got an integrity error")
-                messages.info(request, 'It seems someone with this username has already played this game. '
-                                       'Choose a different one to save your score!')
+                data['result'] = 'Integrity Error'
+                data['message'] = 'It seems someone with this username has already played this game. ' \
+                                  'Choose a different one to save your score!'
+                return JsonResponse(data)
         else:
             print('not valid')
             if KeyError:
                 print("we've got a key error")
-                messages.info(request, 'It seems someone with this username has already played this game. '
-                                       'Choose a different one to save your score!')
+                data['result'] = 'Key Error'
+                data['message'] = 'It seems someone with this username has already played this game. ' \
+                                  'Choose a different one to save your score!'
+                return JsonResponse(data)
             else:
                 print('some other errors')
-                messages.info(request, 'Something went wrong, please try again.')
+                data['result'] = 'Other Errors'
+                data['message'] = 'Something went wrong, please try again.'
+                return JsonResponse(data)
+    else:
+        form = AddScores(initial={'game_type': game_played,
+                                  'score': score_got})  # initial={'game_type': game_played, 'score': score_got}
 
-    form = AddScores(initial={'game_type': game_played,
-                              'score': score_got})  # initial={'game_type': game_played, 'score': score_got}
-    print(submitted)
-    # pass stuff to the page
-    context = {
-        'form': form,
-        'submitted': submitted,
-    }
-    return render(request, 'mainFDM/results.html', context)
+        # pass stuff to the page on load
+        context = {
+            'form': form,
+        }
+        return render(request, 'mainFDM/results.html', context)

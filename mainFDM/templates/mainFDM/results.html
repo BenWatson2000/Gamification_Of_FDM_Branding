@@ -8,54 +8,53 @@
 <!-- row of for columns -->
 {% block forcolumns %}
               <!-- row of for 2 columns with 2 forms-->
-              <div class="row justify-content-between pt-5">
+              <div class="row justify-content-around pt-5">
 
-                  <!-- add scores -->
-                  <div class="col-5 form-col p-4 justify-content-center">
+                  <!-- add scores / leaderboard -->
+                  <div class="col-sm-auto col-lg-5 form-col p-4 justify-content-center">
 
-                      {% if not submitted %}
-                          <!-- 'add scores' form starts here -->
-                          <form method="POST" action="">
-                              {% csrf_token %}
+                      <!-- ajax result for successful submission of the score form -->
+                      <div class="" id="success"></div>
 
-                              <!-- form title -->
+                      <!-- 'upload scores' form starts here -->
+                      <form class="" method="POST" action="" id="upload-scores">{%  csrf_token %}
+
+                          <!-- form title -->
+                          <div id="form-title-div">
                               <h3 class="form-title" id="form-title">Upload</h3>
+                          </div>
 
-                              <!-- form field errors -->
-                              {%  for error in form.errors%}
-                                <p class="errors">{{ error }}</p>
-                              {% endfor %}
+                          <div class="mb-3">
+                              <label class="form-label">{{ form.player_username.label }}</label>
+                              {{ form.player_username }}
+                          </div>
+                          <div class="mb-3">
+                              <label class="form-label">{{ form.game_type.label }}</label>
+                              {{ form.game_type }}
+                          </div>
+                          <div class="mb-3">
+                              <label class="form-label">{{ form.score.label }}</label>
+                              {{ form.score }}
+                          </div>
+                          <div class="d-flex pt-1 justify-content-center">
+                              <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
+                          </div>
+                      </form>
 
-                              <!-- non field form errors -->
-                              {%  for error in form.non_field_errors%}
-                                <p class="errors">{{ error }}</p>
-                              {% endfor %}
+                      <!-- leader board starts here -->
+                      <div class="container d-none" id="leaderboard">
+                          <!-- leaderboard title -->
+                          <div id="leaderboard-title-div">
+                              <h3 class="form-title" id="leaderboard-title">Leaderboard</h3>
+                          </div>
 
-                              <!-- messages -->
-                              {%  for message in messages %}
-                                <p id="messages">{{ message }}</p>
-                              {% endfor %}
+                          <ul id="leaderboard-list">
 
-                              <div class="mb-3">
-                                  <label class="form-label">{{ form.player_username.label }}</label>
-                                  {{ form.player_username }}
-                              </div>
-                              <div class="mb-3">
-                                  <label class="form-label">{{ form.game_type.label }}</label>
-                                  {{ form.game_type }}
-                              </div>
-                              <div class="mb-3">
-                                  <label class="form-label">{{ form.score.label }}</label>
-                                  {{ form.score }}
-                              </div>
-                              <div class="d-flex pt-1 justify-content-center">
-                                  <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
-                              </div>
-                          </form>
-                      {% else %}
-                      <p>submitted</p>
-                      {% endif %}
-                    </div>
+                          </ul>
+
+                      </div>
+
+                  </div>
 
                   <!-- don't add scores -->
                   <div class="col-sm-auto col-md-5">
@@ -76,3 +75,58 @@
                 {% endblock %}
 
 {% block lower %}{% endblock %}
+
+{% block scripts %}
+
+    <script>
+    $(document).ready(function(){
+
+        $("#upload-scores").submit(function(event){
+            event.preventDefault(); //prevent default form submission action
+
+            console.log("start form submission"); //sanity check
+
+            //get the csrf token form django and pass it to ajax
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            //get the username given by user:
+            let uname = $("#upload-user").val();
+
+            //prepare the form data
+            let formData = {
+                'player_username' : uname,
+                'csrfmiddlewaretoken': csrftoken,
+            };
+
+            //process the form
+            $.post("", formData)
+                .done(function( data ){
+                    if (data['result'] === 'Submitted'){
+                        console.log("submitted");
+                        $("#success").addClass("alert alert-success").empty().append(data.message);
+                        $("#upload-scores").addClass("d-none");
+                        $("#leaderboard").removeClass("d-none");
+                        //get the leaderboard from the view
+                        const leaderboard = data['leaderboard'];
+                        //for each score in the leaderboard, print the username and score to the page
+                        leaderboard.forEach(item =>
+                            $("#leaderboard-list").append('<li>' + item.player_username + '  -->  '+ item.score + '</li>')
+                        );
+                    }
+                    else{
+                        console.log("form errors");
+                        $("#form-title-div").append('<div class="alert alert-danger">' + data.message + '</div>');
+
+                    }
+
+                })
+                .fail(function(){
+                    console.log("server error");
+                    //Server failed to respond - Show an error message
+                    $("#form-title-div").append('<div class="alert alert-danger">Could not reach server, please try again later.</div>');
+            });
+        });
+    })
+    </script>
+
+{% endblock %}
