@@ -67,41 +67,41 @@
 
 /* end points */
 
-.u {
-    background-image: url("../images/end.png");
-    transform: rotate(180deg);
-}
+/*.u {*/
+/*    background-image: url("../images/end.png");*/
+/*    transform: rotate(180deg);*/
+/*}*/
 
-.u.a{
-    background-image: url("../images/activated_end.png");
-}
+/*.u.a{*/
+/*    background-image: url("../images/activated_end.png");*/
+/*}*/
 
-.d {
-    background-image: url("../images/end.png");
-    transform: rotate(0deg);
-}
+/*.d {*/
+/*    background-image: url("../images/end.png");*/
+/*    transform: rotate(0deg);*/
+/*}*/
 
-.d.a{
-    background-image: url("../images/activated_end.png");
-}
+/*.d.a{*/
+/*    background-image: url("../images/activated_end.png");*/
+/*}*/
 
-.r {
-    background-image: url("../images/end.png");
-    transform: rotate(270deg);
-}
+/*.r {*/
+/*    background-image: url("../images/end.png");*/
+/*    transform: rotate(270deg);*/
+/*}*/
 
-.r.a{
-    background-image: url("../images/activated_end.png");
-}
+/*.r.a{*/
+/*    background-image: url("../images/activated_end.png");*/
+/*}*/
 
-.l{
-    background-image: url("../images/end.png");
-    transform: rotate(90deg);
-}
+/*.l{*/
+/*    background-image: url("../images/end.png");*/
+/*    transform: rotate(90deg);*/
+/*}*/
 
-.l.a{
-    background-image: url("../images/activated_end.png");
-}
+/*.l.a{*/
+/*    background-image: url("../images/activated_end.png");*/
+/*}*/
 
 /* straight */
 .u.d{

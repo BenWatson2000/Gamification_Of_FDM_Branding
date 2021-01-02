@@ -263,24 +263,46 @@ var grid = {
                 }
             }
         }
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
         var top = this.getThisPipe(Math.ceil(1), Math.ceil(this.size));
         var mid = this.getThisPipe(Math.ceil(this.size/2), Math.ceil(this.size));
         var bot = this.getThisPipe(Math.ceil(this.size), Math.ceil(this.size));
+        losingOptions=[];
+        var computerResponse = getRandomInt(1, 3);
+        sessionStorage.setItem("computerResponse", computerResponse.toString());
+        if (computerResponse==1){
+            var winningOption = top;
+            losingOptions= [mid,bot];
+        }
+        else if (computerResponse==2){
+            var winningOption = mid;
+            losingOptions= [top,bot];
+        }
+        else if (computerResponse==3){
+            var winningOption = bot;
+            losingOptions = [top,mid];
+
+        }
+
+
+
 
         // Check if the user has won
-        if (pipes_with_connection.includes(top)) {
+        if (pipes_with_connection.includes(winningOption)) {
 
-            setTimeout(alert("won game"),1000)
+            setTimeout(alert("won game"),200)
         }
 
         //check loss
-        else if (pipes_with_connection.includes(mid)) {
+        else if (pipes_with_connection.includes(losingOptions[0])) {
 
-            setTimeout(alert("wrong answer"),1000)
+            setTimeout(alert("wrong answer"),200)
         }
-        else if (pipes_with_connection.includes(bot)) {
+        else if (pipes_with_connection.includes(losingOptions[1])) {
 
-            setTimeout(alert("won game"),1000)
+            setTimeout(alert("wrong answer"),200)
         }
 
     },

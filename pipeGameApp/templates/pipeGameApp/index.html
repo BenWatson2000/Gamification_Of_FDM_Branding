@@ -12,14 +12,14 @@
 
         <script type="text/javascript" src="../../static/js/board.js"></script>
         <div id="answers" class="my_answers">
-        <div id="answer1" class="answers">
-        <h6> 1</h6>
+        <div class="answers">
+        <h6 id="answer1"> </h6>
             </div>
-        <div id="answer2" class="answers">
-        <h6> 2</h6>
+        <div  class="answers">
+        <h6 id="answer2"> </h6>
             </div>
-        <div id="answer3" class="answers">
-        <h6> 3</h6>
+        <div class="answers">
+        <h6 id="answer3"> </h6>
             </div>
             </div><br>
     <div>
@@ -32,7 +32,21 @@
 
     <div id="timer"></div>
     <script>
-
+        if (sessionStorage.getItem("computerResponse")==1){
+            document.getElementById("answer1").innerHTML = {{ answer_1 }};
+            document.getElementById("answer2").innerHTML = {{ answer_2 }};
+            document.getElementById("answer3").innerHTML = {{ answer_3 }};
+        }
+        else if (sessionStorage.getItem("computerResponse")==2){
+            document.getElementById("answer1").innerHTML = {{ answer_2 }};
+            document.getElementById("answer2").innerHTML = {{ answer_1 }};
+            document.getElementById("answer3").innerHTML = {{ answer_3 }};
+        }
+        else if (sessionStorage.getItem("computerResponse")==3){
+            document.getElementById("answer1").innerHTML = {{ answer_3 }};
+            document.getElementById("answer2").innerHTML = {{ answer_2 }};
+            document.getElementById("answer3").innerHTML = {{ answer_1 }};
+        }
     </script>
 
 
