@@ -130,7 +130,7 @@ def results(request):
                 score.save()
 
                 # leaderboard query set
-                leaderboard_set = Score.objects.filter(game_type=game_played).order_by('-score')[:10]
+                leaderboard_set = Score.objects.filter(game_type=game_played).order_by('score')[:10]
                 leaderboard_set_list = list(leaderboard_set.values())
 
                 data['result'] = 'Submitted'

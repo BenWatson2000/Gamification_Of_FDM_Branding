@@ -191,6 +191,31 @@ body {
     font-weight: 300;
 }
 
+.board-username{
+    border-right: 2px solid #FFFFFF;
+    padding-left: 4px;
+    padding-block: 10px;
+    word-wrap: break-word;
+}
+
+.board-score{
+    padding-block: 10px;
+    padding-right: 4px;
+    word-wrap: break-word;
+}
+
+.board-header{
+    font-size: large;
+    font-weight: bold;
+}
+
+.board-row{
+    background: #0dcaf0;
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    border-top: 1px solid #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+}
 
 .card{
     background-clip:padding-box;

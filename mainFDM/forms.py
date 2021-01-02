@@ -86,15 +86,15 @@ class AddScores(ModelForm):
                                                       'style': 'height:max-content',
                                                       'placeholder': 'Username',
                                                       'title': 'Enter your username here',
-                                                      'id': 'floatingUsername'}),
+                                                      'id': 'upload-user'}),
             'game_type': forms.TextInput(attrs={'type': "text", 'class': 'form-control form-readonly',
                                                 'style': 'height:max-content',
                                                 'placeholder': 'Game type',
                                                 'title': 'This is the game you played',
-                                                'id': 'floatingGame', 'disabled': True}),
+                                                'id': 'upload-game', 'disabled': True}),
             'score': forms.TextInput(attrs={'type': "text", 'class': 'form-control form-readonly',
                                             'style': 'height:max-content',
                                             'placeholder': 'Your Score',
                                             'title': 'This is your score',
-                                            'id': 'floatingScore', 'disabled': True})
+                                            'id': 'upload-score', 'disabled': True})
         }

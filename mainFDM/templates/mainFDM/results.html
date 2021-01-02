@@ -11,7 +11,7 @@
               <div class="row justify-content-around pt-5">
 
                   <!-- add scores / leaderboard -->
-                  <div class="col-sm-auto col-lg-5 form-col p-4 justify-content-center">
+                  <div class="col-auto col-lg-5 form-col p-2 p-sm-3 pb-4 pb-sm-3 justify-content-center">
 
                       <!-- ajax result for successful submission of the score form -->
                       <div class="" id="success"></div>
@@ -48,9 +48,40 @@
                               <h3 class="form-title" id="leaderboard-title">Leaderboard</h3>
                           </div>
 
-                          <ul id="leaderboard-list">
+                          <div class="row gx-0 align-items-center board-row">
+                            <div class="col col-6">
+                                <div class="board-username board-header">Player Username</div>
+                            </div>
+                            <div class="col col-6 text-end">
+                                <div class="board-score board-header">Score</div>
+                            </div>
+                          </div>
 
-                          </ul>
+                          <!--
+                          <div class="row gx-0 align-items-center board-row">
+                            <div class="col col-6 text-start">
+                                <div class="board-username">Ben</div>
+                            </div>
+                            <div class="col col-6 text-end">
+                                <div class="board-score">32534</div>
+                            </div>
+                          </div>
+                          <div class="row gx-0 align-items-center board-row">
+                            <div class="col col-6 text-start">
+                                <div class="board-username">testss</div>
+                            </div>
+                            <div class="col col-6 text-end">
+                                <div class="board-score">345</div>
+                            </div>
+                          </div>
+                          <div class="row gx-0 align-items-center board-row">
+                            <div class="col col-6 text-start">
+                                <div class="board-username">Ben thomspons-watson</div>
+                            </div>
+                            <div class="col col-6 text-end">
+                                <div class="board-score">235467</div>
+                            </div>
+                          </div> -->
 
                       </div>
 
@@ -91,6 +122,7 @@
 
             //get the username given by user:
             let uname = $("#upload-user").val();
+            console.log(uname);
 
             //prepare the form data
             let formData = {
@@ -108,9 +140,14 @@
                         $("#leaderboard").removeClass("d-none");
                         //get the leaderboard from the view
                         const leaderboard = data['leaderboard'];
-                        //for each score in the leaderboard, print the username and score to the page
+                        //for each score in the leaderboard, add the username and score to the leaderboard
                         leaderboard.forEach(item =>
-                            $("#leaderboard-list").append('<li>' + item.player_username + '  -->  '+ item.score + '</li>')
+                            //$("#leaderboard-list").append('<li>' + item.player_username + '  -->  '+ item.score + '</li>')
+                            $('#leaderboard').append('<div class="row gx-0 align-items-center board-row">' +
+                                ' <div class="col col-6 text-start"> ' +
+                                    '<div class="board-username">' + item.player_username + '</div></div>' +
+                                '<div class="col col-6 text-end">' +
+                                    '<div class="board-score">' + item.score + '</div> </div> </div>')
                         );
                     }
                     else{
