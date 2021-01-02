@@ -32,7 +32,7 @@ class Score(models.Model):
 
     player_username = models.CharField(max_length=50)
     game_type = models.CharField(max_length=50, blank=True)
-    score = models.CharField(max_length=10, blank=True)
+    score = models.IntegerField(blank=True)
 
     def __str__(self):
         return self.player_username, self.game_type
