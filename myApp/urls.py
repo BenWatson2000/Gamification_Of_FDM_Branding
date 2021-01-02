@@ -28,5 +28,5 @@ urlpatterns = [
     path('cable/',include('cable_app.urls')),
     path('memory/',include('memoryApp.urls')),
     path('pipe/',include('pipeGameApp.urls')),
-
+    path('quiz/',include('quizApp.urls'))
 ]
