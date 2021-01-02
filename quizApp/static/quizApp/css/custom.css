@@ -16,11 +16,12 @@ html {
   min-height: 100%;
 }
 
-body {
-    padding-bottom: 8rem;
-    padding-top: 6rem;
-    font-family: open sans, sans-serif;
-}
+/*body {*/
+/*    padding-bottom: 8rem;*/
+/*    padding-top: 6rem;*/
+/*    font-family: open sans, sans-serif;*/
+/*    */
+/*}*/
 
 #home{
     background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');
