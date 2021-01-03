@@ -32,9 +32,6 @@ class AddQuestion(forms.Form):
                                                           'id': 'floatingAnswer'}))
 
 
-# TODO customise the login form in the same way (somehow)
-
-
 class CreateHelperForm(UserCreationForm):
     password1 = forms.CharField(label=_("Password"),
                                 widget=forms.PasswordInput(attrs={'class': 'form-control',
