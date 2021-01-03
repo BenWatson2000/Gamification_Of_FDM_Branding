@@ -33,19 +33,19 @@
     <div id="timer"></div>
     <script>
         if (sessionStorage.getItem("computerResponse")==1){
-            document.getElementById("answer1").innerHTML = {{ answer_1 }};
-            document.getElementById("answer2").innerHTML = {{ answer_2 }};
-            document.getElementById("answer3").innerHTML = {{ answer_3 }};
+            document.getElementById("answer1").innerHTML = "a1";
+            document.getElementById("answer2").innerHTML = "a2";
+            document.getElementById("answer3").innerHTML = "a3";
         }
         else if (sessionStorage.getItem("computerResponse")==2){
-            document.getElementById("answer1").innerHTML = {{ answer_2 }};
-            document.getElementById("answer2").innerHTML = {{ answer_1 }};
-            document.getElementById("answer3").innerHTML = {{ answer_3 }};
+            document.getElementById("answer1").innerHTML = "a2";
+            document.getElementById("answer2").innerHTML = "a1";
+            document.getElementById("answer3").innerHTML = "a3";
         }
         else if (sessionStorage.getItem("computerResponse")==3){
-            document.getElementById("answer1").innerHTML = {{ answer_3 }};
-            document.getElementById("answer2").innerHTML = {{ answer_2 }};
-            document.getElementById("answer3").innerHTML = {{ answer_1 }};
+            document.getElementById("answer1").innerHTML = "a3";
+            document.getElementById("answer2").innerHTML = "a2";
+            document.getElementById("answer3").innerHTML = "a1";
         }
     </script>
 
