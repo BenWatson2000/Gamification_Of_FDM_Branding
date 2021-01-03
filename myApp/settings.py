@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'memoryApp',
     'pipeGameApp',
-    'cable_app'
+    'cable_app',
+    'quizApp',
 ]
 
 MIDDLEWARE = [
