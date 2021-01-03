@@ -1,13 +1,13 @@
 <!doctype html>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'mainFDM/css/custom.css' %}">
+<script src="{% static 'mainFDM/js/script.js' %}"></script>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Base template">
     <meta name="author" content="Iga">
-
 
     <title>{%block title%}Base Template{%endblock%}</title>
 
@@ -16,6 +16,7 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="/static/mainFDM/css/custom.css">
+
   </head>
 
   <body id="base">
@@ -95,8 +96,12 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- custom javascript file -->
+    <script src="/static/mainFDM/js/script.js"></script>
 
-  {% block javascript %}{% endblock %}
+    {% block scripts %}{% endblock %}
 
   </body>
 </html>

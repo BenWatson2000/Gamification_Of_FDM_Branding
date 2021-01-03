@@ -145,7 +145,6 @@ body {
 .form-label{
     color: #ffffff;
     font-weight: 500;
-    /*margin-left: 10px;*/
     text-shadow: 0 3px 2px #212026;
     min-width: max-content;
     width: 8rem;
@@ -160,6 +159,11 @@ body {
     border-radius: 30px;
     background-clip: border-box;
     margin-bottom: 20px;
+}
+
+#login-form-col,#register-form-col{
+    min-width: max-content;
+    max-width: max-content;
 }
 
 .form-title{
@@ -191,6 +195,39 @@ body {
     font-weight: 300;
 }
 
+#success{
+    margin-top: 20px;
+    margin-inline: 10px;
+    margin-bottom: 10px;
+}
+
+.board-username{
+    border-right: 2px solid #FFFFFF;
+    padding-block: 10px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.board-score{
+    padding-block: 10px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.board-header{
+    font-size: large;
+    font-weight: bold;
+    text-shadow: 0 4px 1px #212026;
+}
+
+.board-row{
+    background: linear-gradient(45deg, #1541c8 50%,#8820bb 50%);
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    border-top: 1px solid #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
 
 .card{
     background-clip:padding-box;
@@ -276,9 +313,5 @@ body {
     font-weight: 300;
     margin-left:10px
 }
-
-/*footer p {
-  margin-bottom: .25rem;
-}*/
 
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }

@@ -28,7 +28,6 @@ class Score(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['player_username', 'game_type'], name='unique_player_game')
         ]
-        # unique_together = (('player_username', 'game_type'),)
 
     player_username = models.CharField(max_length=50)
     game_type = models.CharField(max_length=50, blank=True)

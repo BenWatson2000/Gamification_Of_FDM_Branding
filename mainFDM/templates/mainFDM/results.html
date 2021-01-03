@@ -8,57 +8,59 @@
 <!-- row of for columns -->
 {% block forcolumns %}
               <!-- row of for 2 columns with 2 forms-->
-              <div class="row justify-content-between pt-5">
+              <div class="row justify-content-center justify-content-md-around justify-content-lg-between pt-5">
 
-                  <!-- add scores -->
-                  <div class="col-5 form-col p-4 justify-content-center">
+                  <!-- add scores / leaderboard -->
+                  <div class="col-auto col-lg-5 form-col p-2 p-sm-3 pb-4 pb-sm-3 justify-content-center" id="upload-form-col">
 
-                      {% if not submitted %}
-                          <!-- 'add scores' form starts here -->
-                          <form method="POST" action="">
-                              {% csrf_token %}
+                      <!-- ajax result for successful submission of the score form -->
+                      <div class="" id="success"></div>
 
-                              <!-- form title -->
+                      <!-- 'upload scores' form starts here -->
+                      <form class="" method="POST" action="" id="upload-scores">{%  csrf_token %}
+
+                          <!-- form title -->
+                          <div id="form-title-div">
                               <h3 class="form-title" id="form-title">Upload</h3>
+                          </div>
 
-                              <!-- form field errors -->
-                              {%  for error in form.errors%}
-                                <p class="errors">{{ error }}</p>
-                              {% endfor %}
+                          <div class="mb-3">
+                              <label class="form-label">{{ form.player_username.label }}</label>
+                              {{ form.player_username }}
+                          </div>
+                          <div class="mb-3">
+                              <label class="form-label">{{ form.game_type.label }}</label>
+                              {{ form.game_type }}
+                          </div>
+                          <div class="mb-3">
+                              <label class="form-label">{{ form.score.label }}</label>
+                              {{ form.score }}
+                          </div>
+                          <div class="d-flex pt-1 justify-content-center">
+                              <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
+                          </div>
+                      </form>
 
-                              <!-- non field form errors -->
-                              {%  for error in form.non_field_errors%}
-                                <p class="errors">{{ error }}</p>
-                              {% endfor %}
+                      <!-- leader board starts here -->
+                      <div class="container d-none" id="leaderboard">
+                          <!-- leaderboard title -->
+                          <div id="leaderboard-title-div">
+                              <h3 class="form-title" id="leaderboard-title">Leaderboard</h3>
+                          </div>
 
-                              <!-- messages -->
-                              {%  for message in messages %}
-                                <p id="messages">{{ message }}</p>
-                              {% endfor %}
-
-                              <div class="mb-3">
-                                  <label class="form-label">{{ form.player_username.label }}</label>
-                                  {{ form.player_username }}
-                              </div>
-                              <div class="mb-3">
-                                  <label class="form-label">{{ form.game_type.label }}</label>
-                                  {{ form.game_type }}
-                              </div>
-                              <div class="mb-3">
-                                  <label class="form-label">{{ form.score.label }}</label>
-                                  {{ form.score }}
-                              </div>
-                              <div class="d-flex pt-1 justify-content-center">
-                                  <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
-                              </div>
-                          </form>
-                      {% else %}
-                      <p>submitted</p>
-                      {% endif %}
-                    </div>
+                          <div class="row gx-0 align-items-center board-row">
+                            <div class="col col-6">
+                                <div class="board-username board-header">Player Username</div>
+                            </div>
+                            <div class="col col-6">
+                                <div class="board-score board-header">Score</div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
 
                   <!-- don't add scores -->
-                  <div class="col-sm-auto col-md-5">
+                  <div class="col-sm-auto col-md-5" style="min-width: fit-content">
                       <div class="container form-col p-4">
                         <!-- 'take me to the streams' form -->
                         <h3 class="form-title">Proceed to stream</h3>
