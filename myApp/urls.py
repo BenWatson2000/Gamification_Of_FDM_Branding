@@ -25,8 +25,8 @@ urlpatterns = [
     # url(r'^cable_app/',include('cable_app.urls')),
     path('', include('mainFDM.urls')),
     path('admin/', admin.site.urls),
-    path('cable/',include('cable_app.urls')),
-    path('memory/',include('memoryApp.urls')),
-    path('pipe/',include('pipeGameApp.urls')),
+    path('cable/', include('cable_app.urls')),
+    path('memory/', include('memoryApp.urls')),
+    path('pipe/', include('pipeGameApp.urls')),
 
 ]
