@@ -71,14 +71,9 @@ body {
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
   margin-bottom: 0;
-  /*background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');
-    !*height: 530px;*!
-    !*width: fit-content;*!
-    !*height: 100%;*!
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center right;*/
+
 }
+
 @media (min-width: 768px) {
   .jumbotron {
     padding-top: calc(var(--jumbotron-padding-y) * 2);
@@ -113,9 +108,6 @@ body {
 #intro{
     font-style: normal;
     font-weight: 600;
-    /*
-    font-size: 32px;
-    */
     font-size: 2.2em;
     text-align: center;
 
@@ -159,6 +151,10 @@ body {
     border-radius: 30px;
     background-clip: border-box;
     margin-bottom: 20px;
+    box-shadow:
+            0.2rem 0.2rem 0.55rem 0.1rem rgb(21, 65, 200),
+            0.5rem 0.5rem 0.55rem 0.1rem rgb(136,32,187);
+    /* horizontal offset, vertical offset, blur radius, spread radius, colour */
 }
 
 #login-form-col,#register-form-col{
@@ -193,6 +189,13 @@ body {
     font-size: 1.3rem;
     padding-inline: 15%;
     font-weight: 300;
+}
+
+#h-score{
+   text-align: center;
+    height: 2.7rem;
+    box-shadow: none;
+    border: none
 }
 
 #success{
@@ -256,14 +259,14 @@ body {
     text-decoration: underline;
 }
 
-.stream_btn{
-    border-color: #1541C8;
+.stream_btn {
     background-color: #1541c8;
     padding-block: 0;
-    padding-inline:4%;
+    padding-inline: 4%;
     position: absolute;
     right: 10px;
     bottom: 10px;
+    border-color: #1541C8;
     border-radius: 22px;
     text-align: center;
     font-size: 2rem;
@@ -288,9 +291,9 @@ body {
     padding-bottom: 0;
     padding-top: 3rem;
     border-bottom: 8px solid #1daded;
-  /*  border-top: 12px solid #8820bb;*/
 }
 
+/*TODO delete if proves unnecessary*/
 /*#lower-bar{
     position: absolute;
     height: 12px;
@@ -314,4 +317,5 @@ body {
     margin-left:10px
 }
 
+/*TODO delete if proves unnecessary*/
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }

@@ -49,6 +49,14 @@ def helper_login(request):
     else:
         form = AuthenticationForm()
         if request.method == 'POST':
+
+            # check whether user wants to stay logged in or not
+            if request.POST.get('remember-me', None):
+                request.session.set_expiry(60 * 60 * 24 * 30)  # keep them logged in for a month
+            else:
+                request.session.set_expiry(0)  # log them out when the browser closes
+
+            # get data from form
             username = request.POST.get('username')
             password = request.POST.get('password')
 
@@ -83,8 +91,6 @@ def helper_home(request):
             question.question = q_form.cleaned_data.get("question")
             question.answer = q_form.cleaned_data.get("answer")
             question.save()
-        else:
-            q_form = AddQuestion()
 
     q_form = AddQuestion()
 
