@@ -262,15 +262,19 @@ body {
 .stream_btn {
     background-color: #1541c8;
     padding-block: 0;
-    padding-inline: 4%;
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+    position: relative;
+    right: 0px;
+    bottom: 0px;
     border-color: #1541C8;
     border-radius: 22px;
     text-align: center;
-    font-size: 2rem;
-    max-font-size: 2rem;
+    font-size: 1.2rem;
+    max-font-size: 1.2rem;
+}
+
+.btn-container {
+    position: absolute;
+    bottom: 10px;
 }
 
 .quiz-btn{
