@@ -80,7 +80,8 @@ def helper_logout(request):
 
 @login_required
 def helper_home(request):
-    # TODO log users out after they close their session
+    # data to be passed to the template
+    context = {}
 
     # the question form functionality
     if request.method == "POST":
@@ -93,16 +94,19 @@ def helper_home(request):
             question.save()
 
     q_form = AddQuestion()
+    context['q_form'] = q_form
 
-    # the highest score functionality
-    score_dict = Score.objects.filter().aggregate(Max('score'))
-    highest_score = score_dict.get('score__max')
+    # the best score functionality
+    best_cable = Score.objects.filter(game_type='Cable').order_by('score')[:1]
+    best_memo = Score.objects.filter(game_type='Memory').order_by('score')[:1]
+    best_pipes = Score.objects.filter(game_type='Pipes').order_by('score')[:1]
 
-    # pass stuff to the page
-    context = {
-        'q_form': q_form,
-        'highest_score': highest_score
-    }
+    for c in best_cable:
+        context['best_cable'] = c
+    for m in best_memo:
+        context['best_memo'] = m
+    for p in best_pipes:
+        context['best_pipes'] = p
 
     return render(request, 'mainFDM/helper_home.html', context)
 

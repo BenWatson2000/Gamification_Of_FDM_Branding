@@ -6,27 +6,20 @@
 
 {% block user %} Hello, {{ request.user }} {% endblock %}
 
-<!-- begin page content -->
-{% block main %}
-
-        <section class="jumbotron m-0 pt-4 text-center">
-            <div class="container background-block" style="max-width: fit-content; background-color: #f8f8f8">
-            <!-- container with the header  -->
-            <div class="container text-center">
-                <p id="helper-header">Helper Page</p>
-            </div>
-                <div class="container px-5">
-
+<!-- row of for columns -->
+{% block forcolumns %}
                   <!-- row of 2 columns with 2 forms -->
-                  <div class="row justify-content-around pt-5">
+                  <div class="row justify-content-center justify-content-md-around justify-content-lg-between pt-5">
 
                     <!-- helper question adding form column -->
-                    <div class="col-sm-auto col-md-5 p-4 form-col">
-                        <div class="row">
-                            <h3 class="form-title">Add a question</h3>
-                            <div class="col">
-                                <form method="post" action="">
-                                    {% csrf_token %}
+                    <div class="col-auto col-md-5 form-col p-3 p-sm-3 pb-4 pb-sm-3 justify-content-center">
+
+                                <form method="post" action=""> {% csrf_token %}
+
+                                    <div id="form-title-div">
+                                      <h3 class="form-title">Add a question</h3>
+                                    </div>
+
                                     <div class="mb-3">
                                         {{ q_form.stream_type }}
                                     </div>
@@ -36,54 +29,78 @@
                                     <div class="mb-3">
                                         {{ q_form.answer }}
                                     </div>
-                                    <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
+
+                                    <!-- button to submit question -->
+                                    <div class="d-flex pt-1 justify-content-center">
+                                        <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
+                                    </div>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
+
+                    </div> <!-- end of helper question adding form column -->
 
                       <!-- column with the retrieving score form -->
-                      <div class="col-sm-auto col-md-5">
-                          <div class="container form-col p-4">
+                      <div class="col-sm-auto col-md-5" style="min-width: fit-content">
+                          <div class="form-col p-4">
+
                               <h3 class="form-title">Retrieve Scores</h3>
-                              <form class="row gy-2 py-2 align-items-center justify-content-center">
-                                  <div class="col-auto">
-                                      <input type="text" class="form-control" placeholder="Highest Score" aria-label="Highest Score" disabled id="h-score">
-                                  </div>
-                                  <div class="w-100"></div>
-                                  <div class="col">
-                                      <button type="button" class="btn btn-grad text-nowrap" id="get-h-score">Get Highest Score</button>
-                                  </div>
-                              </form>
+
+                              <!-- table with current best scoring players and their scores -->
+                              <table class="table table-bordered d-none" id="best-scores-table">
+                                  <thead class="table-head">
+                                    <tr class="table-row">
+                                      <th scope="col">Game Type</th>
+                                      <th scope="col">Player Username</th>
+                                      <th scope="col">Best Score</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr class="table-row" id="cable-tr">
+                                      <td>Cable Game</td>
+                                      <td>{{ best_cable.player_username }}</td>
+                                      <td>{{ best_cable.score }}</td>
+                                    </tr>
+                                    <tr class="table-row" id="memo-tr">
+                                      <td>Memory Game</td>
+                                      <td>{{ best_memo.player_username }}</td>
+                                      <td>{{ best_memo.score }}</td>
+                                    </tr>
+                                    <tr class="table-row" id="pipe-tr">
+                                        <td>Pipe Game</td>
+                                        <td>{{ best_pipes.player_username }}</td>
+                                        <td>{{ best_pipes.score }}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+
+                              <!-- retrieve scores button -->
+                              <div class="d-flex pt-1 justify-content-center">
+                               <button type="submit" class="btn btn-grad btn-lg" id="get-b-score" >Get Best Scores</button>
+                              </div>
                           </div>
-                      </div>
-                  </div>
-                </div>
-            </div>
-        </section>
+                      </div> <!-- end of column with the retrieving score form -->
+                  </div> <!-- end of the row of 2 columns with 2 forms -->
+
+
 {% endblock %}
+
+{% block lower %}{% endblock %}
 
 
 <!-- footer  -->
 {% block helper-button %}
-<a href="/helper/logout/" style="text-decoration: none" type="button" class="btn btn-grad btn-lg mt-2 mx-auto text-nowrap" id="helper-login-btn">
+<a href="/helper/logout/" type="button" class="btn btn-grad btn-lg mt-2 mx-auto text-nowrap" id="helper-login-btn">
     HELPER LOGOUT
 </a>
 {% endblock %}
 
 
-
 {% block scripts %}
-
-    {{ highest_score|json_script:"highest_score" }}
     <script>
-    const get_score = document.getElementById("get-h-score")
-    const show_score = document.getElementById("h-score")
-    const h_score = JSON.parse(document.getElementById('highest_score').textContent);
-
-    get_score.addEventListener("click", function () {
-        show_score.value = h_score
-    })
+        $(document).ready(function(){
+            $("#get-b-score").click(function(){
+                $("#best-scores-table").removeClass("d-none");
+                });
+        });
     </script>
 
 {% endblock %}
