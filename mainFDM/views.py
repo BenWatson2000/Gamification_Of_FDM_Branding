@@ -115,9 +115,11 @@ def quiz(request):
 # view of the pre-stream quiz page
 def results(request):
     # set the game type to the one the user played
-    game_played = 'Cable'
+    game_played = request.session["my_game"]
     # set the score to the one the user got
-    score_got = 734
+
+    score_got = request.session["my_score"]
+
     # send data to ajax
     data = {}
 
