@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'memoryApp',
     'pipeGameApp',
-    'cable_app'
+    'cable_app',
+    'quizApp',
 ]
 
 MIDDLEWARE = [
@@ -88,8 +89,6 @@ DATABASES = {
         'PORT': '3306'
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

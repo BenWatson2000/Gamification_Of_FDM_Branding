@@ -1,0 +1,74 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+
+    <title>Quiz App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Quiz App">
+    <meta name="author" content="Ben">
+    <!--<link rel="icon" href="../../../../favicon.ico">-->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script defer src="/static/quizApp/js/script.js"></script>
+
+    <!--Bootstrap stylesheet-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/static/quizApp/css/custom.css">
+    <link rel="stylesheet" href="/static/quizApp/css/styles.css">
+  </head>
+
+  <body id="home">
+
+    <header>
+      <!-- fixed navbar -->
+      <nav class="navbar navbar-expand-md fixed-top navbar-dark p-2">
+        <div class="container-fluid">
+          <a class="navbar-brand mx-5 my-1" href="/">
+          <img src="/static/mainFDM/images/fdm-logo-2018.png" id="fdm_logo_header" alt="FDM logo">
+          </a>
+          </div>
+        </nav>
+      <!-- gradient bar below navbar -->
+      <div class="gradient-bar" id="upper-bar"></div>
+    </header>
+
+    <div class="container">
+        <div id="question-container" class="hide">
+            <div id="question">Question</div>
+            <div id="chart_div" align="center">
+                <canvas id="myChart" width="500" height="400" class="hide"></canvas>
+            </div>
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+        </div>
+        <div id="result-response" align="center" class="hide response">Response</div>
+        <div class="controls">
+{#            <button id="start-btn" class="start-btn btn">Start</button>#}
+            <button id="next-btn" class="next-btn btn hide">Next</button>
+            <button id="finished-btn" class="finished-btn btn hide">Finished</button>
+            <button id="redirect-btn" class="redirect-btn btn hide" onclick="location.href='/'">Back to Homepage</button>
+        </div>
+    </div>
+
+    <!-- close the gap to the bottom of the page -->
+    <footer class="footer py-0 py-sm-3 py-md-4 py-lg-4 py-xl-4 py-xxl-5 bg-dark">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-7 col-sm-auto">HALLO</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+  </body>
+</html>

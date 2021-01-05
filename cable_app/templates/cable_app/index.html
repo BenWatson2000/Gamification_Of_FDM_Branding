@@ -4,12 +4,12 @@
     <head>
         <meta charset="utf-8">
         <title>Cable Game</title>
-         <script type="text/javascript" src="../../static/js/phaser.min.js"></script>
+        <script type="text/javascript" src="../../static/js/phaser.min.js"></script>
+        <link href="../../static/css/styles.css" rel="stylesheet">
     </head>
     <body>
 
     <div>
-
 
         <input  value="{{ question_1 }}" name="value" id='q1' type="hidden"/>
         <input  value="{{ question_2 }}" name="value" id='q2' type="hidden"/>
@@ -20,14 +20,11 @@
         <input  value="{{ answer_3 }}" name="value" id='a3' type="hidden"/>
         <input  value="{{ answer_4 }}" name="value" id='a4' type="hidden"/>
 
-
     </div>
-
-    <p id="mytext"></p>
 
      <form name="cablegame" method="post">
 
-
+         {% csrf_token %}
 
          {#phaser game#}
          <script type="text/javascript">
@@ -136,14 +133,11 @@
             //create main game
             function create ()
             {
-
-
                 var main = this;
 
                 //create background image
                 var bg = this.add.image(400, 300, 'background').setInteractive();
                 bg.setScale(2);
-
 
                 //TODO left question number indicators so I can know the right answers (remove them when they are not needed)
                     // set all questions and answers
@@ -574,7 +568,8 @@
                                         score.visible = true;
                                         score_border.visible = true;
                                         score_text.visible = true;
-
+                                        document.getElementById("score-holder").value = score.text
+                                        document.getElementById("submit-btn").classList.remove("hide")
                                     }
 
                                     lineActive = false;
@@ -759,6 +754,12 @@
 
          </script>
 
+          <input type="hidden" name="score-holder" id="score-holder" value="blank">
+
+          <input type="submit" value="Submit" id="submit-btn" class="hide">
+
          </form>
+
+
     </body>
 </html>

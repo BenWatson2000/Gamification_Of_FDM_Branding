@@ -10,6 +10,6 @@ urlpatterns = [
     path('helper/login/', views.helper_login, name='helperLogin'),
     path('helper/register/', views.helper_register, name='helperRegister'),
     path('helper/logout/', views.helper_logout, name='helperLogout'),
-    path('quiz/', views.quiz, name='quiz'),  # route to the page with the pre-stream quiz
+    # path('quiz/', views.quiz, name='quiz'),  # route to the page with the pre-stream quiz
     path('results/', views.results, name='results'),  # route to the page with the pre-stream quiz
 ]

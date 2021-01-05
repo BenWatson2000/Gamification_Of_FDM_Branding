@@ -43,44 +43,101 @@
           <h1 class="jumbotron-heading">Bringing people and technology together</h1>
           <p class="lead" id="intro">Choose one of our Technical Graduate Programmes to kick-start your career!</p>
         </div>
+
+
         <!-- container with the cards of streams -->
         <div class="album pt-4 px-5 justify-content-around">
           <div class="container px-5">
 
-              <!-- rowe of cards -->
+              <!-- row of cards -->
               <div class="row justify-content-center gx-5">
 
                 <div class="col-sm-auto col-md-4 px-4" style="max-width: 500px; min-width: 350px">
-                  <div class="card text-start mb-4 box-shadow">
+                  <div class="card text-start mb-4">
                     <img class="card-img" src="https://www.fdmgroup.com/wp-content/uploads/techop.jpg" alt="">
                     <div class="card-img-overlay">
                       <a href="pipe/" class="card-link">Technical Operations</a>
-                      <a href="pipe/" class="btn stream_btn btn-primary">+</a>
+                      <div class="btn-container">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Cable">
+                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="TO">
+                                <input type="submit" value="Cable Game" class="stream_btn">
+                            </form>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Pipe">
+                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="TO">
+                                <input type="submit" value="Pipe Game" class="stream_btn">
+                            </form>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Memory">
+                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="TO">
+                                <input type="submit" value="Memory Game" class="stream_btn">
+                            </form>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-
                 <div class="col-sm-auto col-md-4 px-4" style="max-width: 500px; min-width: 350px">
-                  <div class="card text-start mb-4 box-shadow">
+                  <div class="card text-start mb-4">
                     <img class="card-img" src="https://www.fdmgroup.com/wp-content/uploads/infosec.jpg" alt="">
                     <div class="card-img-overlay">
                       <a href="memory/" class="card-link">Business Intelligence</a>
-                      <a href="memory/" class="btn stream_btn btn-primary">+</a>
+                      <div class="btn-container">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Cable">
+                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="BI">
+                                <input type="submit" value="Cable Game" class="stream_btn">
+                            </form>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Pipe">
+                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="BI">
+                                <input type="submit" value="Pipe Game" class="stream_btn">
+                            </form>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Memory">
+                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="BI">
+                                <input type="submit" value="Memory Game" class="stream_btn">
+                            </form>
+                        </div>
                       </div>
                     </div>
                   </div>
 
                 <div class="col-sm-auto col-md-4 px-sm-4" style="max-width: 500px; min-width: 350px">
-                  <div class="card text-start mb-4 box-shadow">
+                  <div class="card text-start mb-4">
                     <img class="card-img" src="https://www.fdmgroup.com/wp-content/uploads/test.jpg" alt="">
                     <div class="card-img-overlay">
                       <a href="cable/" class="card-link">Software Testing</a>
-                      <a href="cable/" class="btn stream_btn btn-primary">+</a>
+                        <div class="btn-container">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Cable">
+                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="ST">
+                                <input type="submit" value="Cable Game" class="stream_btn">
+                            </form>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Pipe">
+                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="ST">
+                                <input type="submit" value="Pipe Game" class="stream_btn">
+                            </form>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Memory">
+                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="ST">
+                                <input type="submit" value="Memory Game" class="stream_btn">
+                            </form>
+                        </div>
                       </div>
                     </div>
                   </div>
-
               </div>
           </div>
         </div>
