@@ -33,19 +33,19 @@
     <div id="timer"></div>
     <script>
         if (sessionStorage.getItem("computerResponse")==1){
-            document.getElementById("answer1").innerHTML = "a1";
-            document.getElementById("answer2").innerHTML = "a2";
-            document.getElementById("answer3").innerHTML = "a3";
+            document.getElementById("answer1").innerHTML = document.getElementById('a1').value;
+            document.getElementById("answer2").innerHTML = document.getElementById('a2').value;
+            document.getElementById("answer3").innerHTML = document.getElementById('a3').value;
         }
         else if (sessionStorage.getItem("computerResponse")==2){
-            document.getElementById("answer1").innerHTML = "a2";
-            document.getElementById("answer2").innerHTML = "a1";
-            document.getElementById("answer3").innerHTML = "a3";
+            document.getElementById("answer1").innerHTML = document.getElementById('a2').value;
+            document.getElementById("answer2").innerHTML = document.getElementById('a1').value;
+            document.getElementById("answer3").innerHTML = document.getElementById('a3').value;
         }
         else if (sessionStorage.getItem("computerResponse")==3){
-            document.getElementById("answer1").innerHTML = "a3";
-            document.getElementById("answer2").innerHTML = "a2";
-            document.getElementById("answer3").innerHTML = "a1";
+            document.getElementById("answer1").innerHTML = document.getElementById('a3').value;
+            document.getElementById("answer2").innerHTML = document.getElementById('a2').value;
+            document.getElementById("answer3").innerHTML = document.getElementById('a1').value;
         }
     </script>
 
