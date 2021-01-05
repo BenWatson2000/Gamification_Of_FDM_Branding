@@ -17,7 +17,9 @@ def index(request):
 
     else:
 
-        question_list = GameQuestion.objects.filter()
+        stream_type = request.session["stream-type"]
+
+        question_list = GameQuestion.objects.filter(stream_type=stream_type)
 
         mockArray = [None] * 4
         questions_for_game = [None] * 4

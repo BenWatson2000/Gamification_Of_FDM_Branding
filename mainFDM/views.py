@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.http import JsonResponse
+import cable_app.views as c
+import memoryApp.views as m
+import pipeGameApp.views as p
 
 
 # Create your views here.
@@ -21,8 +24,21 @@ def base(response):
     return render(response, 'mainFDM/base.html')
 
 
-def home(response):
-    return render(response, 'mainFDM/home.html', {})
+def home(request):
+    if request.method == "POST":
+
+        request.session["stream-type"] = request.POST.get("stream-type-holder")
+
+        game_type = request.POST.get("game-type-holder")
+
+        if game_type == 'Cable':
+            return redirect(c.index)
+        elif game_type == "Pipe":
+            return redirect(p.index)
+        elif game_type == "Memory":
+            return redirect(m.index)
+
+    return render(request, 'mainFDM/home.html')
 
 
 def helper_register(request):
