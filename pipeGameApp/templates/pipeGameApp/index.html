@@ -47,12 +47,19 @@
             document.getElementById("answer2").innerHTML = document.getElementById('a2').value;
             document.getElementById("answer3").innerHTML = document.getElementById('a1').value;
         }
+
     </script>
 
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="score-holder" id="score-holder" value="blank">
+
+        <input type="submit" value="Submit" id="submit-btn">
+    </form>
 
 
-
-
+{#    document.getElementById("score-holder").value = score.text#}
+{#    document.getElementById("submit-btn").classList.remove("hide")#}
 
     </body>
 </html>

@@ -376,7 +376,7 @@ function startTimer(duration, display) {
 }
 
 window.onload = function () {
-    var time = 60 / 2, // your time in seconds here
+    var time = 180 , // your time in seconds here
         display = document.querySelector('#timer');
     startTimer(time, display);
 };
