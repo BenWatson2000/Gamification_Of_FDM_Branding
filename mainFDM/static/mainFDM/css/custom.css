@@ -99,12 +99,24 @@ body {
 }
 
 /*Header text on each of the pages extending base*/
-#header{
+.header{
     font-size: 4rem;
     font-weight: 300;
     color: #1daded;
     margin:0;
     text-shadow: 0 6px 6px #212026;
+    text-align: center;
+}
+
+/*Any header-style text on each of the pages extending base that is below the 'header' text*/
+.subheader{
+    font-size: 3rem;
+    font-weight: 300;
+    color: #1daded;
+    margin:0;
+    padding-bottom: 15px;
+    text-shadow: 0 6px 6px #212026;
+    text-align: center;
 }
 
 /*Home page intro to the programmes*/
@@ -238,7 +250,7 @@ body {
     border-collapse: collapse;
     border-style: hidden;
     margin-inline: auto;
-    max-width: fit-content;
+    max-width: border-box;
     word-wrap: break-word;
     border-radius: 20px;
 }

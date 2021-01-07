@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
@@ -107,6 +109,19 @@ def helper_home(request):
         context['best_memo'] = m
     for p in best_pipes:
         context['best_pipes'] = p
+
+    # display the list of questions already in the database
+    # query the database
+    qs = GameQuestion.objects.all()
+    # create a list of values from the queryset to prepare for passing to template
+    qs_list = list(qs.values())
+
+    # previous methods, don't delete yet
+    # context['questions'] = qs
+    # context['qscount'] = range(1, qs.count()+1)
+
+    # pass the list as json to template
+    context['qsjson'] = json.dumps(qs_list)
 
     return render(request, 'mainFDM/helper_home.html', context)
 
