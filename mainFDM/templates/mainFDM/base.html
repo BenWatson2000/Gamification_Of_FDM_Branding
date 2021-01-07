@@ -1,5 +1,6 @@
 <!doctype html>
 {% load static %}
+{% load custom_tags %}
 <link rel="stylesheet" type="text/css" href="{% static 'mainFDM/css/custom.css' %}">
 <script src="{% static 'mainFDM/js/script.js' %}"></script>
 <html lang="en">
@@ -35,10 +36,6 @@
               <div class="collapse navbar-collapse justify-content-end">
                   <span style="color: #1daded; font-size: 18px; margin-right: 20px">{% block user %}{% endblock %}</span>
                   <a class="nav-link link-light mx-5" href="/">Home <span class="sr-only"></span></a>
-<!--                  <ul class="navbar-nav me-5">-->
-<!--                  &lt;!&ndash;<li class="nav-item active">&ndash;&gt;-->
-<!--                  &lt;!&ndash;</li>&ndash;&gt;-->
-<!--                </ul>-->
               </div>
             </div>
           </nav>
@@ -52,13 +49,13 @@
 
 
       <section class="jumbotron m-0 py-5">
-          <div class="container background-block" style="max-width: fit-content; padding-inline: 6rem; background-color: #f8f8f8">
+          <div class="container background-block" style="min-width: fit-content; max-width: border-box; padding-inline: 5rem; background-color: #f5f5f5">
             <!-- container with the header  -->
             <div class="container text-center">
-                <p id="helper-header">{%block header%}HEADER AND TITLE{%endblock%}</p>
+                <p class="header" id="header">{%block header%}HEADER AND TITLE{%endblock%}</p>
             </div>
             <!-- container for columns/streams/cards -->
-            <div class="container p-5 px-5">
+            <div class="container p-5 px-2">
                 {% block forcolumns %}
               <!-- row of for columns -->
               <div class="row justify-content-center py-4">

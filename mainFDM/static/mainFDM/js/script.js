@@ -31,15 +31,13 @@ $(document).ready(function(){
                     $("#leaderboard").removeClass("d-none");
                     //get the leaderboard from the view
                     const leaderboard = data['leaderboard'];
+                    console.log(leaderboard);
                     //for each score in the leaderboard, add the username and score to the leaderboard
                     leaderboard.forEach(item =>
-                        //$("#leaderboard-list").append('<li>' + item.player_username + '  -->  '+ item.score + '</li>')
-                        $('#leaderboard').append('<div class="row gx-0 align-items-center board-row">' +
-                            ' <div class="col col-6 text-start"> ' +
-                                '<div class="board-username">' + item.player_username + '</div></div>' +
-                            '<div class="col col-6 text-end">' +
-                                '<div class="board-score">' + item.score + '</div> </div> </div>')
+                        $('#leader-table').append('<tr class="table-row"> ' +
+                            '<td>' + item.player_username +  '</td> <td>' + item.score + '</td></tr>')
                     );
+
                 }
                 else{
                     console.log("form errors");
