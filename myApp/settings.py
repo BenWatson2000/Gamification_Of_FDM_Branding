@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'fdmdatabase',
         'USER': 'team4admin',
         'PASSWORD': 'our3ChipDoor',
-        'HOST': 'fdminstance.cwflfkfpqivv.us-east-2.rds.amazonaws.com',
+        'HOST': 'fdminstance.ckkpfd5mfral.eu-west-2.rds.amazonaws.com',
         'PORT': '3306'
     }
 }

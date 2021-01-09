@@ -1,4 +1,3 @@
-// const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const finishedButton = document.getElementById('finished-btn')
 const redirectButton = document.getElementById('redirect-btn')
