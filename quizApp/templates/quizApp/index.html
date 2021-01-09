@@ -22,7 +22,6 @@
   </head>
 
   <body id="home">
-
     <header>
       <!-- fixed navbar -->
       <nav class="navbar navbar-expand-md fixed-top navbar-dark p-2">
@@ -36,25 +35,31 @@
       <div class="gradient-bar" id="upper-bar"></div>
     </header>
 
+    <!-- container for questions, answers, buttons and pie chart -->
     <div class="container">
-        <div id="question-container" class="hide">
+        <div id="container-element">
+            <!-- question element -->
             <div id="question">Question</div>
+            <!-- chart element -->
             <div id="chart_div" align="center">
                 <canvas id="myChart" width="500" height="400" class="hide"></canvas>
             </div>
-            <div id="answer-buttons" class="btn-grid">
+            <!-- button container -->
+            <div id="buttons-element" class="btn-grid">
                 <button class="btn">Answer 1</button>
                 <button class="btn">Answer 2</button>
                 <button class="btn">Answer 3</button>
                 <button class="btn">Answer 4</button>
             </div>
         </div>
+        <!-- response variable -->
         <div id="result-response" align="center" class="hide response">Response</div>
+        <!-- controls to move between states -->
         <div class="controls">
 {#            <button id="start-btn" class="start-btn btn">Start</button>#}
-            <button id="next-btn" class="next-btn btn hide">Next</button>
-            <button id="finished-btn" class="finished-btn btn hide">Finished</button>
-            <button id="redirect-btn" class="redirect-btn btn hide" onclick="location.href='/'">Back to Homepage</button>
+            <button id="next-element" class="next-element btn hide">Next</button>
+            <button id="finished-element" class="finished-element btn hide">Finished</button>
+            <button id="redirect-element" class="redirect-element btn hide" onclick="location.href='/'">Back to Homepage</button>
         </div>
     </div>
 
