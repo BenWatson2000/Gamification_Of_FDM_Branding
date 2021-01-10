@@ -21,6 +21,7 @@
         <div class="answers">
         <h6 id="answer3"> </h6>
             </div>
+            <h6 id="computer"></h6>
             </div><br>
     <div>
         <input  value="{{ question_1 }}" name="value" id='q1' type="hidden"/>
@@ -32,6 +33,7 @@
 
     <div id="timer"></div>
     <script>
+        document.getElementById("computer").innerHTML = sessionStorage.getItem("computerResponse");
         if (sessionStorage.getItem("computerResponse")==1){
             document.getElementById("answer1").innerHTML = document.getElementById('a1').value;
             document.getElementById("answer2").innerHTML = document.getElementById('a2').value;

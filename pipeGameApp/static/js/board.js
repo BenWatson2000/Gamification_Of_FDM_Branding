@@ -290,19 +290,19 @@ var grid = {
 
 
         // Check if the user has won
-        if (pipes_with_connection.includes(winningOption)) {
+        if (pipes_with_connection.includes(top)) {
 
             setTimeout(alert("won game"),200)
         }
 
         //check loss
-        else if (pipes_with_connection.includes(losingOptions[0])) {
+        else if (pipes_with_connection.includes(bot)) {
 
-            setTimeout(alert("wrong answer"),200)
+             setTimeout(alert("wrong answer"),200)
         }
-        else if (pipes_with_connection.includes(losingOptions[1])) {
+        else if (pipes_with_connection.includes(mid)) {
 
-            setTimeout(alert("wrong answer"),200)
+             setTimeout(alert("wrong answer"),200)
         }
 
     },
