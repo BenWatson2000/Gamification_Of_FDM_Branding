@@ -53,24 +53,12 @@
                               <table class="table table-bordered" id="best-scores-table">
                                   <thead class="table-head">
                                     <tr class="table-row">
-                                      <th scope="col">Player Username</th>
-                                      <th scope="col">Score</th>
+                                        <th scope="col">Rank</th>
+                                        <th scope="col">Player Username</th>
+                                        <th scope="col">Score</th>
                                     </tr>
                                   </thead>
                                   <tbody id="leader-table">
-                                  <!-- practice rows to check padding - DO NOT DELETE -->
-<!--                                    <tr class="table-row">-->
-<!--                                      <td>cvbcv</td>-->
-<!--                                      <td>vbxnxv</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr class="table-row">-->
-<!--                                      <td>bxnx</td>-->
-<!--                                      <td>4577</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr class="table-row">-->
-<!--                                        <td>dgshfgjhfgjdghkgmhfj,g</td>-->
-<!--                                        <td>3462547568</td>-->
-<!--                                    </tr>-->
                                   </tbody>
                                 </table>
                       </div>
@@ -81,14 +69,26 @@
                       <!-- actual column with the proceed to streams button (small) -->
                       <div class="container form-col p-4">
                         <!-- 'take me to the streams' form -->
-                        <h3 class="form-title">Proceed to stream</h3>
+                        <h3 class="form-title">Find out more about this stream</h3>
                         <!-- the form starts here -->
-                        <form method="POST" action='/'>
-                            {% csrf_token %}
-                            <div class="d-flex pt-1 justify-content-center">
-                               <button type="submit" class="btn btn-grad btn-lg" id="form-btn2" >Go</button>
-                            </div>
-                        </form>
+                        <!-- based on the stream chosen before the game started, redirect to the correct page -->
+                        {% with s=stream_type %}
+                          {%  if s == "BI" %}
+                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/business-graduate/business-intelligence-graduate-programme/'>
+                          {% elif s == "ST" %}
+                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/technical-graduate-programme/software-development-and-engineering/'>
+                          {% elif s == "TO" %}
+                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/technical-graduate-programme/technical-operations-graduate-programme/'>
+                          {% else %}
+                              <form method="POST" action='/'>
+                          {% endif %}
+                        {% endwith %}
+                                <!-- the rest of the form -->
+                                {% csrf_token %}
+                                <div class="d-flex pt-1 justify-content-center">
+                                   <button type="submit" class="btn btn-grad btn-lg" id="form-btn2" >Let's Go</button>
+                                </div>
+                            </form>
                       </div>
                   </div> <!-- end of proceed to streams container -->
               </div> <!-- end of the row of for 2 columns with 2 forms-->
@@ -97,4 +97,9 @@
 
 {% block lower %}{% endblock %}
 
-<!--TODO add helper button here-->
+<!-- footer  -->
+{% block helper-button %}
+<a href="/helper/home/" type="button" class="btn btn-grad btn-lg mt-2 mx-auto text-nowrap" id="helper-login-btn">
+    HELPER PAGE
+</a>
+{% endblock %}

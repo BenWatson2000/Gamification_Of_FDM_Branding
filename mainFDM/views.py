@@ -3,7 +3,6 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-from django.db.models import Max
 from .models import GameQuestion, Score
 from .forms import AddQuestion, CreateHelperForm, AddScores
 from django.contrib.auth import authenticate, login, logout
@@ -32,6 +31,7 @@ def home(request):
         request.session["stream-type"] = request.POST.get("stream-type-holder")
 
         game_type = request.POST.get("game-type-holder")
+        request.session["my_game"] = game_type
 
         if game_type == 'Cable':
             return redirect(c.index)
@@ -119,12 +119,12 @@ def helper_home(request):
     best_memo = Score.objects.filter(game_type='Memory').order_by('score')[:1]
     best_pipes = Score.objects.filter(game_type='Pipes').order_by('score')[:1]
 
-    for c in best_cable:
-        context['best_cable'] = c
-    for m in best_memo:
-        context['best_memo'] = m
-    for p in best_pipes:
-        context['best_pipes'] = p
+    for ca in best_cable:
+        context['best_cable'] = ca
+    for me in best_memo:
+        context['best_memo'] = me
+    for pi in best_pipes:
+        context['best_pipes'] = pi
 
     # display the list of questions already in the database
     # query the database
@@ -152,8 +152,9 @@ def results(request):
     # set the game type to the one the user played
     game_played = request.session["my_game"]
     # set the score to the one the user got
-
     score_got = request.session["my_score"]
+    # get the stream type the user entered
+    stream_type = request.session["stream-type"]
 
     # send data to ajax
     data = {}
@@ -208,5 +209,6 @@ def results(request):
         # pass stuff to the page on load
         context = {
             'form': form,
+            'stream_type': stream_type,
         }
         return render(request, 'mainFDM/results.html', context)

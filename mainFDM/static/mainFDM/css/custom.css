@@ -17,7 +17,7 @@ html {
 }
 
 body {
-    padding-bottom: 8rem;
+    padding-bottom: 10rem;
     padding-top: 6rem;
     font-family: open sans, sans-serif;
 }
@@ -32,6 +32,7 @@ body {
 
 #base{
     background-color: #ffffff;
+    padding-bottom: 8rem;
     min-height: 35rem;
     margin-inline: 0;
 }
@@ -326,8 +327,8 @@ body {
     bottom: 0;
     width: 100%;
     margin-bottom:0;
-    padding-bottom: 0;
-    padding-top: 3rem;
+    /*padding-bottom: 0;*/
+    /*padding-top: 3rem;*/
     border-bottom: 8px solid #1daded;
 }
 
@@ -346,6 +347,8 @@ body {
     max-width: max-content;
     padding-inline: 20px;
     text-decoration: none;
+    text-wrap: none;
+    word-break: keep-all;
 }
 
 #licence{
@@ -353,8 +356,47 @@ body {
     font-size:12px;
     font-family: open sans, sans-serif;
     font-weight: 300;
-    margin-left:10px
 }
+
+.icon-effect{
+    align-items: center;
+
+    padding-left: 0;
+    list-style-type: disc;
+    font-weight: 300;
+    width: max-content;
+}
+
+.icon-effect li{
+    list-style: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    margin: 10px;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+}
+
+#link-fb{
+    width: 20px;
+    height: 15px;
+}
+
+.icon-effect a {
+    color: #fff;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: linear-gradient(40deg,#1541c8 0,#8820bb 100%);
+    border-radius: 50%;
+    padding-block: 30%;
+    padding-inline: 40%;
+    cursor: pointer;
+}
+
 
 /*TODO delete if proves unnecessary*/
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
