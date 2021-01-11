@@ -15,6 +15,7 @@ var Pipe = function(){
         this.active = (active ? 1 : 0);
     };
 
+
     /**
      * Get the neighbouring pipe in the given direction
      *
@@ -70,6 +71,7 @@ var grid = {
         1: 3,
         0: 2
     },
+
 
     /**
       * Grid initialization
@@ -173,6 +175,8 @@ var grid = {
       * Scramble all pipes by rotating them a random amount of times
       */
     randomisePipes: function() {
+        var computerResponse = this.getRandomInt(1,3)
+        sessionStorage.setItem("computerResponse", computerResponse.toString());
         for (x = 1; x < this.pipes.length; x++) {
             for (y = 1; y < this.pipes.length; y++) {
                 var pipe = this.getThisPipe(x, y);
@@ -194,6 +198,9 @@ var grid = {
                 this.getThisPipe(x, y).setActive(false);
             }
         }
+    },
+    getRandomInt: function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
     },
 
     /**
@@ -263,24 +270,41 @@ var grid = {
                 }
             }
         }
+
         var top = this.getThisPipe(Math.ceil(1), Math.ceil(this.size));
         var mid = this.getThisPipe(Math.ceil(this.size/2), Math.ceil(this.size));
         var bot = this.getThisPipe(Math.ceil(this.size), Math.ceil(this.size));
+        losingOptions=[];
+
+        if (sessionStorage.getItem("computerResponse")==1){
+            var winningOption = top;
+            losingOptions= [mid,bot];
+        }
+        else if (sessionStorage.getItem("computerResponse")==2){
+            var winningOption = mid;
+            losingOptions= [top,bot];
+        }
+        else if (sessionStorage.getItem("computerResponse")==3){
+            var winningOption = bot;
+            losingOptions = [top,mid];
+
+        }
+
 
         // Check if the user has won
-        if (pipes_with_connection.includes(top)) {
+        if (pipes_with_connection.includes(winningOption)) {
 
-            setTimeout(alert("won game"),1000)
+            setTimeout(alert("won game"),200)
         }
 
         //check loss
-        else if (pipes_with_connection.includes(mid)) {
+        else if (pipes_with_connection.includes(losingOptions[0])) {
 
-            setTimeout(alert("wrong answer"),1000)
+             setTimeout(alert("wrong answer"),200)
         }
-        else if (pipes_with_connection.includes(bot)) {
+        else if (pipes_with_connection.includes(losingOptions[1])) {
 
-            setTimeout(alert("won game"),1000)
+             setTimeout(alert("wrong answer"),200)
         }
 
     },
@@ -354,9 +378,10 @@ function startTimer(duration, display) {
 }
 
 window.onload = function () {
-    var time = 60 / 2, // your time in seconds here
+    var time = 180 , // your time in seconds here
         display = document.querySelector('#timer');
     startTimer(time, display);
+
 };
 
 // Called when clicking a pipe

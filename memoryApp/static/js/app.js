@@ -99,7 +99,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
         var imgPanel = document.querySelectorAll('img')
         const panelOneId = chosenPanelId[0]
         const panelTwoId = chosenPanelId[1]
-        if(chosenPanels[0] === chosenPanels[1]){
+        if (panelOneId == panelTwoId){
+            imgPanel[panelOneId].setAttribute('src','/static/images/'+ chosenPanels[0]+ ' red.png')
+            setTimeout(() => {  imgPanel[panelOneId].setAttribute('src','/static/images/grey.png');
+            }, 1000);
+        }
+
+
+        else if(chosenPanels[0] === chosenPanels[1]){
             alert('matching panels found')
             if(chosenPanels[0] === chosenPanels[1]) {
                 imgPanel[panelOneId].setAttribute('src', '/static/images/'+ chosenPanels[0]+ ' green.png')
@@ -144,7 +151,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 }
 
 window.onload = function () {
-    var time = 60 / 2, // your time in seconds here
+    var time = 180, // your time in seconds here
         display = document.querySelector('#timer');
     startTimer(time, display);
 };

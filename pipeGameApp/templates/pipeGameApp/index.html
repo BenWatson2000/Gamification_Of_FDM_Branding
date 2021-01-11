@@ -12,15 +12,16 @@
 
         <script type="text/javascript" src="../../static/js/board.js"></script>
         <div id="answers" class="my_answers">
-        <div id="answer1" class="answers">
-        <h6> 1</h6>
+        <div class="answers">
+        <h6 id="answer1"> </h6>
             </div>
-        <div id="answer2" class="answers">
-        <h6> 2</h6>
+        <div  class="answers">
+        <h6 id="answer2"> </h6>
             </div>
-        <div id="answer3" class="answers">
-        <h6> 3</h6>
+        <div class="answers">
+        <h6 id="answer3"> </h6>
             </div>
+            <h6 id="computer"></h6>
             </div><br>
     <div>
         <input  value="{{ question_1 }}" name="value" id='q1' type="hidden"/>
@@ -32,13 +33,35 @@
 
     <div id="timer"></div>
     <script>
+        document.getElementById("computer").innerHTML = sessionStorage.getItem("computerResponse");
+        if (sessionStorage.getItem("computerResponse")==1){
+            document.getElementById("answer1").innerHTML = document.getElementById('a1').value;
+            document.getElementById("answer2").innerHTML = document.getElementById('a2').value;
+            document.getElementById("answer3").innerHTML = document.getElementById('a3').value;
+        }
+        else if (sessionStorage.getItem("computerResponse")==2){
+            document.getElementById("answer1").innerHTML = document.getElementById('a2').value;
+            document.getElementById("answer2").innerHTML = document.getElementById('a1').value;
+            document.getElementById("answer3").innerHTML = document.getElementById('a3').value;
+        }
+        else if (sessionStorage.getItem("computerResponse")==3){
+            document.getElementById("answer1").innerHTML = document.getElementById('a3').value;
+            document.getElementById("answer2").innerHTML = document.getElementById('a2').value;
+            document.getElementById("answer3").innerHTML = document.getElementById('a1').value;
+        }
 
     </script>
 
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="score-holder" id="score-holder" value="blank">
+
+        <input type="submit" value="Submit" id="submit-btn">
+    </form>
 
 
-
-
+{#    document.getElementById("score-holder").value = score.text#}
+{#    document.getElementById("submit-btn").classList.remove("hide")#}
 
     </body>
 </html>
