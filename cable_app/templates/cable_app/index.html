@@ -22,7 +22,7 @@
 
     </div>
 
-     <form name="cablegame" method="post">
+     <form name="cablegame" method="post" id="cable_game">
 
          {% csrf_token %}
 
@@ -569,7 +569,8 @@
                                         score_border.visible = true;
                                         score_text.visible = true;
                                         document.getElementById("score-holder").value = score.text
-                                        document.getElementById("submit-btn").classList.remove("hide")
+                                        {#document.getElementById("submit-btn").classList.remove("hide")#}
+                                        document.getElementById("cable_game").submit();
                                     }
 
                                     lineActive = false;
