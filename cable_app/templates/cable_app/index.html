@@ -574,6 +574,7 @@
                                      // count right answers
                                     qnaCount = qnaCount +1
                                     if(qnaCount===4){
+                                        score.text = 120 - parseInt(score.text).toString()
                                         timedEvent.paused = true;
                                         score.visible = true;
                                         score_border.visible = true;
