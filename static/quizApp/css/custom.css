@@ -16,12 +16,11 @@ html {
   min-height: 100%;
 }
 
-/*body {*/
-/*    padding-bottom: 8rem;*/
-/*    padding-top: 6rem;*/
-/*    font-family: open sans, sans-serif;*/
-/*    */
-/*}*/
+body {
+    padding-bottom: 10rem;
+    padding-top: 6rem;
+    font-family: open sans, sans-serif;
+}
 
 #home{
     background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');
@@ -31,9 +30,11 @@ html {
     min-height: 60rem; /*this causes the page to scroll*/
 }
 
-#helper, #base{
-    background-color: white;
+#base{
+    background-color: #ffffff;
+    padding-bottom: 8rem;
     min-height: 35rem;
+    margin-inline: 0;
 }
 
 .navbar {
@@ -72,14 +73,9 @@ html {
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
   margin-bottom: 0;
-  /*background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');
-    !*height: 530px;*!
-    !*width: fit-content;*!
-    !*height: 100%;*!
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center right;*/
+
 }
+
 @media (min-width: 768px) {
   .jumbotron {
     padding-top: calc(var(--jumbotron-padding-y) * 2);
@@ -103,20 +99,31 @@ html {
     text-shadow: 0 8px 4px #212026;
 }
 
-#helper-header{
+/*Header text on each of the pages extending base*/
+.header{
     font-size: 4rem;
     font-weight: 300;
     color: #1daded;
     margin:0;
     text-shadow: 0 6px 6px #212026;
+    text-align: center;
 }
 
+/*Any header-style text on each of the pages extending base that is below the 'header' text*/
+.subheader{
+    font-size: 3rem;
+    font-weight: 300;
+    color: #1daded;
+    margin:0;
+    padding-bottom: 15px;
+    text-shadow: 0 6px 6px #212026;
+    text-align: center;
+}
+
+/*Home page intro to the programmes*/
 #intro{
     font-style: normal;
     font-weight: 600;
-    /*
-    font-size: 32px;
-    */
     font-size: 2.2em;
     text-align: center;
 
@@ -127,8 +134,6 @@ html {
 .jumbotron .container {
   max-width: 100%;
 }
-
-
 /*.form-select:focus{
     border-color: #FF0000;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.3);
@@ -146,7 +151,6 @@ html {
 .form-label{
     color: #ffffff;
     font-weight: 500;
-    /*margin-left: 10px;*/
     text-shadow: 0 3px 2px #212026;
     min-width: max-content;
     width: 8rem;
@@ -161,6 +165,20 @@ html {
     border-radius: 30px;
     background-clip: border-box;
     margin-bottom: 20px;
+    min-width: fit-content;
+    /*box-shadow:*/
+    /*        0.2rem 0.2rem 0.55rem 0.1rem rgb(21, 65, 200),*/
+    /*        0.5rem 0.5rem 0.55rem 0.1rem rgb(136,32,187);*/
+    /* horizontal offset, vertical offset, blur radius, spread radius, colour */
+
+    /*FDM's blue on black shadow*/
+    -webkit-box-shadow: 0 0 25px 0 #202025, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 25px 0 #202025, 0 20px 25px 0 rgba(0,0,0,.2);
+}
+
+#login-form-col,#register-form-col{
+    min-width: max-content;
+    max-width: max-content;
 }
 
 .form-title{
@@ -186,12 +204,67 @@ html {
     font-weight: 300;
 }
 
-#get-h-score{
+#get-b-score{
     font-size: 1.3rem;
     padding-inline: 15%;
     font-weight: 300;
 }
 
+#success{
+    margin-top: 20px;
+    margin-inline: 10px;
+    margin-bottom: 10px;
+}
+
+.board-username{
+    border-right: 2px solid #FFFFFF;
+    padding-block: 10px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.board-score{
+    padding-block: 10px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.board-header{
+    font-size: large;
+    font-weight: bold;
+    text-shadow: 0 4px 1px #212026;
+}
+
+.board-row{
+    background: linear-gradient(45deg, #1541c8 50%,#8820bb 50%);
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    border-top: 1px solid #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
+.table{
+    /*background: linear-gradient(40deg,#1541c8 0,#8820bb 100%);*/
+    background: #202025;
+    color: #FFFFFF;
+    border-collapse: collapse;
+    border-style: hidden;
+    margin-inline: auto;
+    max-width: border-box;
+    word-wrap: break-word;
+    border-radius: 20px;
+}
+
+.table-head{
+    border-bottom: 2px solid #FFFFFF;
+    /*word-break: keep-all;*/
+}
+
+.table-row{
+    /*background: linear-gradient(45deg, #1541c8 50%,#8820bb 50%);*/
+    /*border-bottom: None;*/
+}
 
 .card{
     background-clip:padding-box;
@@ -220,18 +293,23 @@ html {
     text-decoration: underline;
 }
 
-.stream_btn{
-    border-color: #1541C8;
+.stream_btn {
     background-color: #1541c8;
     padding-block: 0;
-    padding-inline:4%;
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+    position: relative;
+    right: 0px;
+    bottom: 0px;
+    border-color: #1541C8;
     border-radius: 22px;
     text-align: center;
-    font-size: 2rem;
-    max-font-size: 2rem;
+    font-size: 1.2rem;
+    max-font-size: 1.2rem;
+    color: white;
+}
+
+.btn-container {
+    position: absolute;
+    bottom: 10px;
 }
 
 .quiz-btn{
@@ -249,12 +327,12 @@ html {
     bottom: 0;
     width: 100%;
     margin-bottom:0;
-    padding-bottom: 0;
-    padding-top: 3rem;
+    /*padding-bottom: 0;*/
+    /*padding-top: 3rem;*/
     border-bottom: 8px solid #1daded;
-  /*  border-top: 12px solid #8820bb;*/
 }
 
+/*TODO delete if proves unnecessary*/
 /*#lower-bar{
     position: absolute;
     height: 12px;
@@ -268,6 +346,9 @@ html {
     display: block;
     max-width: max-content;
     padding-inline: 20px;
+    text-decoration: none;
+    text-wrap: none;
+    word-break: keep-all;
 }
 
 #licence{
@@ -275,11 +356,47 @@ html {
     font-size:12px;
     font-family: open sans, sans-serif;
     font-weight: 300;
-    margin-left:10px
 }
 
-/*footer p {
-  margin-bottom: .25rem;
-}*/
+.icon-effect{
+    align-items: center;
 
+    padding-left: 0;
+    list-style-type: disc;
+    font-weight: 300;
+    width: max-content;
+}
+
+.icon-effect li{
+    list-style: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    margin: 10px;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+}
+
+#link-fb{
+    width: 20px;
+    height: 15px;
+}
+
+.icon-effect a {
+    color: #fff;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: linear-gradient(40deg,#1541c8 0,#8820bb 100%);
+    border-radius: 50%;
+    padding-block: 30%;
+    padding-inline: 40%;
+    cursor: pointer;
+}
+
+
+/*TODO delete if proves unnecessary*/
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
