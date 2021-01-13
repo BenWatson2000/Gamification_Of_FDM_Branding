@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             img:'/static/images/im 9.png'
         }
     ]
-
+    //randomise panel images displayed on grid
     PanelArray.sort(()=>0.5 - Math.random())
     const grid = document.querySelector('.grid')
     const displayResult = document.querySelector('#result')
@@ -99,13 +99,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
         var imgPanel = document.querySelectorAll('img')
         const panelOneId = chosenPanelId[0]
         const panelTwoId = chosenPanelId[1]
+        // case where same panel is selected
         if (panelOneId == panelTwoId){
             imgPanel[panelOneId].setAttribute('src','/static/images/'+ chosenPanels[0]+ ' red.png')
             setTimeout(() => {  imgPanel[panelOneId].setAttribute('src','/static/images/grey.png');
             }, 1000);
         }
 
-
+        // case where matching panels are selected
         else if(chosenPanels[0] === chosenPanels[1]){
             alert('matching panels found')
             if(chosenPanels[0] === chosenPanels[1]) {
@@ -114,6 +115,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             }
             completedPanels.push(chosenPanels)
         }
+        // case where incorrect panels are selected
         else{
             imgPanel[panelOneId].setAttribute('src','/static/images/'+ chosenPanels[0]+ ' red.png')
             imgPanel[panelTwoId].setAttribute('src','/static/images/'+ chosenPanels[1]+ ' red.png')
@@ -125,11 +127,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
         chosenPanels = []
         chosenPanelId = []
         displayResult.textContent = completedPanels.length.toString()
+        // when all panels have been matched
         if (completedPanels.length === PanelArray.length/2){
             displayResult.textContent='You have won'
         }
     }
-
+    // timer function
     function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
