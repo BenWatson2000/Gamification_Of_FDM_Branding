@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
+<html style="background-color: black">
     <head>
         <meta charset="utf-8">
         <title>Cable Game</title>
@@ -68,6 +68,11 @@
             var deduct = false;
             var qnaCount = 0;
             var i;
+            var answsr1 =0;
+            var answsr2=0;
+            var answsr3=0;
+            var answsr4=0;
+
 
 
             //het all questions and answers from html input
@@ -578,9 +583,22 @@
                                     firstSelected = null;
 
                                 } else {
+                                    //deduct is true so 5 secs are being deducted from timer
                                      deduct=true;
+                                     if(image.y===93){
+                                         answsr1=firstSelected.y
+                                     }else if(image.y===278){
+                                             answsr2=firstSelected.y
+                                     }else if(image.y===463){
+                                         answsr3=firstSelected.y
+                                     }else if(image.y===648){
+                                         answsr4=firstSelected.y
+                                     }
+
+
 
                                     // if cables DON'T connect turn red cable images visible and all the other wrong choices invisible
+                                    image.visible = false;
                                     if (image.y === 93 && firstSelected.y === 93 && image.x===803) {
                                         q1a1f.visible = true;
                                         q1a2f.visible =false;
@@ -673,6 +691,80 @@
                             if (lineActive === false && !image.getData('selected') && !reset) {
                                 // Make sure it's not one that's already been completed and the first option is a question
                                 if (!completedNodes.includes(image.getData('name')) && image.x===397) {
+                                    //if questions cable is selected again delete the red cable connected to it
+                                    if (image.y === 93) {
+                                        if(answsr1===93){
+                                            images[4].visible = true;
+                                            answsr1=0;
+                                        }else if(answsr2===93){
+                                            images[5].visible = true;
+                                            answsr2=0;
+                                        }else if(answsr3===93){
+                                            images[6].visible = true;
+                                            answsr3=0;
+                                        }else if(answsr4===93){
+                                            images[7].visible = true;
+                                            answsr4=0;
+                                        }
+                                        q1a1f.visible = false;
+                                        q1a2f.visible =false;
+                                        q1a3f.visible =false;
+                                        q1a4f.visible =false;
+                                    } else if (image.y === 278) {
+                                        if(answsr1===278){
+                                            images[4].visible = true;
+                                            answsr1=0;
+                                        }else if(answsr2===278){
+                                            images[5].visible = true;
+                                            answsr2=0;
+                                        }else if(answsr3===278){
+                                            images[6].visible = true;
+                                            answsr3=0;
+                                        }else if(answsr4===278){
+                                            images[7].visible = true;
+                                            answsr4=0;
+                                        }
+                                        q2a2f.visible = false;
+                                        q2a1f.visible =false;
+                                        q2a3f.visible =false;
+                                        q2a4f.visible =false;
+                                    } else if (image.y === 463) {
+                                        if(answsr1===463){
+                                            images[4].visible = true;
+                                            answsr1=0;
+                                        }else if(answsr2===463){
+                                            images[5].visible = true;
+                                            answsr2=0;
+                                        }else if(answsr3===463){
+                                            images[6].visible = true;
+                                            answsr3=0;
+                                        }else if(answsr4===463){
+                                            images[7].visible = true;
+                                            answsr4=0;
+                                        }
+                                        q3a4f.visible = false;
+                                        q3a1f.visible =false;
+                                        q3a2f.visible =false;
+                                        q3a3f.visible =false;
+                                    } else if (image.y === 648) {
+                                        if(answsr1===648){
+                                            images[4].visible = true;
+                                            answsr1=0;
+                                        }else if(answsr2===648){
+                                            images[5].visible = true;
+                                            answsr2=0;
+                                        }else if(answsr3===648){
+                                            images[6].visible = true;
+                                            answsr3=0;
+                                        }else if(answsr4===648){
+                                            images[7].visible = true;
+                                            answsr4=0;
+                                        }
+                                        q4a3f.visible = false;
+                                        q4a1f.visible =false;
+                                        q4a2f.visible =false;
+                                        q4a4f.visible=false;
+                                    }
                                     // create line in those coordinates
                                     line = main.add.line(0, 0, image.x, image.y, pointer.x, pointer.y, 0xd50102).setOrigin(0, 0);
                                     // set line's width
