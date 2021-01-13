@@ -446,7 +446,8 @@
                             this.initialTime -= 1;
                             text.setText(formatTime(this.initialTime)
                             );
-                            score.setText(this.initialTime)
+                            //final score is initialTime minus time left
+                            score.setText(120-this.initialTime)
                             //timer deduct 5 seconds and then keep counting normal
                         }else if(this.initialTime > 0 && deduct===true){
                             // - 5 second
