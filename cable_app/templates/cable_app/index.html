@@ -353,6 +353,7 @@
                     console.log('create');
                     // 2:00 in seconds
                     this.initialTime = 120;
+                    this.redirect = 6;
 
                     var clock = this.add.image(593, 53, 'timer')
                     clock.setScale(0.13)
@@ -395,9 +396,15 @@
                 var score_border = this.add.image(600,370,'textBorder')
                 score = this.add.text(573, 360, this.initialTime, {fill: "#FFFFFF ",font: "30px Arial"});
                 var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Arial"})
+                var redirectText = this.add.text(465,420,'Redirecting to score page in ', {fill: "#FFFFFF ",font: "20px Arial"})
+                text2 = this.add.text(720, 420, this.redirect, {fill: "#FFFFFF ", font: "20px Arial"});
+                scoreNA = this.add.text(573,360,"N/A", {fill: "#FFFFFF ",font: "30px Arial"})
                 score.visible = false;
+                text2.visible = false;
                 score_border.visible = false;
                 score_text.visible = false;
+                redirectText.visible = false;
+                scoreNA.visible = false;
 
                 // fullscreen button
                 var button = this.add.image(1160, 40, 'fullscreen').setInteractive();
@@ -419,6 +426,7 @@
                 }, this);
 
 
+
                     // Each 950 ms call onEvent
                     if (this.initialTime > 0) {
                         timedEvent = this.time.addEvent({
@@ -433,10 +441,32 @@
                     // end game if timer reaches zero
                     function endGame(){
                                 timedEvent.paused = true;
-                                score.visible = true;
                                 score_border.visible = true;
                                 score_text.visible = true;
+                                scoreNA.visible = true;
                             }
+
+                    //creating event for looping redirect timer
+                    if (this.redirect > 0) {
+                        redirectEvent = this.time.addEvent({
+                            delay: 950,
+                            callback: redirectTimer,
+                            callbackScope: this,
+                            loop: true
+                        });
+                        redirectEvent.paused = true;
+                    }
+
+                    //timer for redirecting to score page
+                    function redirectTimer(){
+                        this.redirect -=1;
+                        if(this.redirect===0){
+                            redirectEvent.paused = true;
+                            document.getElementById("score-holder").value = score.text;
+                            document.getElementById("cable_game").submit();
+                        }
+                        text2.setText(this.redirect);
+                    }
 
                     // update clock
                     function onEvent (){
@@ -580,9 +610,9 @@
                                         score.visible = true;
                                         score_border.visible = true;
                                         score_text.visible = true;
-                                        document.getElementById("score-holder").value = score.text
-                                        {#document.getElementById("submit-btn").classList.remove("hide")#}
-                                        document.getElementById("cable_game").submit();
+                                        redirectEvent.paused=false;
+                                        text2.visible = true;
+                                        redirectText.visible = true;
                                     }
 
                                     lineActive = false;
@@ -821,13 +851,13 @@
 
             // create time format
             function formatTime(seconds){
-                // Minutes
+                //minutes
                 var minutes = Math.floor(seconds/60);
-                // Seconds
+                //seconds
                 var partInSeconds = seconds%60;
-                // Adds left zeros to seconds
+                //adds left zeros to seconds
                 partInSeconds = partInSeconds.toString().padStart(2,'0');
-                // Returns formatted time
+                //returns formatted time
                 return `${minutes}:${partInSeconds}`;
             }
 
