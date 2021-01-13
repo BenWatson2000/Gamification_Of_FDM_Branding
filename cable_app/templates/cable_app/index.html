@@ -382,6 +382,7 @@
                         fill: "#000000"
                     })
 
+                    //play button(when pushed start timer)
                     var play = this.add.image(583 , 640 , 'play').setInteractive({useHandCursor: true}).on('pointerdown', function () {
                      timedEvent.paused = false;
                      bg2.visible = false;
@@ -418,7 +419,7 @@
                 }, this);
 
 
-                    // Each 1000 ms call onEvent
+                    // Each 950 ms call onEvent
                     if (this.initialTime > 0) {
                         timedEvent = this.time.addEvent({
                             delay: 950,
@@ -450,6 +451,10 @@
                         }else if(this.initialTime > 0 && deduct===true){
                             // - 5 second
                             this.initialTime -= 5;
+                            //if timer goes below 0 then change it to 0
+                            if(this.initialTime<0){
+                                this.initialTime=0
+                            }
                             text.setText(formatTime(this.initialTime));
                             score.setText(this.initialTime)
                             //reset deduction
