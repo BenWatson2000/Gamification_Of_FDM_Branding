@@ -75,7 +75,7 @@
 
 
 
-            //het all questions and answers from html input
+            //set all questions and answers from html input
             var qst1 = document.getElementById('q1').value;
             var qst2 = document.getElementById('q2').value;
             var qst3 = document.getElementById('q3').value;
@@ -351,13 +351,17 @@
                     q4a1f.visible = false;
 
                     console.log('create');
+                    //time for game
                     // 2:00 in seconds
                     this.initialTime = 120;
-                    this.redirect = 6;
+                    //time for redirecting to score page
+                    this.redirect = 5;
 
+                    //set image for timer
                     var clock = this.add.image(593, 53, 'timer')
                     clock.setScale(0.13)
 
+                    //set text for timer
                     text = this.add.text(573, 45, formatTime(this.initialTime), {fill: "#000000 "});
 
 
@@ -383,7 +387,7 @@
                         fill: "#000000"
                     })
 
-                    //play button(when pushed start timer)
+                    //play button(when pushed start timer and reveal game)
                     var play = this.add.image(583 , 640 , 'play').setInteractive({useHandCursor: true}).on('pointerdown', function () {
                      timedEvent.paused = false;
                      bg2.visible = false;
@@ -393,7 +397,9 @@
 
                     })
 
+                //border for displaying final score
                 var score_border = this.add.image(600,370,'textBorder')
+                // text for final score
                 score = this.add.text(573, 360, this.initialTime, {fill: "#FFFFFF ",font: "30px Arial"});
                 var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Arial"})
                 var redirectText = this.add.text(465,420,'Redirecting to score page in ', {fill: "#FFFFFF ",font: "20px Arial"})
