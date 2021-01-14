@@ -188,36 +188,36 @@
                     this.add.image(1049, 648, 'textBorder')
 
                     // set random positions for question texts
-                    this.add.text(8, newArray[0]-40, question1,{align: 'middle'})
-                    this.add.text(8, newArray[1]-40, question2,{align: 'middle'})
-                    this.add.text(8, newArray[2]-40, question3,{align: 'middle'})
-                    this.add.text(8, newArray[3]-40, question4,{align: 'middle'})
+                    this.add.text(70, newArray[0]-40, question1,{align: 'center' , font: "13px Sans-Serif"})
+                    this.add.text(70, newArray[1]-40, question2,{align: 'center' , font: "13px Sans-Serif"})
+                    this.add.text(70, newArray[2]-40, question3,{align: 'center' , font: "13px Sans-Serif"})
+                    this.add.text(70, newArray[3]-40, question4,{align: 'center' , font: "13px Sans-Serif"})
 
 
 
                     // set positions for answer texts depending on the length of each one
                     if(answer1.length<31){
-                         this.add.text(1010, 85, answer1)
+                         this.add.text(1010, 85, answer1, {align: 'center' , font: "13px -Serif"})
                      }else{
-                         this.add.text(907, 15, answer1)
+                         this.add.text(975, 15, answer1, {align: 'center' , font: "13px Sans-Serif"})
                      }
 
                      if(answer2.length<21){
-                         this.add.text(1010, 270, answer2)
+                         this.add.text(1010, 270, answer2, {align: 'center' , font: "13px Sans-Serif"})
                      }else{
-                         this.add.text(907, 200, answer2)
+                         this.add.text(975, 200, answer2, {align: 'center' , font: "13px Sans-Serif"})
                      }
 
                      if(answer3.length<21){
-                         this.add.text(1010, 455, answer3)
+                         this.add.text(1010, 455, answer3, {align: 'center' , font: "13px Sans-Serif"})
                      }else{
-                         this.add.text(907, 385, answer3)
+                         this.add.text(975, 385, answer3, {align: 'center' , font: "13px Sans-Serif"})
                      }
 
                      if(answer4.length<21){
-                         this.add.text(1010, 640, answer4)
+                         this.add.text(1010, 640, answer4, {align: 'center' , font: "13px Sans-Serif"})
                      }else{
-                         this.add.text(907, 570, answer4)
+                         this.add.text(975, 570, answer4, {align: 'center' , font: "13px Sans-Serif"})
                      }
 
                     //array of connected cable images
@@ -366,12 +366,12 @@
 
 
                     //intro
-                    var bg2 = this.add.image(400, 300, 'background');
+                    var bg2 = this.add.image(400, 300, 'background').setInteractive();
                     bg2.setScale(2);
 
                     // game rules
                     var rules = this.add.text(490, 100, 'Cable Game', {
-                        font: "35px Arial",
+                        font: "35px Sans-Serif",
                         fill: "#000000",
                         align: "center"
                     })
@@ -383,7 +383,7 @@
                         ' Your score\nwill depend on the time left after you finish the game. If\nthe timer reaches 0 before you connect ' +
                         'all the cables\nyou lose the game and you get a 0 score. Press the play\nbutton bellow to start the game.\n\n                       ' +
                         '          Good Luck!', {
-                        font: "25px Arial",
+                        font: "25px Sans-Serif",
                         fill: "#000000"
                     })
 
@@ -400,11 +400,11 @@
                 //border for displaying final score
                 var score_border = this.add.image(600,370,'textBorder')
                 // text for final score
-                score = this.add.text(573, 360, this.initialTime, {fill: "#FFFFFF ",font: "30px Arial"});
-                var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Arial"})
-                var redirectText = this.add.text(465,420,'Redirecting to score page in ', {fill: "#FFFFFF ",font: "20px Arial"})
-                text2 = this.add.text(720, 420, this.redirect, {fill: "#FFFFFF ", font: "20px Arial"});
-                scoreNA = this.add.text(573,360,"N/A", {fill: "#FFFFFF ",font: "30px Arial"})
+                score = this.add.text(573, 360, this.initialTime, {fill: "#FFFFFF ",font: "30px Sans-Serif"});
+                var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Sans-Serif"})
+                var redirectText = this.add.text(465,420,'Redirecting to score page in ', {fill: "#FFFFFF ",font: "20px Sans-Serif"})
+                text2 = this.add.text(720, 420, this.redirect, {fill: "#FFFFFF ", font: "20px Sans-Serif"});
+                scoreNA = this.add.text(573,360,"N/A", {fill: "#FFFFFF ",font: "30px Sans-Serif"})
                 score.visible = false;
                 text2.visible = false;
                 score_border.visible = false;
@@ -450,6 +450,15 @@
                                 score_border.visible = true;
                                 score_text.visible = true;
                                 scoreNA.visible = true;
+                                images[0].visible = false;
+                                images[1].visible = false;
+                                images[2].visible = false;
+                                images[3].visible = false;
+                                images[4].visible = false;
+                                images[5].visible = false;
+                                images[6].visible = false;
+                                images[7].visible = false;
+
                             }
 
                     //creating event for looping redirect timer
@@ -489,7 +498,7 @@
                             // - 5 second
                             this.initialTime -= 5;
                             //if timer goes below 0 then change it to 0
-                            if(this.initialTime<0){
+                            if(this.initialTime<=0){
                                 this.initialTime=0
                             }
                             text.setText(formatTime(this.initialTime));
