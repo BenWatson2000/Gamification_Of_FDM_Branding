@@ -210,5 +210,9 @@ def results(request):
         context = {
             'form': form,
             'stream_type': stream_type,
+            'tweetURL' : 'https://twitter.com/intent/tweet?'
+                         'text=I%20just%20scored%20'+score_got+'%20on%20the%20'+game_played+' Game%21%20Try'
+                         '%20and%20beat%20my%20score%20at%20https%3A//mycareerpath.co.uk%20and%20di'
+                         'scover%20many%20different%20career%20sectors%20in%20technology%21&hashtags=MYCAREERPATH',
         }
         return render(request, 'mainFDM/results.html', context)
