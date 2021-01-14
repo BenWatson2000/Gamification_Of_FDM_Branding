@@ -133,6 +133,8 @@
                 this.load.image('textBorder','{% static "images/text-border.png" %}')
 
                 this.load.image('fullscreen','{% static "images/fullscreen.png" %}')
+
+                this.load.image('replay','{% static "images/Replay.png" %}')
             }
 
             //create main game
@@ -400,20 +402,36 @@
                 //border for displaying final score
                 var score_border = this.add.image(600,370,'textBorder')
                 // text for final score
-                score = this.add.text(573, 360, this.initialTime, {fill: "#FFFFFF ",font: "30px Sans-Serif"});
+                var score = this.add.text(573, 360, this.initialTime, {fill: "#FFFFFF ",font: "30px Sans-Serif"});
                 var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Sans-Serif"})
                 var redirectText = this.add.text(465,420,'Redirecting to score page in ', {fill: "#FFFFFF ",font: "20px Sans-Serif"})
-                text2 = this.add.text(720, 420, this.redirect, {fill: "#FFFFFF ", font: "20px Sans-Serif"});
-                scoreNA = this.add.text(573,360,"N/A", {fill: "#FFFFFF ",font: "30px Sans-Serif"})
+                var text2 = this.add.text(720, 420, this.redirect, {fill: "#FFFFFF ", font: "20px Sans-Serif"});
+                var scoreNA = this.add.text(573,360,"N/A", {fill: "#FFFFFF ",font: "30px Sans-Serif"})
+                var replay = this.add.image(532,429,'replay').setInteractive({useHandCursor: true});
+                replay.setScale(0.3)
                 score.visible = false;
                 text2.visible = false;
                 score_border.visible = false;
                 score_text.visible = false;
                 redirectText.visible = false;
                 scoreNA.visible = false;
+                replay.visible = false;
+
+                //refresh page and set tint when pointer down
+                replay.on('pointerdown', function (pointer) {
+                    //set tint for when image is clicked
+                    this.setTint(0x888888);
+                    window.location.href=window.location.href
+
+                })
+
+                //clear button tint when pointer up
+                 replay.on('pointerup', function (pointer) {
+                            this.clearTint();
+                        });
 
                 // fullscreen button
-                var button = this.add.image(1160, 40, 'fullscreen').setInteractive();
+                var button = this.add.image(1160, 40, 'fullscreen').setInteractive({useHandCursor: true});
                 button.setScale(0.1)
 
                 // set game to fullscreen
@@ -450,6 +468,7 @@
                                 score_border.visible = true;
                                 score_text.visible = true;
                                 scoreNA.visible = true;
+                                replay.visible = true;
                                 images[0].visible = false;
                                 images[1].visible = false;
                                 images[2].visible = false;
