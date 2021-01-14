@@ -135,6 +135,7 @@
                 this.load.image('fullscreen','{% static "images/fullscreen.png" %}')
 
                 this.load.image('replay','{% static "images/Replay.png" %}')
+                this.load.image('home','{% static "images/Home.png" %}')
             }
 
             //create main game
@@ -408,6 +409,8 @@
                 var text2 = this.add.text(720, 420, this.redirect, {fill: "#FFFFFF ", font: "20px Sans-Serif"});
                 var scoreNA = this.add.text(573,360,"N/A", {fill: "#FFFFFF ",font: "30px Sans-Serif"})
                 var replay = this.add.image(532,429,'replay').setInteractive({useHandCursor: true});
+                var home = this.add.image(681,428,'home').setInteractive({useHandCursor: true});
+                home.setScale(0.32)
                 replay.setScale(0.3)
                 score.visible = false;
                 text2.visible = false;
@@ -416,7 +419,23 @@
                 redirectText.visible = false;
                 scoreNA.visible = false;
                 replay.visible = false;
+                home.visible = false;
 
+                //home page button
+                //refresh page and set tint when pointer down
+                home.on('pointerdown', function (pointer) {
+                    //set tint for when image is clicked
+                    this.setTint(0x888888);
+                    window.location.href="/"
+
+                })
+                
+                //clear button tint when pointer up
+                 home.on('pointerup', function (pointer) {
+                            this.clearTint();
+                        });
+
+                //replay button
                 //refresh page and set tint when pointer down
                 replay.on('pointerdown', function (pointer) {
                     //set tint for when image is clicked
@@ -469,6 +488,7 @@
                                 score_text.visible = true;
                                 scoreNA.visible = true;
                                 replay.visible = true;
+                                home.visible = true;
                                 images[0].visible = false;
                                 images[1].visible = false;
                                 images[2].visible = false;
