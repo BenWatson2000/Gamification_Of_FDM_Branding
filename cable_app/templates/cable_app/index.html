@@ -75,7 +75,7 @@
 
 
 
-            //het all questions and answers from html input
+            //set all questions and answers from html input
             var qst1 = document.getElementById('q1').value;
             var qst2 = document.getElementById('q2').value;
             var qst3 = document.getElementById('q3').value;
@@ -133,6 +133,9 @@
                 this.load.image('textBorder','{% static "images/text-border.png" %}')
 
                 this.load.image('fullscreen','{% static "images/fullscreen.png" %}')
+
+                this.load.image('replay','{% static "images/Replay.png" %}')
+                this.load.image('home','{% static "images/Home.png" %}')
             }
 
             //create main game
@@ -188,36 +191,36 @@
                     this.add.image(1049, 648, 'textBorder')
 
                     // set random positions for question texts
-                    this.add.text(8, newArray[0]-40, question1,{align: 'middle'})
-                    this.add.text(8, newArray[1]-40, question2,{align: 'middle'})
-                    this.add.text(8, newArray[2]-40, question3,{align: 'middle'})
-                    this.add.text(8, newArray[3]-40, question4,{align: 'middle'})
+                    this.add.text(70, newArray[0]-40, question1,{align: 'center' , font: "13px Sans-Serif"})
+                    this.add.text(70, newArray[1]-40, question2,{align: 'center' , font: "13px Sans-Serif"})
+                    this.add.text(70, newArray[2]-40, question3,{align: 'center' , font: "13px Sans-Serif"})
+                    this.add.text(70, newArray[3]-40, question4,{align: 'center' , font: "13px Sans-Serif"})
 
 
 
                     // set positions for answer texts depending on the length of each one
                     if(answer1.length<31){
-                         this.add.text(1010, 85, answer1)
+                         this.add.text(1010, 85, answer1, {align: 'center' , font: "13px -Serif"})
                      }else{
-                         this.add.text(907, 15, answer1)
+                         this.add.text(975, 15, answer1, {align: 'center' , font: "13px Sans-Serif"})
                      }
 
                      if(answer2.length<21){
-                         this.add.text(1010, 270, answer2)
+                         this.add.text(1010, 270, answer2, {align: 'center' , font: "13px Sans-Serif"})
                      }else{
-                         this.add.text(907, 200, answer2)
+                         this.add.text(975, 200, answer2, {align: 'center' , font: "13px Sans-Serif"})
                      }
 
                      if(answer3.length<21){
-                         this.add.text(1010, 455, answer3)
+                         this.add.text(1010, 455, answer3, {align: 'center' , font: "13px Sans-Serif"})
                      }else{
-                         this.add.text(907, 385, answer3)
+                         this.add.text(975, 385, answer3, {align: 'center' , font: "13px Sans-Serif"})
                      }
 
                      if(answer4.length<21){
-                         this.add.text(1010, 640, answer4)
+                         this.add.text(1010, 640, answer4, {align: 'center' , font: "13px Sans-Serif"})
                      }else{
-                         this.add.text(907, 570, answer4)
+                         this.add.text(975, 570, answer4, {align: 'center' , font: "13px Sans-Serif"})
                      }
 
                     //array of connected cable images
@@ -294,10 +297,6 @@
                     var q4a1 = this.add.image(600, 369, 'q4a1')
                     q4a1.visible = false;
 
-                    console.log('create');
-                    // 2:00 in seconds
-                    this.initialTime = 120;
-
                     var clock = this.add.image(593, 53, 'timer')
                     clock.setScale(0.13)
 
@@ -351,23 +350,27 @@
                     q4a1f.visible = false;
 
                     console.log('create');
+                    //time for game
                     // 2:00 in seconds
                     this.initialTime = 120;
-                    this.redirect = 6;
+                    //time for redirecting to score page
+                    this.redirect = 5;
 
+                    //set image for timer
                     var clock = this.add.image(593, 53, 'timer')
                     clock.setScale(0.13)
 
+                    //set text for timer
                     text = this.add.text(573, 45, formatTime(this.initialTime), {fill: "#000000 "});
 
 
                     //intro
-                    var bg2 = this.add.image(400, 300, 'background');
+                    var bg2 = this.add.image(400, 300, 'background').setInteractive();
                     bg2.setScale(2);
 
                     // game rules
                     var rules = this.add.text(490, 100, 'Cable Game', {
-                        font: "35px Arial",
+                        font: "35px Sans-Serif",
                         fill: "#000000",
                         align: "center"
                     })
@@ -379,11 +382,11 @@
                         ' Your score\nwill depend on the time left after you finish the game. If\nthe timer reaches 0 before you connect ' +
                         'all the cables\nyou lose the game and you get a 0 score. Press the play\nbutton bellow to start the game.\n\n                       ' +
                         '          Good Luck!', {
-                        font: "25px Arial",
+                        font: "25px Sans-Serif",
                         fill: "#000000"
                     })
 
-                    //play button(when pushed start timer)
+                    //play button(when pushed start timer and reveal game)
                     var play = this.add.image(583 , 640 , 'play').setInteractive({useHandCursor: true}).on('pointerdown', function () {
                      timedEvent.paused = false;
                      bg2.visible = false;
@@ -393,21 +396,57 @@
 
                     })
 
+                //border for displaying final score
                 var score_border = this.add.image(600,370,'textBorder')
-                score = this.add.text(573, 360, this.initialTime, {fill: "#FFFFFF ",font: "30px Arial"});
-                var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Arial"})
-                var redirectText = this.add.text(465,420,'Redirecting to score page in ', {fill: "#FFFFFF ",font: "20px Arial"})
-                text2 = this.add.text(720, 420, this.redirect, {fill: "#FFFFFF ", font: "20px Arial"});
-                scoreNA = this.add.text(573,360,"N/A", {fill: "#FFFFFF ",font: "30px Arial"})
+                // text for final score
+                var score = this.add.text(590, 360, (120 - this.initialTime), {fill: "#FFFFFF ",font: "30px Sans-Serif" , align: "center"});
+                var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Sans-Serif"})
+                var redirectText = this.add.text(465,420,'Redirecting to score page in ', {fill: "#FFFFFF ",font: "20px Sans-Serif"})
+                var text2 = this.add.text(720, 420, this.redirect, {fill: "#FFFFFF ", font: "20px Sans-Serif"});
+                var scoreNA = this.add.text(573,360,"N/A", {fill: "#FFFFFF ",font: "30px Sans-Serif"})
+                var replay = this.add.image(532,429,'replay').setInteractive({useHandCursor: true});
+                var home = this.add.image(681,428,'home').setInteractive({useHandCursor: true});
+                home.setScale(0.32)
+                replay.setScale(0.3)
                 score.visible = false;
                 text2.visible = false;
                 score_border.visible = false;
                 score_text.visible = false;
                 redirectText.visible = false;
                 scoreNA.visible = false;
+                replay.visible = false;
+                home.visible = false;
+
+                //home page button
+                //refresh page and set tint when pointer down
+                home.on('pointerdown', function (pointer) {
+                    //set tint for when image is clicked
+                    this.setTint(0x888888);
+                    window.location.href="/"
+
+                })
+
+                //clear button tint when pointer up
+                 home.on('pointerup', function (pointer) {
+                            this.clearTint();
+                        });
+
+                //replay button
+                //refresh page and set tint when pointer down
+                replay.on('pointerdown', function (pointer) {
+                    //set tint for when image is clicked
+                    this.setTint(0x888888);
+                    window.location.href=window.location.href
+
+                })
+
+                //clear button tint when pointer up
+                 replay.on('pointerup', function (pointer) {
+                            this.clearTint();
+                        });
 
                 // fullscreen button
-                var button = this.add.image(1160, 40, 'fullscreen').setInteractive();
+                var button = this.add.image(1160, 40, 'fullscreen').setInteractive({useHandCursor: true});
                 button.setScale(0.1)
 
                 // set game to fullscreen
@@ -444,6 +483,17 @@
                                 score_border.visible = true;
                                 score_text.visible = true;
                                 scoreNA.visible = true;
+                                replay.visible = true;
+                                home.visible = true;
+                                images[0].visible = false;
+                                images[1].visible = false;
+                                images[2].visible = false;
+                                images[3].visible = false;
+                                images[4].visible = false;
+                                images[5].visible = false;
+                                images[6].visible = false;
+                                images[7].visible = false;
+
                             }
 
                     //creating event for looping redirect timer
@@ -477,17 +527,17 @@
                             text.setText(formatTime(this.initialTime)
                             );
                             //final score is initialTime minus time left
-                            score.setText(120-this.initialTime)
+                            score.setText((120-this.initialTime))
                             //timer deduct 5 seconds and then keep counting normal
                         }else if(this.initialTime > 0 && deduct===true){
                             // - 5 second
                             this.initialTime -= 5;
                             //if timer goes below 0 then change it to 0
-                            if(this.initialTime<0){
+                            if(this.initialTime<=0){
                                 this.initialTime=0
                             }
                             text.setText(formatTime(this.initialTime));
-                            score.setText(this.initialTime)
+                            score.setText((120-this.initialTime))
                             //reset deduction
                             deduct=false;
                         }else if(this.initialTime<=0){
@@ -605,7 +655,7 @@
                                      // count right answers
                                     qnaCount = qnaCount +1
                                     if(qnaCount===4){
-                                        score.text = 120 - parseInt(score.text).toString()
+                                        score.text = parseInt(score.text).toString()
                                         timedEvent.paused = true;
                                         score.visible = true;
                                         score_border.visible = true;
