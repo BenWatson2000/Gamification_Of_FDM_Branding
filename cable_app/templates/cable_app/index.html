@@ -297,10 +297,6 @@
                     var q4a1 = this.add.image(600, 369, 'q4a1')
                     q4a1.visible = false;
 
-                    console.log('create');
-                    // 2:00 in seconds
-                    this.initialTime = 120;
-
                     var clock = this.add.image(593, 53, 'timer')
                     clock.setScale(0.13)
 
@@ -403,7 +399,7 @@
                 //border for displaying final score
                 var score_border = this.add.image(600,370,'textBorder')
                 // text for final score
-                var score = this.add.text(573, 360, this.initialTime, {fill: "#FFFFFF ",font: "30px Sans-Serif"});
+                var score = this.add.text(590, 360, (120 - this.initialTime), {fill: "#FFFFFF ",font: "30px Sans-Serif" , align: "center"});
                 var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Sans-Serif"})
                 var redirectText = this.add.text(465,420,'Redirecting to score page in ', {fill: "#FFFFFF ",font: "20px Sans-Serif"})
                 var text2 = this.add.text(720, 420, this.redirect, {fill: "#FFFFFF ", font: "20px Sans-Serif"});
@@ -531,7 +527,7 @@
                             text.setText(formatTime(this.initialTime)
                             );
                             //final score is initialTime minus time left
-                            score.setText(120-this.initialTime)
+                            score.setText((120-this.initialTime))
                             //timer deduct 5 seconds and then keep counting normal
                         }else if(this.initialTime > 0 && deduct===true){
                             // - 5 second
@@ -541,7 +537,7 @@
                                 this.initialTime=0
                             }
                             text.setText(formatTime(this.initialTime));
-                            score.setText(this.initialTime)
+                            score.setText((120-this.initialTime))
                             //reset deduction
                             deduct=false;
                         }else if(this.initialTime<=0){
@@ -659,7 +655,7 @@
                                      // count right answers
                                     qnaCount = qnaCount +1
                                     if(qnaCount===4){
-                                        score.text = 120 - parseInt(score.text).toString()
+                                        score.text = parseInt(score.text).toString()
                                         timedEvent.paused = true;
                                         score.visible = true;
                                         score_border.visible = true;
