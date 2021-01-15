@@ -6,6 +6,9 @@ from django.http import HttpResponse
 
 def index(request):
 
+    # boolean check for path traversals on results page
+    request.session["played"] = True
+
     question_list = GameQuestion.objects.filter()
 
     mockArray = [None]*4

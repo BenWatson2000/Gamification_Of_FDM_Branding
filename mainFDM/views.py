@@ -26,6 +26,8 @@ def base(response):
 
 
 def home(request):
+    # update the results page boolean check
+    request.session["played"] = False
     if request.method == "POST":
 
         request.session["stream-type"] = request.POST.get("stream-type-holder")
@@ -147,72 +149,85 @@ def quiz(request):
     return render(request, 'mainFDM/quiz.html', {})  # passing info to the quiz.html template
 
 
-# view of the pre-stream quiz page
+# view of the results page
 def results(request):
-    # set the game type to the one the user played
-    game_played = request.session["my_game"]
-    # set the score to the one the user got
-    score_got = request.session["my_score"]
-    # get the stream type the user entered
-    stream_type = request.session["stream-type"]
+    # check if the key exists yet - in case someone opens results page from url before opening home page
+    # if they key does not exist, create it as False (not played yet) and throw them to the home page
+    if "played" not in request.session:
+        request.session["played"] = False
+        return redirect(home)
 
-    # send data to ajax
-    data = {}
+    # if this user has not yet played
+    if request.session["played"] is None or not request.session["played"]:
+        return redirect(home)
 
-    # the score adding form functionality
-    if request.method == "POST":
-        form = AddScores(request.POST)
-        if form.is_valid():
-            print("form is valid")
-            score = Score()
-            # get the username
-            score.player_username = request.POST.get('player_username')
-            # manually set the game type and score to be added to the table as the fields are disabled
-            score.game_type = game_played
-            score.score = score_got
-            try:
-                score.save()
+    else: #if they have played - display the results page for them
 
-                # leaderboard query set
-                leaderboard_set = Score.objects.filter(game_type=game_played).order_by('score')[:10]
-                leaderboard_set_list = list(leaderboard_set.values())
+        # set the game type to the one the user played
+        game_played = request.session["my_game"]
+        # set the score to the one the user got
+        score_got = request.session["my_score"]
+        # get the stream type the user entered
+        stream_type = request.session["stream-type"]
 
-                data['result'] = 'Submitted'
-                data['message'] = 'Your score has been uploaded!'
-                data['leaderboard'] = leaderboard_set_list
+        # send data to ajax
+        data = {'game': game_played}
 
-                return JsonResponse(data, safe=False)
+        # the score adding form functionality
+        if request.method == "POST":
+            form = AddScores(request.POST)
+            if form.is_valid():
+                print("form is valid")
+                score = Score()
+                # get the username
+                score.player_username = request.POST.get('player_username')
+                # manually set the game type and score to be added to the table as the fields are disabled
+                score.game_type = game_played
+                score.score = score_got
+                try:
+                    score.save()
 
-            except IntegrityError as e:
-                print("we've got an integrity error")
-                data['result'] = 'Integrity Error'
-                data['message'] = 'It seems someone with this username has already played this game. ' \
-                                  'Choose a different one to save your score!'
-                return JsonResponse(data)
-        else:
-            print('not valid')
-            if KeyError:
-                print("we've got a key error")
-                data['result'] = 'Key Error'
-                data['message'] = 'It seems someone with this username has already played this game. ' \
-                                  'Choose a different one to save your score!'
-                return JsonResponse(data)
+                    # leaderboard query set
+                    leaderboard_set = Score.objects.filter(game_type=game_played).order_by('score')[:10]
+                    leaderboard_set_list = list(leaderboard_set.values())
+
+                    data['result'] = 'Submitted'
+                    data['message'] = 'Your score has been uploaded!'
+                    data['leaderboard'] = leaderboard_set_list
+
+                    return JsonResponse(data, safe=False)
+
+                except IntegrityError as e:
+                    print("we've got an integrity error")
+                    data['result'] = 'Integrity Error'
+                    data['message'] = 'It seems someone with this username has already played this game. ' \
+                                      'Choose a different one to save your score!'
+                    return JsonResponse(data)
             else:
-                print('some other errors')
-                data['result'] = 'Other Errors'
-                data['message'] = 'Something went wrong, please try again.'
-                return JsonResponse(data)
-    else:
-        form = AddScores(initial={'game_type': game_played,
-                                  'score': score_got})  # initial={'game_type': game_played, 'score': score_got}
+                print('not valid')
+                if KeyError:
+                    print("we've got a key error")
+                    data['result'] = 'Key Error'
+                    data['message'] = 'It seems someone with this username has already played this game. ' \
+                                      'Choose a different one to save your score!'
+                    return JsonResponse(data)
+                else:
+                    print('some other errors')
+                    data['result'] = 'Other Errors'
+                    data['message'] = 'Something went wrong, please try again.'
+                    return JsonResponse(data)
+        else:
+            form = AddScores(initial={'game_type': game_played,
+                                      'score': score_got})  # initial={'game_type': game_played, 'score': score_got}
 
-        # pass stuff to the page on load
-        context = {
-            'form': form,
-            'stream_type': stream_type,
-            'tweetURL' : 'https://twitter.com/intent/tweet?'
-                         'text=I%20just%20got%20a%20time%20of%20'+score_got+'%20on%20the%20'+game_played+' Game%21%20Try'
-                         '%20and%20beat%20my%20time%20at%20https%3A//mycareerpath.co.uk%20and%20di'
-                         'scover%20many%20different%20career%20sectors%20in%20technology%21&hashtags=MYCAREERPATH',
-        }
-        return render(request, 'mainFDM/results.html', context)
+            # pass stuff to the page on load
+            context = {
+                'form': form,
+                'stream_type': stream_type,
+                'game': game_played,
+                'tweetURL': 'https://twitter.com/intent/tweet?'
+                            'text=I%20just%20got%20a%20time%20of%20'+score_got+'%20on%20the%20'+game_played+' Game%21%20Try'
+                            '%20and%20beat%20my%20time%20at%20https%3A//mycareerpath.co.uk%20and%20di'
+                            'scover%20many%20different%20career%20sectors%20in%20technology%21&hashtags=MYCAREERPATH',
+            }
+            return render(request, 'mainFDM/results.html', context)
