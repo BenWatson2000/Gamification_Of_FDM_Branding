@@ -78,12 +78,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
     PanelArray.sort(()=>0.5 - Math.random())
     const grid = document.querySelector('.grid')
     const displayResult = document.querySelector('#result')
-    //create array for chosen panels
+    //create array for chosen panels, chosen panel ids and completed panels
     var chosenPanels=[]
     var chosenPanelId = []
     var completedPanels = []
-    //creating main game panel
 
+    /**
+     * creating main game panel
+     */
     function createGamePanel(){
         for (let i = 0; i< PanelArray.length; i++){
             var imgPanel = document.createElement('img')
@@ -93,8 +95,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
             grid.appendChild(imgPanel)
         }
     }
-
-    //check for matching panels
+    /**
+     * check for matching panels
+     */
     function checkMatchingPanel() {
         var imgPanel = document.querySelectorAll('img')
         const panelOneId = chosenPanelId[0]
@@ -132,7 +135,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
             displayResult.textContent='You have won'
         }
     }
-    // timer function
+    /**
+     * function to create a timer
+     * @param {Number} duration
+     * @param
+     */
     function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
@@ -160,7 +167,9 @@ window.onload = function () {
 };
 
 
-    //flip panel function
+    /**
+     * function to flip panel called on click
+     */
     function flipPanel(){
         var panelId = this.getAttribute('data-id')
         chosenPanels.push(PanelArray[panelId].name)
