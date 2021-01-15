@@ -13,6 +13,9 @@ def index(request):
         request.session["my_score"] = score
         request.session["my_game"] = "Cable"
 
+        # boolean check for path traversals on results page
+        request.session["played"] = True
+
         return redirect(results)
 
     else:
