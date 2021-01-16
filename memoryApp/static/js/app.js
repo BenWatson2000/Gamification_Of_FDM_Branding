@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const grid = document.querySelector('.grid')
     const displayResult = document.querySelector('#result')
     let gameStarted = false;
-    //create array for chosen panels
+    //create array for chosen panels, chosen panel ids and completed panels.
     var chosenPanels=[]
     var chosenPanelId = []
     var completedPanels = []
@@ -99,6 +99,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
+    /**
+     * check for matching panels
+     */
     function checkMatchingPanel() {
         var imgPanel = document.querySelectorAll('img')
         const panelOneId = chosenPanelId[0]
@@ -113,7 +116,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
             setTimeout(enablePanels, 1000)
 
         }
-
         // case where matching panels are selected
         else if(chosenPanels[0] === chosenPanels[1]){
             document.getElementById("status").innerText = "Matching Panel Found"
@@ -144,6 +146,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         chosenPanels = []
         chosenPanelId = []
 
+        // case when all panels have been matched
         if (completedPanels.length === PanelArray.length/2){
             let score = returnIntTime(document.getElementById("timer").innerText)
             document.getElementById("status").innerText = "You have won in: "+
@@ -156,8 +159,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
+    /**
+     * function to turn duration string into int variable.
+     * @param timeString time in string form e.g. '01:20'
+     * @returns {number} time in int form e.g. 80
+     */
     function returnIntTime(timeString){
-        //01:30
         let mins = timeString.slice(0,2)
         let secs = timeString.slice(3,5)
         let totalMins = parseInt(mins)
@@ -169,6 +176,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
 
+    /**
+     * function to create a timer
+     * @param duration duration to be displayed
+     * @param display display object
+     */
     function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
@@ -218,6 +230,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
+    /**
+     * enables all the panels on the grid
+     */
     function enablePanels(){
         let panelChildren = document.getElementById("grid-id").children
         for (let i = 0; i< panelChildren.length; i++) {
