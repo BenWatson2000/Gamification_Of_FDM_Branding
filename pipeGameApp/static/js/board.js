@@ -399,7 +399,7 @@ function startTimer(duration, display) {
  * window onload function
  */
 window.onload = function () {
-    var time = 180 , // your time in seconds here
+    var time = 10000 , // your time in seconds here
         display = document.querySelector('#timer');
     startTimer(time, display);
 
