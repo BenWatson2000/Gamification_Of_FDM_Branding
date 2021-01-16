@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             img:'/static/images/im 9.png'
         }
     ]
-
+    //randomise panel images displayed on grid
     PanelArray.sort(()=>0.5 - Math.random())
     const grid = document.querySelector('.grid')
     const displayResult = document.querySelector('#result')
@@ -86,6 +86,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let won = false
     //creating main game panel
 
+    /**
+     * creating main game panel
+     */
     function createGamePanel(){
         for (let i = 0; i< PanelArray.length; i++){
             var imgPanel = document.createElement('img')
@@ -111,7 +114,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
         }
 
-
+        // case where matching panels are selected
         else if(chosenPanels[0] === chosenPanels[1]){
             document.getElementById("status").innerText = "Matching Panel Found"
             if(chosenPanels[0] === chosenPanels[1]) {
@@ -125,6 +128,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             }
             completedPanels.push(chosenPanels)
         }
+        // case where incorrect panels are selected
         else{
 
             document.getElementById("status").innerText = "Incorrect Panel Match"
@@ -188,7 +192,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 }
 
 
-    //flip panel function
+    /**
+     * function to flip panel called on click
+     */
     function flipPanel(){
 
         if (gameStarted === false) {
