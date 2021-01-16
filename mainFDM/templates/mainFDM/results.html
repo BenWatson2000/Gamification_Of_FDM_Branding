@@ -2,7 +2,6 @@
 
 {%block title%}Results page{%endblock%}
 
-
 {%block header%}Do you want to upload your scores?{%endblock%}
 
 <!-- row of for columns -->
@@ -10,8 +9,8 @@
               <!-- row of for 2 columns with 2 forms-->
               <div class="row justify-content-center justify-content-md-around justify-content-lg-between pt-5">
 
-                  <!-- add scores / leaderboard -->
-                  <div class="col-auto col-lg-5 form-col p-2 p-sm-3 pb-4 pb-sm-3 justify-content-center" id="upload-form-col">
+                  <!-- add scores / leaderboard column -->
+                  <div class="col-auto col-lg-5 form-col p-3 p-sm-3 pb-4 pb-sm-3 justify-content-center" id="upload-form-col">
 
                       <!-- ajax result for successful submission of the score form -->
                       <div class="" id="success"></div>
@@ -36,45 +35,82 @@
                               <label class="form-label">{{ form.score.label }}</label>
                               {{ form.score }}
                           </div>
+
+                          <!-- button to submit scores -->
                           <div class="d-flex pt-1 justify-content-center">
                               <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
                           </div>
                       </form>
 
                       <!-- leader board starts here -->
-                      <div class="container d-none" id="leaderboard">
+                      <div class="container justify-content-center d-none" id="leaderboard">
                           <!-- leaderboard title -->
                           <div id="leaderboard-title-div">
-                              <h3 class="form-title" id="leaderboard-title">Leaderboard</h3>
+                              <h3 class="form-title" id="leaderboard-title">{{ game }} Game Leaderboard</h3>
                           </div>
 
-                          <div class="row gx-0 align-items-center board-row">
-                            <div class="col col-6">
-                                <div class="board-username board-header">Player Username</div>
-                            </div>
-                            <div class="col col-6">
-                                <div class="board-score board-header">Score</div>
-                            </div>
-                          </div>
+                               <!-- table with current best scoring players and their scores -->
+                              <table class="table table-bordered" id="best-scores-table">
+                                  <thead class="table-head">
+                                    <tr class="table-row">
+                                        <th scope="col">Rank</th>
+                                        <th scope="col">Player Username</th>
+                                        <th scope="col">Time [s]</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="leader-table">
+                                  </tbody>
+                                </table>
                       </div>
-                  </div>
+                  </div> <!-- end of add scores / leaderboard column -->
 
-                  <!-- don't add scores -->
+                  <!-- proceed to streams container (same size as the form on the left but invisible) -->
                   <div class="col-sm-auto col-md-5" style="min-width: fit-content">
+                      <!-- actual column with the proceed to streams button (small) -->
                       <div class="container form-col p-4">
                         <!-- 'take me to the streams' form -->
-                        <h3 class="form-title">Proceed to stream</h3>
+                        <h3 class="form-title">Find out more about this stream</h3>
                         <!-- the form starts here -->
-                        <form method="POST" action='/'>
-                            {% csrf_token %}
-                            <div class="d-flex pt-1 justify-content-center">
-                               <button type="submit" class="btn btn-grad btn-lg" id="form-btn2" >Go</button>
-                            </div>
-                        </form>
+                        <!-- based on the stream chosen before the game started, redirect to the correct page -->
+                        {% with s=stream_type %}
+                          {%  if s == "BI" %}
+                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/business-graduate/business-intelligence-graduate-programme/'>
+                          {% elif s == "ST" %}
+                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/technical-graduate-programme/software-development-and-engineering/'>
+                          {% elif s == "TO" %}
+                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/technical-graduate-programme/technical-operations-graduate-programme/'>
+                          {% else %}
+                              <form method="POST" action='/'>
+                          {% endif %}
+                        {% endwith %}
+                                <!-- the rest of the form -->
+                                {% csrf_token %}
+                                <div class="d-flex pt-1 justify-content-center">
+                                   <button type="submit" class="btn btn-grad btn-lg" id="form-btn2" >Let's Go</button>
+                                </div>
+                            </form>
                       </div>
+
+                  <div class="container form-col p-4">
+
+                      <h3 class="form-title">Share Results on Twitter</h3>
+
+                      <div class="d-flex pt-1 justify-content-center">
+                          <button title="button title" class="btn btn-grad btn-lg" onclick=" window.open('{{ tweetURL }}', '_blank'); return false;">Share</button>
+                      </div>
+
                   </div>
-              </div>
+
+                  </div> <!-- end of proceed to streams container -->
+              </div> <!-- end of the row of for 2 columns with 2 forms-->
 
                 {% endblock %}
 
 {% block lower %}{% endblock %}
+
+<!-- footer  -->
+{% block helper-button %}
+<a href="/helper/home/" type="button" class="btn btn-grad btn-lg mt-2 mx-auto text-nowrap" id="helper-login-btn">
+    HELPER PAGE
+</a>
+{% endblock %}

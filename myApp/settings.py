@@ -28,7 +28,7 @@ SECRET_KEY = 'z^!sb3zb1_io^epf3xp8@2!*%v1vrs5np!jx!9cc6-!@%wk1&p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mycareerpath.co.uk','localhost','127.0.0.1']
 
 # Application definition
 
@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'fdmdatabase',
         'USER': 'team4admin',
         'PASSWORD': 'our3ChipDoor',
-        'HOST': 'fdminstance.cwflfkfpqivv.us-east-2.rds.amazonaws.com',
+        'HOST': 'fdminstance.ckkpfd5mfral.eu-west-2.rds.amazonaws.com',
         'PORT': '3306'
     }
 }
@@ -125,10 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_URL = '/helper/login/'
 LOGIN_REDIRECT_URL = '/helper/home/'

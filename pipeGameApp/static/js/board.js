@@ -15,7 +15,6 @@ var Pipe = function(){
         this.active = (active ? 1 : 0);
     };
 
-
     /**
      * Get the neighbouring pipe in the given direction
      *
@@ -71,7 +70,6 @@ var grid = {
         1: 3,
         0: 2
     },
-
 
     /**
       * function to initialize the grid
@@ -302,19 +300,19 @@ var grid = {
 
 
         // Check if the user has won
-        if (pipes_with_connection.includes(winningOption)) {
+        if (pipes_with_connection.includes(top)) {
 
-            setTimeout(alert("won game"),200)
+            setTimeout(alert("won game"),1000)
         }
 
         //check loss
-        else if (pipes_with_connection.includes(losingOptions[0])) {
+        else if (pipes_with_connection.includes(mid)) {
 
-             setTimeout(alert("wrong answer"),200)
+            setTimeout(alert("wrong answer"),1000)
         }
-        else if (pipes_with_connection.includes(losingOptions[1])) {
+        else if (pipes_with_connection.includes(bot)) {
 
-             setTimeout(alert("wrong answer"),200)
+            setTimeout(alert("won game"),1000)
         }
 
     },
@@ -399,10 +397,9 @@ function startTimer(duration, display) {
  * window onload function
  */
 window.onload = function () {
-    var time = 180 , // your time in seconds here
+    var time = 60 / 2, // your time in seconds here
         display = document.querySelector('#timer');
     startTimer(time, display);
-
 };
 
 /**
