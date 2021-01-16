@@ -1,5 +1,4 @@
 import json
-
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
@@ -83,10 +82,17 @@ def helper_login(request):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
-                login(request, user)
-                return redirect('helperHome')
+                # check if the user has been approved by the admin
+                if user.helper.admin_approved:
+                    login(request, user)
+                    return redirect('helperHome')
+                # not approved yet
+                else:
+                    messages.info(request, 'Your account has not yet been approved by the admins.\nThis may take up to '
+                                           '24h.')
             else:
-                messages.info(request, 'Username or password is incorrect')
+                messages.error(request, 'Please enter a correct username and password.\nNote that both fields '
+                                        'may be case-sensitive.')
 
         context = {'form': form}
         # using the django.shortcut render to add templates
@@ -218,7 +224,7 @@ def results(request):
                     return JsonResponse(data)
         else:
             form = AddScores(initial={'game_type': game_played,
-                                      'score': score_got})  # initial={'game_type': game_played, 'score': score_got}
+                                      'score': score_got})
 
             # pass stuff to the page on load
             context = {

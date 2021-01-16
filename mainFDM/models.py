@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -12,6 +13,36 @@ class HelperAccount(models.Model):
 
     def __str__(self):
         return self.username
+
+
+# extending django User model with a one-to-one field
+class HelperProfile(models.Model):
+    user = models.OneToOneField(
+        User,
+        # this works only programmatically inside django or through the django admin page
+        # but NOT in MySQL console - this is due to mysql not having the logic for handling the deletion of
+        # user profiles with this constraint
+        on_delete=models.CASCADE,
+        related_name='helper'
+    )
+
+    # this field is accessible by querying user.helper.admin_approved
+    admin_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+
+# # add signals to the HelperProfile model so it gets updated whenever the django User model is
+# @receiver(post_save, sender=User)
+# def create_helper_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Helper.objects.create(user=instance)
+#
+#
+# @receiver(post_save, sender=User)
+# def save_helper_profile(sender, instance, **kwargs):
+#     instance.helper.save()
 
 
 class GameQuestion(models.Model):
