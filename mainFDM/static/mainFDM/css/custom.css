@@ -156,6 +156,11 @@ body {
     width: 8rem;
 }
 
+/*TODO style the floating labels*/
+.form-label-float{
+
+}
+
 .form-control::placeholder{
     color: #202025;
 }
@@ -187,6 +192,10 @@ body {
     color: white;
     font-size: 2rem;
     text-shadow: 0 4px 2px #212026;
+}
+
+.form-link{
+    color: #ffffff;
 }
 
 .btn-grad{
