@@ -18,4 +18,10 @@ def index(request):
 
         return redirect(m.results)
 
-    return render(request, 'memoryApp/index.html')
+    stream_type = request.session["stream-type"]
+
+    context = {
+        'steam_type': stream_type
+    }
+
+    return render(request, 'memoryApp/index.html',context)
