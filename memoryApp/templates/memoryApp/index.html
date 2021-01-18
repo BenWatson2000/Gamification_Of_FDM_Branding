@@ -7,7 +7,6 @@
     <title>Memory Game</title>
     <link rel="stylesheet" href="../../static/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <script src="../../static/js/app.js" charset="UTF-8"></script>
 
 </head>
 <body id="home">
@@ -27,7 +26,10 @@
             <form method="post" class="timer">
             {% csrf_token %}
                 <button id="sub-btn" type="submit" align="center" class="hide">Results Page</button>
+
                 <input type="hidden" name="score-holder" id="score-holder" value="blank">
+                <input type="hidden" name="score-holder" id="stream-holder" value={{ steam_type }}>
+{#                <input type="hidden" name="score-holder" id="stream-holder" value='BI'>#}
         </form>
             <div class="timer-2">
                 <a id="mybutton-1" href="/" title="link to homepage" class="hide">
@@ -69,6 +71,8 @@
         </div>
       </div>
     </footer>
+
+    <script src="../../static/js/app.js" charset="UTF-8"></script>
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
