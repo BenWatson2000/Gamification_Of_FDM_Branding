@@ -3,89 +3,92 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const PanelArray = [
         {
             name:'im 1',
-            img:'/static/images/im 1.png'
+            img:'/static/images/'+steam_type+'/im 1.png'
         },
         {
             name:'im 1',
-            img:'/static/images/im 1.png'
+            img:'/static/images/'+steam_type+'/im 1.png'
         },
         {
             name:'im 2',
-            img:'/static/images/im 2.png'
+            img:'/static/images/'+steam_type+'/im 2.png'
         },
         {
             name:'im 2',
-            img:'/static/images/im 2.png'
+            img:'/static/images/'+steam_type+'/im 2.png'
         },
         {
             name:'im 3',
-            img:'/static/images/im 3.png'
+            img:'/static/images/'+steam_type+'/im 3.png'
         },
         {
             name:'im 3',
-            img:'/static/images/im 3.png'
+            img:'/static/images/'+steam_type+'/im 3.png'
         },
         {
             name:'im 4',
-            img:'/static/images/im 4.png'
+            img:'/static/images/'+steam_type+'/im 4.png'
         },
         {
             name:'im 4',
-            img:'/static/images/im 4.png'
+            img:'/static/images/'+steam_type+'/im 4.png'
         },
         {
             name:'im 5',
-            img:'/static/images/im 5.png'
+            img:'/static/images/'+steam_type+'/im 5.png'
         },
         {
             name:'im 5',
-            img:'/static/images/im 5.png'
+            img:'/static/images/'+steam_type+'/im 5.png'
         },
         {
             name:'im 6',
-            img:'/static/images/im 6.png'
+            img:'/static/images/'+steam_type+'/im 6.png'
         },
         {
             name:'im 6',
-            img:'/static/images/im 6.png'
+            img:'/static/images/'+steam_type+'/im 6.png'
         },
         {
             name:'im 7',
-            img:'/static/images/im 7.png'
+            img:'/static/images/'+steam_type+'/im 7.png'
         },
         {
             name:'im 7',
-            img:'/static/images/im 7.png'
+            img:'/static/images/'+steam_type+'/im 7.png'
         },
         {
             name:'im 8',
-            img:'/static/images/im 8.png'
+            img:'/static/images/'+steam_type+'/im 8.png'
         },
         {
             name:'im 8',
-            img:'/static/images/im 8.png'
+            img:'/static/images/'+steam_type+'/im 8.png'
         },
         {
             name:'im 9',
-            img:'/static/images/im 9.png'
+            img:'/static/images/'+steam_type+'/im 9.png'
         },
         {
             name:'im 9',
-            img:'/static/images/im 9.png'
+            img:'/static/images/'+steam_type+'/im 9.png'
         }
     ]
-
+    //randomise panel images displayed on grid
     PanelArray.sort(()=>0.5 - Math.random())
     const grid = document.querySelector('.grid')
     const displayResult = document.querySelector('#result')
     let gameStarted = false;
-    //create array for chosen panels
+    //create array for chosen panels, chosen panel ids and completed panels.
     var chosenPanels=[]
     var chosenPanelId = []
     var completedPanels = []
     let won = false
     //creating main game panel
 
+    /**
+     * creating main game panel
+     */
     function createGamePanel(){
         for (let i = 0; i< PanelArray.length; i++){
             var imgPanel = document.createElement('img')
@@ -96,6 +99,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
+    /**
+     * check for matching panels
+     */
     function checkMatchingPanel() {
         var imgPanel = document.querySelectorAll('img')
         const panelOneId = chosenPanelId[0]
@@ -104,19 +110,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if (panelOneId === panelTwoId){
 
             document.getElementById("status").innerText = "Incorrect Panel Match"
-            imgPanel[panelOneId].setAttribute('src','/static/images/'+ chosenPanels[0]+ ' red.png')
+            imgPanel[panelOneId].setAttribute('src','/static/images/'+steam_type+'/'+ chosenPanels[0]+ ' red.png')
             setTimeout(() => {  imgPanel[panelOneId].setAttribute('src','/static/images/grey.png');
             }, 1000);
             setTimeout(enablePanels, 1000)
 
         }
-
-
+        // case where matching panels are selected
         else if(chosenPanels[0] === chosenPanels[1]){
             document.getElementById("status").innerText = "Matching Panel Found"
             if(chosenPanels[0] === chosenPanels[1]) {
-                imgPanel[panelOneId].setAttribute('src', '/static/images/'+ chosenPanels[0]+ ' green.png')
-                imgPanel[panelTwoId].setAttribute('src', '/static/images/'+ chosenPanels[1]+ ' green.png')
+                imgPanel[panelOneId].setAttribute('src', '/static/images/'+steam_type+'/'+ chosenPanels[0]+ ' green.png')
+                imgPanel[panelTwoId].setAttribute('src', '/static/images/'+steam_type+'/'+ chosenPanels[1]+ ' green.png')
                 imgPanel[panelOneId].removeEventListener('click',flipPanel)
                 imgPanel[panelTwoId].removeEventListener('click',flipPanel)
                 imgPanel[panelOneId].classList.add("found")
@@ -125,11 +130,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
             }
             completedPanels.push(chosenPanels)
         }
+        // case where incorrect panels are selected
         else{
 
             document.getElementById("status").innerText = "Incorrect Panel Match"
-            imgPanel[panelOneId].setAttribute('src','/static/images/'+ chosenPanels[0]+ ' red.png')
-            imgPanel[panelTwoId].setAttribute('src','/static/images/'+ chosenPanels[1]+ ' red.png')
+            imgPanel[panelOneId].setAttribute('src','/static/images/'+steam_type+'/'+ chosenPanels[0]+ ' red.png')
+            imgPanel[panelTwoId].setAttribute('src','/static/images/'+steam_type+'/'+ chosenPanels[1]+ ' red.png')
             setTimeout(() => {  imgPanel[panelOneId].setAttribute('src','/static/images/grey.png');
                 imgPanel[panelTwoId].setAttribute('src','/static/images/grey.png');
             }, 1000);
@@ -140,6 +146,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         chosenPanels = []
         chosenPanelId = []
 
+        // case when all panels have been matched
         if (completedPanels.length === PanelArray.length/2){
             let score = returnIntTime(document.getElementById("timer").innerText)
             document.getElementById("status").innerText = "You have won in: "+
@@ -152,8 +159,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
+    /**
+     * function to turn duration string into int variable.
+     * @param timeString time in string form e.g. '01:20'
+     * @returns {number} time in int form e.g. 80
+     */
     function returnIntTime(timeString){
-        //01:30
         let mins = timeString.slice(0,2)
         let secs = timeString.slice(3,5)
         let totalMins = parseInt(mins)
@@ -165,6 +176,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
 
+    /**
+     * function to create a timer
+     * @param duration duration to be displayed
+     * @param display display object
+     */
     function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
@@ -188,7 +204,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 }
 
 
-    //flip panel function
+    /**
+     * function to flip panel called on click
+     */
     function flipPanel(){
 
         if (gameStarted === false) {
@@ -212,6 +230,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
+    /**
+     * enables all the panels on the grid
+     */
     function enablePanels(){
         let panelChildren = document.getElementById("grid-id").children
         for (let i = 0; i< panelChildren.length; i++) {
