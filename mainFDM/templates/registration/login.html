@@ -3,7 +3,7 @@
 {%block title%}Helper Login{%endblock%}
 
 
-{%block header%}Please log into your helper account{%endblock%}
+{%block header%}Please log into your helper account (built-in){%endblock%}
 
 <!-- row of for columns -->
 {% block row1 %}
@@ -27,7 +27,7 @@
                 <label class="form-label">{{ form.password.label_tag }}</label>
                 {{ form.password }}
             </div>
-{#<!--            {{ form.as_p }}-->#}
+<!--            {{ form.as_p }}-->
             <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
         </form>
         <div class="mt-4">
@@ -40,9 +40,9 @@
 
 {% block lower %}{% endblock %}
 
-{#<script>#}
-{#    const form_fields = document.getElementsByTagName('input')#}
-{#    for (const field in form_fields){#}
-{#        form_fields[field].className += ' form-control'#}
-{#    }#}
-{#</script>#}
+<!--<script>-->
+<!--    const form_fields = document.getElementsByTagName('input')-->
+<!--    for (const field in form_fields){-->
+<!--        form_fields[field].className += ' form-control'-->
+<!--    }-->
+<!--</script>-->

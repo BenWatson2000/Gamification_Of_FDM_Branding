@@ -127,6 +127,14 @@ USE_TZ = True
 # SMTP Configuration - simple mail transfer protocol for the reset password functionality
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # FOR DEVELOPMENT ONLY - sends the email to console
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'team4helper@gmail.com'
+    EMAIL_HOST_PASSWORD = 'ppvjxlyqglrpzuvm'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    DEFAULT_FROM_EMAIL = 'MyCareerPath Team <noreply@mycareerpath.co.uk>'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

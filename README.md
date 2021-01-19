@@ -53,7 +53,8 @@ the high scores for each game type.<br><br>
  
 
 Email: team4helper@gmail.com <br>
-Password: eaNTZmzb
+Password: eaNTZmzb <br>
+App password for reset: ppvjxlyqglrpzuvm
 
 
   *note that both accounts can access the helper page however only the superuser can access the django admin page.
