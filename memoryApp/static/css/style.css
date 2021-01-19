@@ -69,17 +69,18 @@ body {
 
 .btn_end {
     --hue: var(--hue-neutral);
-    border: 1px solid hsl(var(--hue),100%, 30%);
     background-color: black;
     border-radius: 5px;
     padding: 5px 5px;
     color: white;
     outline: black;
     font-size: 1.5rem;
+    position: center;
+    margin-bottom: 15px;
 }
 
-.btn:hover {
-    border-color: black;
+.btn_end:hover {
+    border-color: white;
 }
 
 
