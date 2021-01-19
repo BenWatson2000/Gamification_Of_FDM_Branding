@@ -51,6 +51,11 @@ the high scores for each game type.<br><br>
   | team4admin      | our3ChipDoor | Django Admin Page |'home-url/admin' | 
   | team4helper      | SAqYgYhaPD      | FDM Helper Page|   Helper page button in footer |
  
+
+Email: team4helper@gmail.com <br>
+Password: eaNTZmzb
+
+
   *note that both accounts can access the helper page however only the superuser can access the django admin page.
   <br><br>Superuser are statically created and helper accounts can be registered on the app and then approved by a 
   super user. This prevents anyone from making a helper account and then adding their own questions to the games.
