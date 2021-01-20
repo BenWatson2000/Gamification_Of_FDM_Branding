@@ -33,18 +33,6 @@ class HelperProfile(models.Model):
         return self.user.username
 
 
-# # add signals to the HelperProfile model so it gets updated whenever the django User model is
-# @receiver(post_save, sender=User)
-# def create_helper_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Helper.objects.create(user=instance)
-#
-#
-# @receiver(post_save, sender=User)
-# def save_helper_profile(sender, instance, **kwargs):
-#     instance.helper.save()
-
-
 class GameQuestion(models.Model):
     stream_type = models.CharField(max_length=50)
     question = models.TextField()

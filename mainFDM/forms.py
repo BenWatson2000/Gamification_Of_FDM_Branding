@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.core.exceptions import NON_FIELD_ERRORS
+from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 
@@ -62,6 +62,13 @@ class CreateHelperForm(UserCreationForm):
                                             'title': 'Enter your email address',
                                             'id': 'floatingEmail'}),
         }
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise ValidationError("An account with this email already exists in the system.\n Please enter a "
+                                  "different email address.")
+        return self.cleaned_data
 
 
 class AddScores(ModelForm):

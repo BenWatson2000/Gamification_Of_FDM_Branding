@@ -15,14 +15,19 @@
         <form method="post" action="">
             {% csrf_token %}
 
+
+            {% for e in form.non_field_errors %}
+                <div class="alert alert-danger">{{ e|linebreaks }}</div>
+            {% endfor %}
+
             {% for field in form %}
                 {% for error in field.errors %}
-                    <div class="alert alert-danger">{{ error }}</div>
+                    <div class="alert alert-danger">{{ error|linebreaks }}</div>
                 {% endfor %}
             {% endfor %}
 
             {%  for message in messages %}
-                <div class="alert alert-danger">{{ message|linebreaks }}</div>
+                <div class="alert alert-success">{{ message|linebreaks }}</div>
             {% endfor %}
 
             <div class="form-floating mb-3">
