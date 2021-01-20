@@ -13,6 +13,10 @@ body {
     display: none;
 }
 
+.hide_2{
+    display: none;
+}
+
 .main-container {
   ...
     position: relative;
@@ -48,6 +52,7 @@ body {
     border-radius: 25px;
     color: white;
     border: 10px black;
+
 }
 
 .status-bar {
@@ -60,6 +65,22 @@ body {
 .btn {
     background-color: #1daded;
     border-color: black;
+}
+
+.btn_end {
+    --hue: var(--hue-neutral);
+    background-color: black;
+    border-radius: 5px;
+    padding: 5px 5px;
+    color: white;
+    outline: black;
+    font-size: 2.0rem;
+    position: center;
+    margin-bottom: 5px;
+}
+
+.btn_end:hover {
+    border-color: white;
 }
 
 

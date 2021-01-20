@@ -72,7 +72,7 @@ var grid = {
     },
 
     /**
-      * Grid initialization
+      * function to initialize the grid
       */
     initializeGrid: function(size) {
         if (size % 2 == false) {
@@ -88,7 +88,7 @@ var grid = {
     },
 
     /**
-      * Get the pipe on the grid on the given X and Y
+      * function to get pipe from specified coordinates
       *
       * @param {Number} x
       * @param {Number} y
@@ -100,7 +100,7 @@ var grid = {
     },
 
     /**
-      * Get all pipes in the grid
+      * function to get all pipes in game
       */
     getAllPipes: function() {
         var pipes = [];
@@ -114,7 +114,7 @@ var grid = {
     },
 
     /**
-      * Initialize all pipes in the grid
+      * function to initialize all pipes into the grid
       *
       * @param {Number} size
       */
@@ -134,7 +134,7 @@ var grid = {
     },
 
     /**
-      * Build the connections for all pipes
+      * function to build the connections for all pipes
       */
     buildPipesConnection: function() {
         // Define variables
@@ -170,9 +170,13 @@ var grid = {
     },
 
     /**
-      * Scramble all pipes by rotating them a random amount of times
+      * function to randomise pipes by rotating them a random number of times
       */
     randomisePipes: function() {
+        //Get a random number from 1 to 3 everytime the randomisePipes function is called
+        var computerResponse = this.getRandomInt(1,3)
+        //Store the random number as a session object
+        sessionStorage.setItem("computerResponse", computerResponse.toString());
         for (x = 1; x < this.pipes.length; x++) {
             for (y = 1; y < this.pipes.length; y++) {
                 var pipe = this.getThisPipe(x, y);
@@ -186,7 +190,7 @@ var grid = {
     },
 
     /**
-      * Deactivate all pipes
+      * function to deactivate all pipes
       */
     deactivateAllPipes: function() {
         for (x = 1; x < this.pipes.length; x++) {
@@ -195,9 +199,18 @@ var grid = {
             }
         }
     },
+    /**
+     * function to get a random integer
+     *
+     * @param {Number} min
+     * @param {Number} max
+     */
+    getRandomInt: function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    },
 
     /**
-      * Check all pipes to see if they are connected to an active pipe
+      * function to check all pipes to see if they are connected to an active pipe
       */
     checkPipesConnection: function() {
         pipes_with_connection = [];
@@ -219,6 +232,18 @@ var grid = {
             var x = pipe.x;
             var y = pipe.y
 
+
+            // Check if this pipe has a connection down
+            if(pipe.hasConnection(grid.direction.DOWN)) {
+                var pipe_below = this.getThisPipe(x+1, y);
+                if (typeof pipe_below !== "undefined" && pipe_below.hasConnection(grid.direction.UP) && !pipe_below.isActive()) {
+                    pipe_below.setActive(true);
+
+                    pipes_with_connection.push(pipe_below);
+                    pipes_to_check.push(pipe_below);
+                }
+            }
+
             // Check if this pipe has a connection up
             if (pipe.hasConnection(grid.direction.UP)) {
                 var pipe_above = this.getThisPipe(x-1, y);
@@ -229,15 +254,14 @@ var grid = {
                     pipes_to_check.push(pipe_above);
                 }
             }
+            // Check if the pipe has a connection left
+            if (pipe.hasConnection(grid.direction.LEFT)) {
+                var pipe_previous = this.getThisPipe(x, y-1);
+                if (typeof pipe_previous !== "undefined" && pipe_previous.hasConnection(grid.direction.RIGHT) && !pipe_previous.isActive()) {
+                    pipe_previous.setActive(true);
 
-            // Check if this pipe has a connection down
-            if(pipe.hasConnection(grid.direction.DOWN)) {
-                var pipe_below = this.getThisPipe(x+1, y);
-                if (typeof pipe_below !== "undefined" && pipe_below.hasConnection(grid.direction.UP) && !pipe_below.isActive()) {
-                    pipe_below.setActive(true);
-
-                    pipes_with_connection.push(pipe_below);
-                    pipes_to_check.push(pipe_below);
+                    pipes_with_connection.push(pipe_previous);
+                    pipes_to_check.push(pipe_previous);
                 }
             }
 
@@ -251,21 +275,29 @@ var grid = {
                     pipes_to_check.push(pipe_next);
                 }
             }
-
-            // Check if the pipe has a connection left
-            if (pipe.hasConnection(grid.direction.LEFT)) {
-                var pipe_previous = this.getThisPipe(x, y-1);
-                if (typeof pipe_previous !== "undefined" && pipe_previous.hasConnection(grid.direction.RIGHT) && !pipe_previous.isActive()) {
-                    pipe_previous.setActive(true);
-
-                    pipes_with_connection.push(pipe_previous);
-                    pipes_to_check.push(pipe_previous);
-                }
-            }
         }
+        // variables for the coordinates of the 3 possible end positions
         var top = this.getThisPipe(Math.ceil(1), Math.ceil(this.size));
         var mid = this.getThisPipe(Math.ceil(this.size/2), Math.ceil(this.size));
         var bot = this.getThisPipe(Math.ceil(this.size), Math.ceil(this.size));
+        losingOptions=[];
+        //assign top corner as winning coordinates
+        if (sessionStorage.getItem("computerResponse")==1){
+            var winningOption = top;
+            losingOptions= [mid,bot];
+        }
+        //assign middle pipe as winning coordinate
+        else if (sessionStorage.getItem("computerResponse")==2){
+            var winningOption = mid;
+            losingOptions= [top,bot];
+        }
+        //assign bottom corner as winning coordinate
+        else if (sessionStorage.getItem("computerResponse")==3){
+            var winningOption = bot;
+            losingOptions = [top,mid];
+
+        }
+
 
         // Check if the user has won
         if (pipes_with_connection.includes(top)) {
@@ -285,6 +317,9 @@ var grid = {
 
     },
 
+    /**
+     * function to draw the grid
+     */
     drawGrid: function() {
         var grid_div = document.getElementById("grid");
         grid_div.innerHTML = '';
@@ -333,6 +368,12 @@ var grid = {
         }
     }
 };
+
+/**
+ * function to create a timer
+ * @param {Number} duration
+ * @param
+ */
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
@@ -352,14 +393,18 @@ function startTimer(duration, display) {
         }
     }, 1000);
 }
-
+/**
+ * window onload function
+ */
 window.onload = function () {
     var time = 60 / 2, // your time in seconds here
         display = document.querySelector('#timer');
     startTimer(time, display);
 };
 
-// Called when clicking a pipe
+/**
+ * function to rotate the pipe called on click
+ */
 function rotatePipe(element) {
     var x = element.dataset.x;
     var y = element.dataset.y;
