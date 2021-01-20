@@ -32,9 +32,9 @@
                       aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
-              <div class="collapse navbar-collapse justify-content-end">
-                  <span style="color: #1daded; font-size: 18px; margin-right: 20px">{% block user %}{% endblock %}</span>
-                  <a class="nav-link link-light mx-5" href="/">Home <span class="sr-only"></span></a>
+               <div class="collapse navbar-collapse justify-content-end">
+                  {% block navtext %}{% endblock %}
+                  <a class="nav-link link-light me-5" href="/">Home <span class="sr-only"></span></a>
               </div>
             </div>
           </nav>

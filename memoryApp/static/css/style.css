@@ -63,20 +63,6 @@ body {
 }
 
 
-
-/*!* Sticky footer styles - in case the fixed navbar is messing up/covers the rest
--------------------------------------------------- *!
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  !* Margin bottom by footer height *!
-  margin-bottom: 60px;
-}*/
-
-/*When the page is bigger and needs a scroll use this to keep the footer down*/
-
 html {
   position: relative;
   min-height: 100%;
@@ -93,7 +79,7 @@ body {
     background-position: bottom right;
     background-color: #000000;
     background-repeat: repeat-y;
-    min-height: 60rem; /*this causes the page to scroll*/
+    /*min-height: 60rem; !*this causes the page to scroll*!*/
 }
 
 #base{

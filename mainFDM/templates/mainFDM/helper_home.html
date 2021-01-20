@@ -4,7 +4,12 @@
 
 {%block header%}Helper Page{%endblock%}
 
-{% block user %} Hello, {{ request.user }} {% endblock %}
+{% block navtext %}
+    {% if request.user.is_authenticated %}
+        <span class="mx-3">Hello, {{ request.user }} </span>
+        <a class="nav-link link-light" href="/helper/logout/">Log out <span class="sr-only"></span></a>
+    {% endif %}
+{% endblock %}
 
 <!-- row of for columns -->
 {% block forcolumns %}

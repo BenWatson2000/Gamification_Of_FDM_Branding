@@ -4,6 +4,13 @@
 
 {%block header%}Do you want to upload your scores?{%endblock%}
 
+{% block navtext %}
+    {% if request.user.is_authenticated %}
+        <span class="mx-3">Hello, {{ request.user }} </span>
+        <a class="nav-link link-light" href="/helper/logout/">Log out <span class="sr-only"></span></a>
+    {% endif %}
+{% endblock %}
+
 <!-- row of for columns -->
 {% block forcolumns %}
               <!-- row of for 2 columns with 2 forms-->
