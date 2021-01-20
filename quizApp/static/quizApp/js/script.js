@@ -166,7 +166,7 @@ function endState() {
         arrayOfOutcomes.push("Business Intelligence")
     }
 
-    let textOutput = 'From this test we can suggest to you that you would be good at'
+    let textOutput = 'From this test we can suggest that you would be good at'
     let count = 0
     //String builder to add either one or more categories to the output message.
     arrayOfOutcomes.forEach(outcome => {
