@@ -74,7 +74,7 @@ function displayQuestion(question) {
     question.answers.forEach(answer => {
         const buttonX = document.createElement('buttonX')
         buttonX.innerText = answer.text
-        buttonX.classList.add('btn')
+        buttonX.classList.add('btn_game')
         //Ensuring buttons are given dataset values for their stream scores.
         if (answer.ST) {
             buttonX.dataset.ST = answer.ST
