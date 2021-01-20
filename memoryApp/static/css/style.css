@@ -74,9 +74,9 @@ body {
     padding: 5px 5px;
     color: white;
     outline: black;
-    font-size: 1.5rem;
+    font-size: 2.0rem;
     position: center;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .btn_end:hover {
