@@ -43,6 +43,7 @@ body {
     grid-template-columns: repeat(2, auto);
     gap: 15px;
     margin: 20px 0;
+    font-size: 1.4rem;
 }
 
 .btn {
@@ -53,7 +54,7 @@ body {
     padding: 5px 10px;
     color: white;
     outline: none;
-    font-size: 1rem;
+    font-size: 1.4rem;
 }
 
 .btn:hover {
@@ -95,4 +96,9 @@ body {
 .response {
     font-size: 1.5rem;
     padding:10px 20px 10px 20px;
+}
+
+.question {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
