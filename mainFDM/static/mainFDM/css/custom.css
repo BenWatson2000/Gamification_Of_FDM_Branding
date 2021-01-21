@@ -43,6 +43,7 @@ body {
     background-color: #202025;
     border-top: 3px solid #1daded;
     font-size: 18px;
+    color: #1daded;
 }
 
 #fdm_logo_header{
@@ -156,6 +157,20 @@ body {
     width: 8rem;
 }
 
+.column-text{
+    color: #FFFFFF;
+    text-shadow: 0 1px 2px #212026;
+    text-align: center;
+    word-break: break-word;
+    text-wrap: normal;
+    padding-bottom: 2rem;
+}
+
+/*TODO style the floating labels*/
+.form-label-float{
+
+}
+
 .form-control::placeholder{
     color: #202025;
 }
@@ -187,6 +202,10 @@ body {
     color: white;
     font-size: 2rem;
     text-shadow: 0 4px 2px #212026;
+}
+
+.form-link{
+    color: #ffffff;
 }
 
 .btn-grad{
@@ -297,8 +316,8 @@ body {
     background-color: #1541c8;
     padding-block: 0;
     position: relative;
-    right: 0px;
-    bottom: 0px;
+    right: 0;
+    bottom: 0;
     border-color: #1541C8;
     border-radius: 22px;
     text-align: center;

@@ -27,14 +27,8 @@ body {
     background-position: bottom right;
     background-color: #000000;
     background-repeat: repeat-y;
-    min-height: 60rem; /*this causes the page to scroll*/
-}
-
-#base{
-    background-color: #ffffff;
-    padding-bottom: 8rem;
-    min-height: 35rem;
-    margin-inline: 0;
+    min-height: 60rem;
+    width:100%;
 }
 
 .navbar {
@@ -43,6 +37,7 @@ body {
     background-color: #202025;
     border-top: 3px solid #1daded;
     font-size: 18px;
+    color: #1daded;
 }
 
 #fdm_logo_header{

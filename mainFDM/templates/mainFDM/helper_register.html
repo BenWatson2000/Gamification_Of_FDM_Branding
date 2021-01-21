@@ -15,27 +15,36 @@
         <form method="post" action="">
             {% csrf_token %}
 
-            {{ form.errors }}
 
-            {%  for message in messages %}
-                <p id="messages">{{ message }}</p>
+            {% for e in form.non_field_errors %}
+                <div class="alert alert-danger">{{ e|linebreaks }}</div>
             {% endfor %}
 
-            <div class="mb-3">
-                <label class="form-label">{{ form.username.label_tag }}</label>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">{{ error|linebreaks }}</div>
+                {% endfor %}
+            {% endfor %}
+
+            {%  for message in messages %}
+                <div class="alert alert-success">{{ message|linebreaks }}</div>
+            {% endfor %}
+
+            <div class="form-floating mb-3">
                 {{ form.username }}
+                <label class="form-label-float">{{ form.username.label }}</label>
             </div>
-            <div class="mb-3">
-                <label class="form-label">{{ form.email.label_tag }}</label>
+            <div class="form-floating mb-3">
                 {{ form.email }}
+                <label class="form-label-float">{{ form.email.label }}</label>
             </div>
-            <div class="mb-3">
-                <label class="form-label">{{ form.password1.label_tag }}</label>
+            <div class="form-floating mb-3">
                 {{ form.password1 }}
+                <label class="form-label-float">{{ form.password1.label }}</label>
             </div>
-            <div class="mb-3">
-                <label class="form-label">{{ form.password2.label_tag }}</label>
+            <div class="form-floating mb-3">
                 {{ form.password2 }}
+                <label class="form-label-float">{{ form.password2.label }}</label>
             </div>
             <div class="d-flex pt-1 justify-content-center">
                <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
@@ -44,7 +53,7 @@
 
         <!-- option to login if has account -->
         <div class="d-flex mt-4 justify-content-center links">
-            Already have a helper account? <a href="/helper/login/" class="ms-4">Login</a>
+            Already have a helper account? <a href="{% url 'helperLogin' %}" class="form-link ms-3">Login</a>
         </div>
 
     </div>

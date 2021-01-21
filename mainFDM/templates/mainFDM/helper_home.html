@@ -4,7 +4,12 @@
 
 {%block header%}Helper Page{%endblock%}
 
-{% block user %} Hello, {{ request.user }} {% endblock %}
+{% block navtext %}
+    {% if request.user.is_authenticated %}
+        <span class="mx-3">Hello, {{ request.user }} </span>
+        <a class="nav-link link-light" href="/helper/logout/">Log out <span class="sr-only"></span></a>
+    {% endif %}
+{% endblock %}
 
 <!-- row of for columns -->
 {% block forcolumns %}
@@ -16,7 +21,7 @@
 
                                 <form method="post" action=""> {% csrf_token %}
 
-                                    <div id="form-title-div">
+                                    <div class="form-title-div">
                                       <h3 class="form-title">Add a question</h3>
                                     </div>
 
@@ -83,7 +88,7 @@
     <!-- container with the question table, size is landscape to prevent the page from shrinking before the table appears -->
     <div class="container justify-content-center" style="size: landscape">
 
-        <div class="container text-center" id="form-title-div">
+        <div class="container text-center form-title-div">
           <h3 class="subheader">Saved Questions</h3>
         </div>
 

@@ -28,7 +28,7 @@ SECRET_KEY = 'z^!sb3zb1_io^epf3xp8@2!*%v1vrs5np!jx!9cc6-!@%wk1&p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mycareerpath.co.uk','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['mycareerpath.co.uk', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -123,6 +123,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+# SMTP Configuration - simple mail transfer protocol for the reset password functionality
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # FOR DEVELOPMENT ONLY - sends the email to console
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'team4helper@gmail.com'
+    EMAIL_HOST_PASSWORD = 'ppvjxlyqglrpzuvm'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    DEFAULT_FROM_EMAIL = 'MyCareerPath Team <noreply@mycareerpath.co.uk>'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

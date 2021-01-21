@@ -79,6 +79,7 @@ def helper_login(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
 
+            # verify the user
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
@@ -167,7 +168,7 @@ def results(request):
     if request.session["played"] is None or not request.session["played"]:
         return redirect(home)
 
-    else: #if they have played - display the results page for them
+    else:  # if they have played - display the results page for them
 
         # set the game type to the one the user played
         game_played = request.session["my_game"]
@@ -226,14 +227,22 @@ def results(request):
             form = AddScores(initial={'game_type': game_played,
                                       'score': score_got})
 
+            # change the shortcuts to real stream names before passing it to the page
+            if stream_type == 'BI':
+                stream_type = 'Business Intelligence'
+            elif stream_type == 'ST':
+                stream_type = 'Software Testing'
+            else:
+                stream_type = 'Technical Operations'
+
             # pass stuff to the page on load
             context = {
                 'form': form,
                 'stream_type': stream_type,
                 'game': game_played,
                 'tweetURL': 'https://twitter.com/intent/tweet?'
-                            'text=I%20just%20got%20a%20time%20of%20'+score_got+'%20on%20the%20'+game_played+' Game%21%20Try'
-                            '%20and%20beat%20my%20time%20at%20https%3A//mycareerpath.co.uk%20and%20di'
+                            'text=I%20just%20got%20a%20time%20of%20' + score_got + '%20on%20the%20' + game_played +
+                            'Game%21%20Try%20and%20beat%20my%20time%20at%20https%3A//mycareerpath.co.uk%20and%20di'
                             'scover%20many%20different%20career%20sectors%20in%20technology%21&hashtags=MYCAREERPATH',
             }
             return render(request, 'mainFDM/results.html', context)
