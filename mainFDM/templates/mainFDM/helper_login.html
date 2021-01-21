@@ -21,8 +21,19 @@
             {% endfor %}
 
             {%  for message in messages %}
-                <div class="alert alert-danger">{{ message|linebreaks }}</div>
+                {% if message.tags %}
+                    {% if message.tags == "error" %}
+                        <div  class="alert alert-danger" >{{ message|linebreaks }}</div>
+                    {% elif message.tags == "success" %}
+                        <div  class="alert alert-success" >{{ message|linebreaks }}</div>
+                    {% elif message.tags == "info" %}
+                        <div  class="alert alert-warning" >{{ message|linebreaks }}</div>
+                    {% else %}
+                        <div  class="alert alert-secondary" >{{ message|linebreaks }}</div>
+                    {% endif %}
+                {% endif %}
             {% endfor %}
+
 
             <div class="form-floating mb-3">
               <input name="username" type="text" class="form-control" id="username_field" placeholder="Username" required>

@@ -55,8 +55,11 @@ def helper_register(request):
             if form.is_valid():
                 form.save()
                 username = form.cleaned_data.get('username')
-                messages.success(request, username + ', you have successfully created a helper account!')
+                messages.success(request, ((username[:50] + '...') if len(username) > 50 else username) +
+                                 ',\nyou have successfully created a helper account!')
                 return redirect('helperLogin')
+            else:
+                return render(request, 'mainFDM/helper_register.html', {'form': form})
 
         context = {'form': form}
         return render(request, 'mainFDM/helper_register.html', context)
