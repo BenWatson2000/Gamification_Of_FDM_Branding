@@ -28,14 +28,15 @@
               <a class="navbar-brand mx-5 my-1" href="/">
               <img src="/static/mainFDM/images/fdm-logo-2018.png" id="fdm_logo_header" alt="FDM logo">
               </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarsExample07"
-                      aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#baseNavbar" aria-controls="baseNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
                 </button>
-               <div class="collapse navbar-collapse justify-content-end">
-                  {% block navtext %}{% endblock %}
-                  <a class="nav-link link-light me-5" href="/">Home <span class="sr-only"></span></a>
-              </div>
+                <div class="collapse navbar-collapse justify-content-end align-content-center" id="baseNavbar">
+                  <div class="navbar-nav">
+                    {% block navtext %}{% endblock %}
+                    <a class="nav-link link-light mx-2" href="/">Home <span class="sr-only"></span></a>
+                  </div>
+                </div>
             </div>
           </nav>
           <!-- gradient bar below navbar -->

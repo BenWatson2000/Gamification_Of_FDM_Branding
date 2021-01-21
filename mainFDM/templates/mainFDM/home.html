@@ -21,23 +21,27 @@
 
     <header>
       <!-- fixed navbar -->
-      <nav class="navbar navbar-expand-md fixed-top navbar-dark p-2">
-        <div class="container-fluid">
-          <a class="navbar-brand mx-5 my-1" href="/">
-          <img src="/static/mainFDM/images/fdm-logo-2018.png" id="fdm_logo_header" alt="FDM logo">
-          </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarsExample07"
-                  aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-          <div class="collapse navbar-collapse justify-content-end">
+        <nav class="navbar navbar-expand-md fixed-top navbar-dark p-2">
+          <div class="container-fluid">
+            <a class="navbar-brand mx-5 my-1" href="/">
+            <img src="/static/mainFDM/images/fdm-logo-2018.png" id="fdm_logo_header" alt="FDM logo">
+            </a>
+              <!-- if the user is logged in add a message and log out button to the navbar
+              and collapse it under the toggle button on smaller screens -->
               {% if request.user.is_authenticated %}
-                    <span class="mx-3">Hello, {{ request.user }} </span>
-                    <a class="nav-link link-light" href="/helper/logout/">Log out <span class="sr-only"></span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#homeNavbar" aria-controls="homeNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end align-content-center" id="homeNavbar">
+                  <div class="navbar-nav">
+                      <span class="navbar-text text-info mx-2">Hello, {{ request.user }} </span>
+                      <a class="nav-link link-light mx-2" href="/helper/logout/">Log out <span class="sr-only"></span></a>
+                  </div>
+                </div>
               {% endif %}
           </div>
-          </div>
         </nav>
+
       <!-- gradient bar below navbar -->
       <div class="gradient-bar" id="upper-bar"></div>
     </header>
@@ -69,20 +73,20 @@
                       <div class="btn-container">
                             <form method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Cable">
-                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="TO">
+                                <input type="hidden" name="game-type-holder" class="game-type-holder" value="Cable">
+                                <input type="hidden" name="stream-type-holder" class="stream-type-holder" value="TO">
                                 <input type="submit" value="Cable Game" class="stream_btn">
                             </form>
                             <form method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Pipe">
-                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="TO">
+                                <input type="hidden" name="game-type-holder" class="game-type-holder" value="Pipe">
+                                <input type="hidden" name="stream-type-holder" class="stream-type-holder" value="TO">
                                 <input type="submit" value="Pipe Game" class="stream_btn">
                             </form>
                             <form method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Memory">
-                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="TO">
+                                <input type="hidden" name="game-type-holder" class="game-type-holder" value="Memory">
+                                <input type="hidden" name="stream-type-holder" class="stream-type-holder" value="TO">
                                 <input type="submit" value="Memory Game" class="stream_btn">
                             </form>
                         </div>
@@ -98,20 +102,20 @@
                       <div class="btn-container">
                             <form method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Cable">
-                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="BI">
+                                <input type="hidden" name="game-type-holder" class="game-type-holder" value="Cable">
+                                <input type="hidden" name="stream-type-holder" class="stream-type-holder" value="BI">
                                 <input type="submit" value="Cable Game" class="stream_btn">
                             </form>
                             <form method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Pipe">
-                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="BI">
+                                <input type="hidden" name="game-type-holder" class="game-type-holder" value="Pipe">
+                                <input type="hidden" name="stream-type-holder" class="stream-type-holder" value="BI">
                                 <input type="submit" value="Pipe Game" class="stream_btn">
                             </form>
                             <form method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" name="game-type-holder" id="game-type-holder" value="Memory">
-                                <input type="hidden" name="stream-type-holder" id="stream-type-holder" value="BI">
+                                <input type="hidden" name="game-type-holder" class="game-type-holder" value="Memory">
+                                <input type="hidden" name="stream-type-holder" class="stream-type-holder" value="BI">
                                 <input type="submit" value="Memory Game" class="stream_btn">
                             </form>
                         </div>

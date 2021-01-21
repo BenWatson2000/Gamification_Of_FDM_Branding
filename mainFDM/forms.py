@@ -55,20 +55,22 @@ class CreateHelperForm(UserCreationForm):
                                                'style': 'height:max-content',
                                                'placeholder': 'Enter your username...',
                                                'title': 'Enter your username here',
-                                               'id': 'floatingUsername'}),
+                                               'id': 'floatingUsername', 'required': True}),
             'email': forms.TextInput(attrs={'type': "text", 'class': 'form-control',
                                             'style': 'height:max-content',
                                             'placeholder': 'Enter your email address...',
                                             'title': 'Enter your email address',
-                                            'id': 'floatingEmail'}),
+                                            'id': 'floatingEmail', 'required': True}),
         }
 
-    def clean(self):
+    # custom clean email method to check for duplicate email entries, while not interfering
+    # with other built-in django valiation
+    def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
             raise ValidationError("An account with this email already exists in the system.\n Please enter a "
                                   "different email address.")
-        return self.cleaned_data
+        return email
 
 
 class AddScores(ModelForm):
