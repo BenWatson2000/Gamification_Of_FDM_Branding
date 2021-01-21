@@ -1,77 +1,79 @@
+let steam_type = document.getElementById('stream-holder').value
+
 document.addEventListener('DOMContentLoaded', ()=>{
     //Array of options
     const PanelArray = [
         {
             name:'im 1',
-            img:'/static/images/im 1.png'
+            img:'/static/images/'+steam_type+'/im 1.png'
         },
         {
             name:'im 1',
-            img:'/static/images/im 1.png'
+            img:'/static/images/'+steam_type+'/im 1.png'
         },
         {
             name:'im 2',
-            img:'/static/images/im 2.png'
+            img:'/static/images/'+steam_type+'/im 2.png'
         },
         {
             name:'im 2',
-            img:'/static/images/im 2.png'
+            img:'/static/images/'+steam_type+'/im 2.png'
         },
         {
             name:'im 3',
-            img:'/static/images/im 3.png'
+            img:'/static/images/'+steam_type+'/im 3.png'
         },
         {
             name:'im 3',
-            img:'/static/images/im 3.png'
+            img:'/static/images/'+steam_type+'/im 3.png'
         },
         {
             name:'im 4',
-            img:'/static/images/im 4.png'
+            img:'/static/images/'+steam_type+'/im 4.png'
         },
         {
             name:'im 4',
-            img:'/static/images/im 4.png'
+            img:'/static/images/'+steam_type+'/im 4.png'
         },
         {
             name:'im 5',
-            img:'/static/images/im 5.png'
+            img:'/static/images/'+steam_type+'/im 5.png'
         },
         {
             name:'im 5',
-            img:'/static/images/im 5.png'
+            img:'/static/images/'+steam_type+'/im 5.png'
         },
         {
             name:'im 6',
-            img:'/static/images/im 6.png'
+            img:'/static/images/'+steam_type+'/im 6.png'
         },
         {
             name:'im 6',
-            img:'/static/images/im 6.png'
+            img:'/static/images/'+steam_type+'/im 6.png'
         },
         {
             name:'im 7',
-            img:'/static/images/im 7.png'
+            img:'/static/images/'+steam_type+'/im 7.png'
         },
         {
             name:'im 7',
-            img:'/static/images/im 7.png'
+            img:'/static/images/'+steam_type+'/im 7.png'
         },
         {
             name:'im 8',
-            img:'/static/images/im 8.png'
+            img:'/static/images/'+steam_type+'/im 8.png'
         },
         {
             name:'im 8',
-            img:'/static/images/im 8.png'
+            img:'/static/images/'+steam_type+'/im 8.png'
         },
         {
             name:'im 9',
-            img:'/static/images/im 9.png'
+            img:'/static/images/'+steam_type+'/im 9.png'
         },
         {
             name:'im 9',
-            img:'/static/images/im 9.png'
+            img:'/static/images/'+steam_type+'/im 9.png'
         }
     ]
     //randomise panel images displayed on grid
@@ -110,7 +112,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if (panelOneId === panelTwoId){
 
             document.getElementById("status").innerText = "Incorrect Panel Match"
-            imgPanel[panelOneId].setAttribute('src','/static/images/'+ chosenPanels[0]+ ' red.png')
+            imgPanel[panelOneId].setAttribute('src','/static/images/'+steam_type+'/'+ chosenPanels[0]+ ' red.png')
             setTimeout(() => {  imgPanel[panelOneId].setAttribute('src','/static/images/grey.png');
             }, 1000);
             setTimeout(enablePanels, 1000)
@@ -120,8 +122,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         else if(chosenPanels[0] === chosenPanels[1]){
             document.getElementById("status").innerText = "Matching Panel Found"
             if(chosenPanels[0] === chosenPanels[1]) {
-                imgPanel[panelOneId].setAttribute('src', '/static/images/'+ chosenPanels[0]+ ' green.png')
-                imgPanel[panelTwoId].setAttribute('src', '/static/images/'+ chosenPanels[1]+ ' green.png')
+                imgPanel[panelOneId].setAttribute('src', '/static/images/'+steam_type+'/'+ chosenPanels[0]+ ' green.png')
+                imgPanel[panelTwoId].setAttribute('src', '/static/images/'+steam_type+'/'+ chosenPanels[1]+ ' green.png')
                 imgPanel[panelOneId].removeEventListener('click',flipPanel)
                 imgPanel[panelTwoId].removeEventListener('click',flipPanel)
                 imgPanel[panelOneId].classList.add("found")
@@ -134,8 +136,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         else{
 
             document.getElementById("status").innerText = "Incorrect Panel Match"
-            imgPanel[panelOneId].setAttribute('src','/static/images/'+ chosenPanels[0]+ ' red.png')
-            imgPanel[panelTwoId].setAttribute('src','/static/images/'+ chosenPanels[1]+ ' red.png')
+            imgPanel[panelOneId].setAttribute('src','/static/images/'+steam_type+'/'+ chosenPanels[0]+ ' red.png')
+            imgPanel[panelTwoId].setAttribute('src','/static/images/'+steam_type+'/'+ chosenPanels[1]+ ' red.png')
             setTimeout(() => {  imgPanel[panelOneId].setAttribute('src','/static/images/grey.png');
                 imgPanel[panelTwoId].setAttribute('src','/static/images/grey.png');
             }, 1000);

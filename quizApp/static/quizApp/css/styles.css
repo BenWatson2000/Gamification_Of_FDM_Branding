@@ -43,9 +43,10 @@ body {
     grid-template-columns: repeat(2, auto);
     gap: 15px;
     margin: 20px 0;
+    font-size: 1.4rem;
 }
 
-.btn {
+.btn_game {
     --hue: var(--hue-neutral);
     border: 1px solid hsl(var(--hue),100%, 30%);
     background-color: hsl(var(--hue), 100%, 50%);
@@ -53,14 +54,14 @@ body {
     padding: 5px 10px;
     color: white;
     outline: none;
-    font-size: 1rem;
+    font-size: 1.4rem;
 }
 
-.btn:hover {
+.btn_game:hover {
     border-color: black;
 }
 
-.btn.selected {
+.btn_game.selected {
     --hue: var(--hue-selected);
     color: black;
 }
@@ -95,4 +96,9 @@ body {
 .response {
     font-size: 1.5rem;
     padding:10px 20px 10px 20px;
+}
+
+.question {
+    font-size: 1.5rem;
+    font-weight: bold;
 }

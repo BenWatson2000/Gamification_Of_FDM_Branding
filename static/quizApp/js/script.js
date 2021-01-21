@@ -74,7 +74,7 @@ function displayQuestion(question) {
     question.answers.forEach(answer => {
         const buttonX = document.createElement('buttonX')
         buttonX.innerText = answer.text
-        buttonX.classList.add('btn')
+        buttonX.classList.add('btn_game')
         //Ensuring buttons are given dataset values for their stream scores.
         if (answer.ST) {
             buttonX.dataset.ST = answer.ST
@@ -114,10 +114,18 @@ function endState() {
     //Hide all other elements that 'resetContainer()' does not remove.
     questionEl.classList.add("hide")
     finishedBtn.classList.add("hide")
+    let total = softwareTest + techOperations + businessIntel
     //Set labels for pie chart.
     let labels1 = ['Software Testing', 'Technical Operations',"Business Intelligence"];
     //Set colours for pie chart.
     let colours1 = ['#49A9EA', '#36CAAB','#008000'];
+
+    let softTestLabel = ((softwareTest/total) * 100).toFixed(2)
+    let businessLabel = ((businessIntel/total) * 100).toFixed(2)
+    let techOpLabel = ((techOperations/total) * 100).toFixed(2)
+
+
+
     //Create pie chart
     let pieChart = document.getElementById("myChart").getContext('2d');
     let chart1 = new Chart(pieChart, {
@@ -125,7 +133,7 @@ function endState() {
         data: {
             labels: labels1,
             datasets: [ {
-                data: [softwareTest,techOperations,businessIntel],
+                data: [softTestLabel,techOpLabel,businessLabel],
                 backgroundColor: colours1
             }]
         },
@@ -158,7 +166,7 @@ function endState() {
         arrayOfOutcomes.push("Business Intelligence")
     }
 
-    let textOutput = 'From this test we can suggest to you that you would be good at'
+    let textOutput = 'From this test we can suggest that you would be good at'
     let count = 0
     //String builder to add either one or more categories to the output message.
     arrayOfOutcomes.forEach(outcome => {
