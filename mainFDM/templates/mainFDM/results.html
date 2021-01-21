@@ -5,9 +5,11 @@
 {%block header%}Do you want to upload your scores?{%endblock%}
 
 {% block navtext %}
+    <!-- if the user is logged in add a message and log out button to the navbar
+              and collapse it under the toggle button on smaller screens -->
     {% if request.user.is_authenticated %}
-        <span class="mx-3">Hello, {{ request.user }} </span>
-        <a class="nav-link link-light" href="/helper/logout/">Log out <span class="sr-only"></span></a>
+        <span class="navbar-text text-info mx-2">Hello, {{ request.user }} </span>
+        <a class="nav-link link-light mx-2" href="/helper/logout/">Log out <span class="sr-only"></span></a>
     {% endif %}
 {% endblock %}
 
