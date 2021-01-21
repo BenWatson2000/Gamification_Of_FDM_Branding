@@ -298,24 +298,61 @@ var grid = {
 
         }
 
+        if((pipes_with_connection.includes(top)&&pipes_with_connection.includes(mid))||(pipes_with_connection.includes(top)&&pipes_with_connection.includes(bot))||(pipes_with_connection.includes(bot)&&pipes_with_connection.includes(mid))||(pipes_with_connection.includes(top)&&pipes_with_connection.includes(bot))){
+                 document.getElementById("status").innerText = "Two pipes are connected at the same time. Please disconnect one of them"
+            }else{
+             if(winningOption===top){
 
-        // Check if the user has won
-        if (pipes_with_connection.includes(top)) {
+            if (pipes_with_connection.includes(top)) {
+                document.getElementById("status").innerText = "You won!"
 
-            setTimeout(alert("won game"),1000)
+            }
+
+
+            else if (pipes_with_connection.includes(mid)) {
+                document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+            }
+            else if (pipes_with_connection.includes(bot)) {
+                document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+            }
+
+        }else if(winningOption===mid){
+
+            if (pipes_with_connection.includes(top)) {
+                document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+            }
+
+            else if (pipes_with_connection.includes(mid)) {
+                document.getElementById("status").innerText = "You won!"
+
+            }
+            else if (pipes_with_connection.includes(bot)) {
+                document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+            }
+
+
+        }else if(winningOption===bot){
+            if (pipes_with_connection.includes(top)) {
+                document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+            }
+
+            else if (pipes_with_connection.includes(mid)) {
+                document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+            }
+            else if (pipes_with_connection.includes(bot)) {
+                document.getElementById("status").innerText = "You won!"
+            }
+
+            }
         }
 
-        //check loss
-        else if (pipes_with_connection.includes(mid)) {
-
-            setTimeout(alert("wrong answer"),1000)
-        }
-        else if (pipes_with_connection.includes(bot)) {
-
-            setTimeout(alert("won game"),1000)
-        }
-
-    },
+     }
+        ,
 
     /**
      * function to draw the grid
@@ -387,8 +424,11 @@ function startTimer(duration, display) {
 
         if (--timer < 0) {
             timer = 0;
-            if(alert('time has run out')){}
-            else window.location.reload();
+            document.getElementById("status").innerText = "Game Over"
+            document.getElementById("timer").classList.add("hide")
+            document.getElementById("mybutton-1").classList.remove("hide")
+            document.getElementById("mybutton-2").classList.remove("hide")
+
             // timer = duration; // uncomment this line to reset timer automatically after reaching 0
         }
     }, 1000);
@@ -397,7 +437,7 @@ function startTimer(duration, display) {
  * window onload function
  */
 window.onload = function () {
-    var time = 10000, // your time in seconds here
+    var time = 5, // your time in seconds here
         display = document.querySelector('#timer');
     startTimer(time, display);
 };
@@ -408,6 +448,7 @@ window.onload = function () {
 function rotatePipe(element) {
     var x = element.dataset.x;
     var y = element.dataset.y;
+
 
     grid.getThisPipe(x,y).rotate();
     grid.checkPipesConnection();
