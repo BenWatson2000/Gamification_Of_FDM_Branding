@@ -2,6 +2,8 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
+
+from .dispatchMail import dispatch
 from .models import GameQuestion, Score
 from .forms import AddQuestion, CreateHelperForm, AddScores
 from django.contrib.auth import authenticate, login, logout
@@ -160,6 +162,9 @@ def quiz(request):
 def results(request):
     # check if the key exists yet - in case someone opens results page from url before opening home page
     # if they key does not exist, create it as False (not played yet) and throw them to the home page
+
+    dispatch()
+
     if "played" not in request.session:
         request.session["played"] = False
         return redirect(home)
