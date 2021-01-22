@@ -47,7 +47,7 @@ var Pipe = function(){
         this.connections.splice(0, 0, this.connections.splice((this.connections.length-1), 1)[0]);
     }
 };
-
+var stopgame=false;
 /**
   * the grid
   */
@@ -298,24 +298,124 @@ var grid = {
 
         }
 
+        //if more than two answer pipes are activated
+        if((pipes_with_connection.includes(top)&&pipes_with_connection.includes(mid))||(pipes_with_connection.includes(top)&&pipes_with_connection.includes(bot))||(pipes_with_connection.includes(bot)&&pipes_with_connection.includes(mid))||(pipes_with_connection.includes(top)&&pipes_with_connection.includes(bot))){
+                 document.getElementById("status").innerText = "Two pipes are connected at the same time. Please disconnect one of them"
+            }else{
 
-        // Check if the user has won
-        if (pipes_with_connection.includes(top)) {
+             if(winningOption===top){
 
-            setTimeout(alert("won game"),1000)
+                if (pipes_with_connection.includes(top)) {
+                    //convert time to seconds
+                     let hms = document.getElementById("timer").innerText;
+                    let a = hms.split(':');
+                    let timeLeft = (+a[0]) * 60 + (+a[1]);
+                    let score = 120 - timeLeft;
+                    document.getElementById("status").innerText = "You have won in: "+
+                        (score) + " seconds.";
+                    document.getElementById("sub-btn").classList.remove("hide")
+                    document.getElementById("score-holder").value = score
+                    let grid1 = document.getElementById("grid");
+                    let q = document.getElementById("question");
+                    let a1 = document.getElementById("answer1");
+                    let a2 = document.getElementById("answer2");
+                    let a3 = document.getElementById("answer3");
+                    grid1.style.display = "none";
+                    q.style.display = "none";
+                    a1.style.display = "none";
+                    a2.style.display = "none";
+                    a3.style.display = "none";
+                    stopgame=true;
+
+                }
+
+
+                else if (pipes_with_connection.includes(mid)) {
+                    document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+                }
+                else if (pipes_with_connection.includes(bot)) {
+                    document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+                }
+
+            }else if(winningOption===mid){
+
+                if (pipes_with_connection.includes(top)) {
+                    document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+                }
+
+                else if (pipes_with_connection.includes(mid)) {
+                    //convert time to seconds
+                    let hms = document.getElementById("timer").innerText;
+                    let a = hms.split(':');
+                    let timeLeft = (+a[0]) * 60 + (+a[1]);
+                    let score = 120 - timeLeft;
+                    document.getElementById("status").innerText = "You have won in: "+
+                        (score) + " seconds.";
+                    document.getElementById("sub-btn").classList.remove("hide")
+                    document.getElementById("score-holder").value = score
+                    let grid1 = document.getElementById("grid");
+                    let q = document.getElementById("question");
+                    let a1 = document.getElementById("answer1");
+                    let a2 = document.getElementById("answer2");
+                    let a3 = document.getElementById("answer3");
+                    grid1.style.display = "none";
+                    q.style.display = "none";
+                    a1.style.display = "none";
+                    a2.style.display = "none";
+                    a3.style.display = "none";
+                    stopgame=true;
+
+
+
+                }
+                else if (pipes_with_connection.includes(bot)) {
+                    document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+                }
+
+
+            }else if(winningOption===bot){
+                if (pipes_with_connection.includes(top)) {
+                    document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+                }
+
+                else if (pipes_with_connection.includes(mid)) {
+                    document.getElementById("status").innerText = "Incorrect pipe. Please try again."
+
+                }
+                else if (pipes_with_connection.includes(bot)) {
+                    //convert time to seconds
+                    let hms = document.getElementById("timer").innerText;
+                    let a = hms.split(':');
+                    let timeLeft = (+a[0]) * 60 + (+a[1]);
+                    let score = 120 - timeLeft;
+                    document.getElementById("status").innerText = "You have won in: "+
+                        (score) + " seconds.";
+                    document.getElementById("sub-btn").classList.remove("hide")
+                    document.getElementById("score-holder").value = score
+                    let grid1 = document.getElementById("grid");
+                    let q = document.getElementById("question");
+                    let a1 = document.getElementById("answer1");
+                    let a2 = document.getElementById("answer2");
+                    let a3 = document.getElementById("answer3");
+                    grid1.style.display = "none";
+                    q.style.display = "none";
+                    a1.style.display = "none";
+                    a2.style.display = "none";
+                    a3.style.display = "none";
+                    stopgame=true;
+
+
+                }
+
+            }
         }
 
-        //check loss
-        else if (pipes_with_connection.includes(mid)) {
-
-            setTimeout(alert("wrong answer"),1000)
-        }
-        else if (pipes_with_connection.includes(bot)) {
-
-            setTimeout(alert("won game"),1000)
-        }
-
-    },
+     }
+        ,
 
     /**
      * function to draw the grid
@@ -357,7 +457,7 @@ var grid = {
                     pipe_div.className += " l";
                 }
 
-                if (pipe.active == 1) {
+                if (pipe.active === 1) {
                     pipe_div.className += " a";
                 }
 
@@ -369,38 +469,50 @@ var grid = {
     }
 };
 
+
 /**
  * function to create a timer
  * @param {Number} duration
  * @param
  */
-function startTimer(duration, display) {
+function startTimer() {
+    var duration = 119, // your time in seconds here
+    display = document.querySelector('#timer');
     var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
+    var myInterval =setInterval(function () {
+        if(stopgame===false){
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.textContent = minutes + ":" + seconds;
+            display.textContent = minutes + ":" + seconds;
 
-        if (--timer < 0) {
-            timer = 0;
-            if(alert('time has run out')){}
-            else window.location.reload();
+            if (--timer < 0) {
+                timer = 0;
+                document.getElementById("status").innerText = "Game Over"
+                document.getElementById("timer").classList.add("hide")
+                document.getElementById("mybutton-1").classList.remove("hide")
+                document.getElementById("mybutton-2").classList.remove("hide")
+                let grid1 = document.getElementById("grid");
+                let q = document.getElementById("question");
+                let a1 = document.getElementById("answer1");
+                let a2 = document.getElementById("answer2");
+                let a3 = document.getElementById("answer3");
+                grid1.style.display = "none";
+                q.style.display = "none";
+                a1.style.display = "none";
+                a2.style.display = "none";
+                a3.style.display = "none";
+            }
+
+
             // timer = duration; // uncomment this line to reset timer automatically after reaching 0
         }
     }, 1000);
 }
-/**
- * window onload function
- */
-window.onload = function () {
-    var time = 60 / 2, // your time in seconds here
-        display = document.querySelector('#timer');
-    startTimer(time, display);
-};
+var startgame=true;
 
 /**
  * function to rotate the pipe called on click
@@ -408,7 +520,10 @@ window.onload = function () {
 function rotatePipe(element) {
     var x = element.dataset.x;
     var y = element.dataset.y;
-
+    if(startgame===true){
+        startTimer();
+        startgame=false;
+    }
     grid.getThisPipe(x,y).rotate();
     grid.checkPipesConnection();
     grid.drawGrid();

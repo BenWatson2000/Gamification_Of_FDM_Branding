@@ -1,10 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from mainFDM.models import GameQuestion
 from random import choices
+import mainFDM.views as m
 from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
+
+    if request.method == 'POST':
+        score = request.POST.get("score-holder")
+        request.session["my_score"] = score
+        request.session["my_game"] = "Memory"
+
+        # boolean check for path traversals on results page
+        request.session["played"] = True
+
+        print(request.session.get("my_score"))
+
+        return redirect(m.results)
+
 
     # boolean check for path traversals on results page
     request.session["played"] = True
