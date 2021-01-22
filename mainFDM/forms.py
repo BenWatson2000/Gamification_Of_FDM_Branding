@@ -9,7 +9,7 @@ from mainFDM.models import Score
 
 STREAM_TYPES = (
     ("", "Select Stream Type"),
-    ("TOP", "Technical Operations"),
+    ("TO", "Technical Operations"),
     ("BI", "Business Intelligence"),
     ("ST", "Software Testing"),
 )
