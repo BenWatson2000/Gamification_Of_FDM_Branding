@@ -303,6 +303,7 @@ var grid = {
                  document.getElementById("status").innerText = "Two pipes are connected at the same time. Please disconnect one of them"
             }else{
 
+            //status messages for when right answer corresponds to top pipe
              if(winningOption===top){
 
                 if (pipes_with_connection.includes(top)) {
@@ -339,6 +340,7 @@ var grid = {
 
                 }
 
+                //status messages for when right answer corresponds to middle pipe
             }else if(winningOption===mid){
 
                 if (pipes_with_connection.includes(top)) {
@@ -375,7 +377,7 @@ var grid = {
                     document.getElementById("status").innerText = "Incorrect pipe. Please try again."
                 }
 
-
+             //status messages for when right answer corresponds to bottom pipe
             }else if(winningOption===bot){
                 if (pipes_with_connection.includes(top)) {
                     document.getElementById("status").innerText = "Incorrect pipe. Please try again."
@@ -457,7 +459,8 @@ var grid = {
                     pipe_div.className += " l";
                 }
 
-                if (pipe.active === 1) {
+                //make active pipes that are connected with the first pipe and the ones that corresponds to the answers
+                if ((pipe.active === 1)||(pipe.x ===1 && pipe.y===7)||(pipe.x ===4 && pipe.y===7)||(pipe.x ===7 && pipe.y===7)) {
                     pipe_div.className += " a";
                 }
 
@@ -480,6 +483,7 @@ function startTimer() {
     display = document.querySelector('#timer');
     var timer = duration, minutes, seconds;
     var myInterval =setInterval(function () {
+        //if game is still going keep refreshing time
         if(stopgame===false){
             minutes = parseInt(timer / 60, 10)
             seconds = parseInt(timer % 60, 10);
