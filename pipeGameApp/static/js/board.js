@@ -309,9 +309,10 @@ var grid = {
                     //convert time to seconds
                      let hms = document.getElementById("timer").innerText;
                     let a = hms.split(':');
-                    let score = (+a[0]) * 60 + (+a[1]);
-                    document.getElementById("status").innerText = "You have won with: "+
-                        (score) + " seconds left."
+                    let timeLeft = (+a[0]) * 60 + (+a[1]);
+                    let score = 120 - timeLeft;
+                    document.getElementById("status").innerText = "You have won in: "+
+                        (score) + " seconds.";
                     document.getElementById("sub-btn").classList.remove("hide")
                     document.getElementById("score-holder").value = score
                     let grid1 = document.getElementById("grid");
@@ -349,9 +350,10 @@ var grid = {
                     //convert time to seconds
                     let hms = document.getElementById("timer").innerText;
                     let a = hms.split(':');
-                    let score = (+a[0]) * 60 + (+a[1]);
-                    document.getElementById("status").innerText = "You have won with: "+
-                        (score) + " seconds left."
+                    let timeLeft = (+a[0]) * 60 + (+a[1]);
+                    let score = 120 - timeLeft;
+                    document.getElementById("status").innerText = "You have won in: "+
+                        (score) + " seconds.";
                     document.getElementById("sub-btn").classList.remove("hide")
                     document.getElementById("score-holder").value = score
                     let grid1 = document.getElementById("grid");
@@ -388,9 +390,10 @@ var grid = {
                     //convert time to seconds
                     let hms = document.getElementById("timer").innerText;
                     let a = hms.split(':');
-                    let score = (+a[0]) * 60 + (+a[1]);
-                    document.getElementById("status").innerText = "You have won with: "+
-                        (score) + " seconds left."
+                    let timeLeft = (+a[0]) * 60 + (+a[1]);
+                    let score = 120 - timeLeft;
+                    document.getElementById("status").innerText = "You have won in: "+
+                        (score) + " seconds.";
                     document.getElementById("sub-btn").classList.remove("hide")
                     document.getElementById("score-holder").value = score
                     let grid1 = document.getElementById("grid");

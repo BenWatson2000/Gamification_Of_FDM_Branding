@@ -304,5 +304,11 @@ body {
     min-height: 60rem; /*this causes the page to scroll*/
 }
 
+#base{
+    background-color: #ffffff;
+    padding-bottom: 8rem;
+    min-height: 35rem;
+    margin-inline: 0;
+}
 
 
