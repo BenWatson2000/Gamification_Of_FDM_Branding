@@ -47,7 +47,7 @@ var Pipe = function(){
         this.connections.splice(0, 0, this.connections.splice((this.connections.length-1), 1)[0]);
     }
 };
-
+var stopgame=false;
 /**
   * the grid
   */
@@ -312,7 +312,6 @@ var grid = {
                     let score = (+a[0]) * 60 + (+a[1]);
                     document.getElementById("status").innerText = "You have won with: "+
                         (score) + " seconds left."
-                    document.getElementById("timer").classList.add("hide")
                     document.getElementById("sub-btn").classList.remove("hide")
                     document.getElementById("score-holder").value = score
                     let grid1 = document.getElementById("grid");
@@ -325,6 +324,7 @@ var grid = {
                     a1.style.display = "none";
                     a2.style.display = "none";
                     a3.style.display = "none";
+                    stopgame=true;
 
                 }
 
@@ -352,7 +352,6 @@ var grid = {
                     let score = (+a[0]) * 60 + (+a[1]);
                     document.getElementById("status").innerText = "You have won with: "+
                         (score) + " seconds left."
-                    document.getElementById("timer").classList.add("hide")
                     document.getElementById("sub-btn").classList.remove("hide")
                     document.getElementById("score-holder").value = score
                     let grid1 = document.getElementById("grid");
@@ -365,6 +364,7 @@ var grid = {
                     a1.style.display = "none";
                     a2.style.display = "none";
                     a3.style.display = "none";
+                    stopgame=true;
 
 
 
@@ -391,7 +391,6 @@ var grid = {
                     let score = (+a[0]) * 60 + (+a[1]);
                     document.getElementById("status").innerText = "You have won with: "+
                         (score) + " seconds left."
-                    document.getElementById("timer").classList.add("hide")
                     document.getElementById("sub-btn").classList.remove("hide")
                     document.getElementById("score-holder").value = score
                     let grid1 = document.getElementById("grid");
@@ -404,6 +403,7 @@ var grid = {
                     a1.style.display = "none";
                     a2.style.display = "none";
                     a3.style.display = "none";
+                    stopgame=true;
 
 
                 }
@@ -466,6 +466,7 @@ var grid = {
     }
 };
 
+
 /**
  * function to create a timer
  * @param {Number} duration
@@ -475,31 +476,33 @@ function startTimer() {
     var duration = 119, // your time in seconds here
     display = document.querySelector('#timer');
     var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
+    var myInterval =setInterval(function () {
+        if(stopgame===false){
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.textContent = minutes + ":" + seconds;
+            display.textContent = minutes + ":" + seconds;
 
-        if (--timer < 0) {
-            timer = 0;
-            document.getElementById("status").innerText = "Game Over"
-            document.getElementById("timer").classList.add("hide")
-            document.getElementById("mybutton-1").classList.remove("hide")
-            document.getElementById("mybutton-2").classList.remove("hide")
-            let grid1 = document.getElementById("grid");
-            let q = document.getElementById("question");
-            let a1 = document.getElementById("answer1");
-            let a2 = document.getElementById("answer2");
-            let a3 = document.getElementById("answer3");
-            grid1.style.display = "none";
-            q.style.display = "none";
-            a1.style.display = "none";
-            a2.style.display = "none";
-            a3.style.display = "none";
+            if (--timer < 0) {
+                timer = 0;
+                document.getElementById("status").innerText = "Game Over"
+                document.getElementById("timer").classList.add("hide")
+                document.getElementById("mybutton-1").classList.remove("hide")
+                document.getElementById("mybutton-2").classList.remove("hide")
+                let grid1 = document.getElementById("grid");
+                let q = document.getElementById("question");
+                let a1 = document.getElementById("answer1");
+                let a2 = document.getElementById("answer2");
+                let a3 = document.getElementById("answer3");
+                grid1.style.display = "none";
+                q.style.display = "none";
+                a1.style.display = "none";
+                a2.style.display = "none";
+                a3.style.display = "none";
+            }
 
 
             // timer = duration; // uncomment this line to reset timer automatically after reaching 0
