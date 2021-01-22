@@ -13,11 +13,12 @@ body {
 
 html {
   position: relative;
+    min-width: fit-content;
   min-height: 100%;
 }
 
 body {
-    padding-bottom: 8rem;
+    padding-bottom: 10rem;
     padding-top: 6rem;
     font-family: open sans, sans-serif;
 }
@@ -30,9 +31,12 @@ body {
     min-height: 60rem; /*this causes the page to scroll*/
 }
 
-#helper, #base{
-    background-color: white;
+#base{
+    background-color: #ffffff;
+    padding-bottom: 8rem;
     min-height: 35rem;
+    margin-inline: 0;
+    min-width: fit-content;
 }
 
 .navbar {
@@ -41,6 +45,7 @@ body {
     background-color: #202025;
     border-top: 3px solid #1daded;
     font-size: 18px;
+    color: #1daded;
 }
 
 #fdm_logo_header{
@@ -97,14 +102,28 @@ body {
     text-shadow: 0 8px 4px #212026;
 }
 
-#helper-header{
+/*Header text on each of the pages extending base*/
+.header{
     font-size: 4rem;
     font-weight: 300;
     color: #1daded;
     margin:0;
     text-shadow: 0 6px 6px #212026;
+    text-align: center;
 }
 
+/*Any header-style text on each of the pages extending base that is below the 'header' text*/
+.subheader{
+    font-size: 3rem;
+    font-weight: 300;
+    color: #1daded;
+    margin:0;
+    padding-bottom: 15px;
+    text-shadow: 0 6px 6px #212026;
+    text-align: center;
+}
+
+/*Home page intro to the programmes*/
 #intro{
     font-style: normal;
     font-weight: 600;
@@ -118,8 +137,6 @@ body {
 .jumbotron .container {
   max-width: 100%;
 }
-
-
 /*.form-select:focus{
     border-color: #FF0000;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.3);
@@ -142,6 +159,15 @@ body {
     width: 8rem;
 }
 
+.column-text{
+    color: #FFFFFF;
+    text-shadow: 0 1px 2px #212026;
+    text-align: center;
+    word-break: break-word;
+    text-wrap: normal;
+    padding-bottom: 2rem;
+}
+
 .form-control::placeholder{
     color: #202025;
 }
@@ -151,10 +177,15 @@ body {
     border-radius: 30px;
     background-clip: border-box;
     margin-bottom: 20px;
-    box-shadow:
-            0.2rem 0.2rem 0.55rem 0.1rem rgb(21, 65, 200),
-            0.5rem 0.5rem 0.55rem 0.1rem rgb(136,32,187);
+    min-width: fit-content;
+    /*box-shadow:*/
+    /*        0.2rem 0.2rem 0.55rem 0.1rem rgb(21, 65, 200),*/
+    /*        0.5rem 0.5rem 0.55rem 0.1rem rgb(136,32,187);*/
     /* horizontal offset, vertical offset, blur radius, spread radius, colour */
+
+    /*FDM's blue on black shadow*/
+    -webkit-box-shadow: 0 0 25px 0 #202025, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 25px 0 #202025, 0 20px 25px 0 rgba(0,0,0,.2);
 }
 
 #login-form-col,#register-form-col{
@@ -168,6 +199,10 @@ body {
     color: white;
     font-size: 2rem;
     text-shadow: 0 4px 2px #212026;
+}
+
+.form-link{
+    color: #ffffff;
 }
 
 .btn-grad{
@@ -185,17 +220,10 @@ body {
     font-weight: 300;
 }
 
-#get-h-score{
+#get-b-score{
     font-size: 1.3rem;
     padding-inline: 15%;
     font-weight: 300;
-}
-
-#h-score{
-   text-align: center;
-    height: 2.7rem;
-    box-shadow: none;
-    border: none
 }
 
 #success{
@@ -232,6 +260,28 @@ body {
     color: #FFFFFF;
 }
 
+.table{
+    /*background: linear-gradient(40deg,#1541c8 0,#8820bb 100%);*/
+    background: #202025;
+    color: #FFFFFF;
+    border-collapse: collapse;
+    border-style: hidden;
+    margin-inline: auto;
+    max-width: border-box;
+    word-wrap: break-word;
+    border-radius: 20px;
+}
+
+.table-head{
+    border-bottom: 2px solid #FFFFFF;
+    /*word-break: keep-all;*/
+}
+
+.table-row{
+    /*background: linear-gradient(45deg, #1541c8 50%,#8820bb 50%);*/
+    /*border-bottom: None;*/
+}
+
 .card{
     background-clip:padding-box;
     border: 10px solid rgba(255, 255, 255, 0.5);
@@ -263,8 +313,8 @@ body {
     background-color: #1541c8;
     padding-block: 0;
     position: relative;
-    right: 0px;
-    bottom: 0px;
+    right: 0;
+    bottom: 0;
     border-color: #1541C8;
     border-radius: 22px;
     text-align: center;
@@ -293,8 +343,8 @@ body {
     bottom: 0;
     width: 100%;
     margin-bottom:0;
-    padding-bottom: 0;
-    padding-top: 3rem;
+    /*padding-bottom: 0;*/
+    /*padding-top: 3rem;*/
     border-bottom: 8px solid #1daded;
 }
 
@@ -312,6 +362,9 @@ body {
     display: block;
     max-width: max-content;
     padding-inline: 20px;
+    text-decoration: none;
+    text-wrap: none;
+    word-break: keep-all;
 }
 
 #licence{
@@ -319,8 +372,47 @@ body {
     font-size:12px;
     font-family: open sans, sans-serif;
     font-weight: 300;
-    margin-left:10px
 }
+
+.icon-effect{
+    align-items: center;
+
+    padding-left: 0;
+    list-style-type: disc;
+    font-weight: 300;
+    width: max-content;
+}
+
+.icon-effect li{
+    list-style: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    margin: 10px;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+}
+
+#link-fb{
+    width: 20px;
+    height: 15px;
+}
+
+.icon-effect a {
+    color: #fff;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: linear-gradient(40deg,#1541c8 0,#8820bb 100%);
+    border-radius: 50%;
+    padding-block: 30%;
+    padding-inline: 40%;
+    cursor: pointer;
+}
+
 
 /*TODO delete if proves unnecessary*/
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }

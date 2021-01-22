@@ -14,20 +14,36 @@
         <form method="post">
             {% csrf_token %}
 
-            {{ form.errors }}
-
-            {%  for message in messages %}
-                <p id="messages">{{ message }}</p>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
             {% endfor %}
 
-            <div class="mb-3">
-                <label class="form-label">{{ form.username.label_tag }}</label>
-                {{ form.username }}
+            {%  for message in messages %}
+                {% if message.tags %}
+                    {% if message.tags == "error" %}
+                        <div  class="alert alert-danger" >{{ message|linebreaks }}</div>
+                    {% elif message.tags == "success" %}
+                        <div  class="alert alert-success" >{{ message|linebreaks }}</div>
+                    {% elif message.tags == "info" %}
+                        <div  class="alert alert-warning" >{{ message|linebreaks }}</div>
+                    {% else %}
+                        <div  class="alert alert-secondary" >{{ message|linebreaks }}</div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+
+            <div class="form-floating mb-3">
+              <input name="username" type="text" class="form-control" id="username_field" placeholder="Username" required>
+              <label class="form-label-float" for="username_field">{{ form.username.label }}</label>
             </div>
-            <div class="mb-3">
-                <label class="form-label">{{ form.password.label_tag }}</label>
-                {{ form.password }}
+            <div class="form-floating mb-3">
+              <input name="password" type="password" class="form-control" id="password_field" placeholder="Password" required>
+              <label class="form-label-float" for="password_field">{{ form.password.label }}</label>
             </div>
+
             <div class="form-check">
                 <input type="checkbox" name="remember-me" class="form-check-input" id="remember-me">
                 <label class="form-check-label" for="remember-me">Remember me</label>
@@ -39,7 +55,10 @@
 
         <!-- option to register if no account yet -->
         <div class="d-flex mt-4 justify-content-center links">
-            Don't have a helper account? <a href="/helper/register/" class="ms-4">Sign Up</a>
+            Don't have a helper account? <a href="{% url 'helperRegister' %}" class="form-link ms-3">Sign Up</a>
+        </div>
+        <div class="d-flex mt-4 justify-content-center links">
+            <a class="form-link m-auto" href="{% url 'password_reset' %}">Forgotten password?</a>
         </div>
 
     </div>
