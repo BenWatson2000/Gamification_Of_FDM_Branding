@@ -15,7 +15,8 @@ urlpatterns = [
     path('helper/logout/', views.helper_logout, name='helperLogout'),
 
     # submit email for password reset
-    path('helper/reset_password/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('helper/reset_password/', auth_views.PasswordResetView.as_view
+    (html_email_template_name='registration/password_reset_html_email.html'), name='password_reset'),
     # email sent success message
     path('helper/reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     # link to password reset form from email
