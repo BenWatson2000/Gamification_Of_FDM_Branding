@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 
-def dispatch(choice,user):
+def dispatch(choice, user):
 
     if choice == "BI":
 

@@ -15,10 +15,10 @@
 
 <!-- row of for columns -->
 {% block forcolumns %}
-              <!-- row of for 2 columns with 2 forms-->
+              <!-- row of for 2 columns on the page -->
               <div class="row justify-content-center justify-content-md-around justify-content-lg-between pt-5">
 
-                  <div class="col-auto col-lg-5">
+                  <div class="col-auto col-lg-5"> <!-- outer container for upload/leaderboard -->
 
                       <!-- add scores / leaderboard column -->
                       <div class="container form-col p-3 p-sm-3 pb-4 pb-sm-3 justify-content-center" id="upload-form-col">
@@ -74,9 +74,20 @@
                                     </table>
                           </div>
                       </div> <!-- end of add scores / leaderboard column -->
-                  </div>
 
-                  <!-- proceed to streams container (same size as the form on the left but invisible) -->
+                      <!-- share results on twitter component -->
+                      <div class="container form-col p-4">
+
+                          <h3 class="form-title">Share Results on Twitter</h3>
+
+                          <div class="d-flex pt-1 justify-content-center">
+                              <button title="button title" class="btn btn-grad btn-lg" onclick=" window.open('{{ tweetURL }}', '_blank'); return false;">Share</button>
+                          </div>
+                      </div><!-- end of share results on twitter component -->
+
+                  </div> <!-- outer container for upload/leaderboard -->
+
+                  <!-- proceed to streams container (same size as outer container on the left but invisible) -->
                   <div class="col-sm-auto col-md-5">
                       <!-- actual column with the proceed to streams button (small) -->
                       <div class="container form-col p-4" style="min-width: fit-content">
@@ -108,50 +119,33 @@
                               </form>
                               </form>
                               </form>
-                      </div>
+                      </div> <!-- end of proceed to stream component -->
 
+                      <div class="container form-col p-4"> <!-- receive-email component -->
 
-                  <div class="container form-col p-4">
+                          <h3 class="form-title">Receive information about graduate programme</h3>
 
-                      <h3 class="form-title">Share Results on Twitter</h3>
+                          <!-- receive info email form -->
+                              <form method="post">
+                                  {% csrf_token %}
 
-                      <div class="d-flex pt-1 justify-content-center">
-                          <button title="button title" class="btn btn-grad btn-lg" onclick=" window.open('{{ tweetURL }}', '_blank'); return false;">Share</button>
-                      </div>
+                                  <div class="form-floating mb-3">
+                                        {{ email_form.email }}
+                                        <label class="form-label-float">{{ email_form.email.label }}</label>
+                                  </div>
 
-                  </div>
+                                  <div class="d-flex pt-1 justify-content-center">
+                                       <button type="submit" class="btn btn-grad btn-lg" >Submit</button>
+                                  </div>
+                              </form>
 
-                  <div class="container form-col p-4">
+                      </div> <!-- end of receive-email component -->
 
-
-
-                      <h3 class="form-title">Receive information about graduate programme</h3>
-
-                          <form method="post">
-
-                              {% csrf_token %}
-
-                              <label for="email" class="column-text">Please enter your email address: </label>&nbsp&nbsp&nbsp<input type="email" id="email" name="email" size="36">
-
-                              <div class="d-flex pt-1 justify-content-center">
-
-                                <input type="submit" class="btn btn-grad btn-lg" value="Submit">
-                              </div>
-{#                              <div class="mb-3" align="center">#}
-{#                              <label class="form-label">Please enter your email:</label><br>#}
-{#                                  <input name="email_input" type="submit" id="email" size="30" required>#}
-{#                              </div>#}
-                          </form>
-
-                  </div>
-
-
-                  </div> <!-- end of proceed to streams container -->
+                  </div> <!-- end of proceed to stream/receive email outer container -->
               </div> <!-- end of the row of for 2 columns with 2 forms-->
 
                 {% endblock %}
 
-{% block lower %}{% endblock %}
 
 <!-- footer  -->
 {% block helper-button %}
