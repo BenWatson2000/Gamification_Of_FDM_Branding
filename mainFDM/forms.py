@@ -9,7 +9,7 @@ from mainFDM.models import Score
 
 STREAM_TYPES = (
     ("", "Select Stream Type"),
-    ("TOP", "Technical Operations"),
+    ("TO", "Technical Operations"),
     ("BI", "Business Intelligence"),
     ("ST", "Software Testing"),
 )
@@ -107,4 +107,8 @@ class AddScores(ModelForm):
 
 
 class EmailUser(forms.Form):
-    email = forms.EmailField()
+    email = forms.CharField(label="Please enter your email address here...",
+                            widget=forms.EmailInput(attrs={'type': 'email', 'class': 'form-control',
+                                                           'placeholder': 'Enter your email address...',
+                                                           'title': 'Enter your email address',
+                                                           'id': 'floatingEmail', 'required': True}))

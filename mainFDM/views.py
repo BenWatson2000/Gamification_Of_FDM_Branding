@@ -166,8 +166,6 @@ def results(request):
     # check if the key exists yet - in case someone opens results page from url before opening home page
     # if they key does not exist, create it as False (not played yet) and throw them to the home page
 
-    # dispatch()
-
     if "played" not in request.session:
         request.session["played"] = False
         return redirect(home)
@@ -195,7 +193,7 @@ def results(request):
             if 'email' in request.POST:
 
                 email = request.POST.get("email")
-                dispatch(stream_type,email)
+                dispatch(stream_type, email)
 
                 return redirect(results)
 
@@ -242,9 +240,9 @@ def results(request):
                         data['message'] = 'Something went wrong, please try again.'
                         return JsonResponse(data)
         else:
-            scoreForm = AddScores(initial={'game_type': game_played,
-                                           'score': score_got})
-            emailForm = EmailUser()
+            score_form = AddScores(initial={'game_type': game_played,
+                                            'score': score_got})
+            email_form = EmailUser()
 
             # change the shortcuts to real stream names before passing it to the page
             if stream_type == 'BI':
@@ -256,8 +254,8 @@ def results(request):
 
             # pass stuff to the page on load
             context = {
-                'form': scoreForm,
-                'emailForm': emailForm,
+                'form': score_form,
+                'email_form': email_form,
                 'stream_type': stream_type,
                 'game': game_played,
                 'tweetURL': 'https://twitter.com/intent/tweet?'
