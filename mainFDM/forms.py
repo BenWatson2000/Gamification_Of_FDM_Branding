@@ -104,3 +104,7 @@ class AddScores(ModelForm):
                                             'title': 'This is your score',
                                             'id': 'upload-score', 'disabled': True})
         }
+
+
+class EmailUser(forms.Form):
+    email = forms.EmailField()

@@ -121,6 +121,31 @@
 
                   </div>
 
+                  <div class="container form-col p-4">
+
+
+
+                      <h3 class="form-title">Receive information about graduate programme</h3>
+
+                          <form method="post">
+
+                              {% csrf_token %}
+
+                              <label for="email" class="column-text">Please enter your email address: </label>&nbsp&nbsp&nbsp<input type="email" id="email" name="email" size="36">
+
+                              <div class="d-flex pt-1 justify-content-center">
+
+                                <input type="submit" class="btn btn-grad btn-lg" value="Submit">
+                              </div>
+{#                              <div class="mb-3" align="center">#}
+{#                              <label class="form-label">Please enter your email:</label><br>#}
+{#                                  <input name="email_input" type="submit" id="email" size="30" required>#}
+{#                              </div>#}
+                          </form>
+
+                  </div>
+
+
                   </div> <!-- end of proceed to streams container -->
               </div> <!-- end of the row of for 2 columns with 2 forms-->
 

@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 from .dispatchMail import dispatch
 from .models import GameQuestion, Score
-from .forms import AddQuestion, CreateHelperForm, AddScores
+from .forms import AddQuestion, CreateHelperForm, AddScores, EmailUser
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
@@ -166,7 +166,7 @@ def results(request):
     # check if the key exists yet - in case someone opens results page from url before opening home page
     # if they key does not exist, create it as False (not played yet) and throw them to the home page
 
-    dispatch()
+    # dispatch()
 
     if "played" not in request.session:
         request.session["played"] = False
@@ -191,49 +191,60 @@ def results(request):
         # the score adding form functionality
         if request.method == "POST":
             form = AddScores(request.POST)
-            if form.is_valid():
-                print("form is valid")
-                score = Score()
-                # get the username
-                score.player_username = request.POST.get('player_username')
-                # manually set the game type and score to be added to the table as the fields are disabled
-                score.game_type = game_played
-                score.score = score_got
-                try:
-                    score.save()
 
-                    # leaderboard query set
-                    leaderboard_set = Score.objects.filter(game_type=game_played).order_by('score')[:10]
-                    leaderboard_set_list = list(leaderboard_set.values())
+            if 'email' in request.POST:
 
-                    data['result'] = 'Submitted'
-                    data['message'] = 'Your score has been uploaded!'
-                    data['leaderboard'] = leaderboard_set_list
+                email = request.POST.get("email")
+                dispatch(stream_type,email)
 
-                    return JsonResponse(data, safe=False)
+                return redirect(results)
 
-                except IntegrityError as e:
-                    print("we've got an integrity error")
-                    data['result'] = 'Integrity Error'
-                    data['message'] = 'It seems someone with this username has already played this game. ' \
-                                      'Choose a different one to save your score!'
-                    return JsonResponse(data)
             else:
-                print('not valid')
-                if KeyError:
-                    print("we've got a key error")
-                    data['result'] = 'Key Error'
-                    data['message'] = 'It seems someone with this username has already played this game. ' \
-                                      'Choose a different one to save your score!'
-                    return JsonResponse(data)
+
+                if form.is_valid():
+                    print("form is valid")
+                    score = Score()
+                    # get the username
+                    score.player_username = request.POST.get('player_username')
+                    # manually set the game type and score to be added to the table as the fields are disabled
+                    score.game_type = game_played
+                    score.score = score_got
+                    try:
+                        score.save()
+
+                        # leaderboard query set
+                        leaderboard_set = Score.objects.filter(game_type=game_played).order_by('score')[:10]
+                        leaderboard_set_list = list(leaderboard_set.values())
+
+                        data['result'] = 'Submitted'
+                        data['message'] = 'Your score has been uploaded!'
+                        data['leaderboard'] = leaderboard_set_list
+
+                        return JsonResponse(data, safe=False)
+
+                    except IntegrityError as e:
+                        print("we've got an integrity error")
+                        data['result'] = 'Integrity Error'
+                        data['message'] = 'It seems someone with this username has already played this game. ' \
+                                          'Choose a different one to save your score!'
+                        return JsonResponse(data)
                 else:
-                    print('some other errors')
-                    data['result'] = 'Other Errors'
-                    data['message'] = 'Something went wrong, please try again.'
-                    return JsonResponse(data)
+                    print('not valid')
+                    if KeyError:
+                        print("we've got a key error")
+                        data['result'] = 'Key Error'
+                        data['message'] = 'It seems someone with this username has already played this game. ' \
+                                          'Choose a different one to save your score!'
+                        return JsonResponse(data)
+                    else:
+                        print('some other errors')
+                        data['result'] = 'Other Errors'
+                        data['message'] = 'Something went wrong, please try again.'
+                        return JsonResponse(data)
         else:
-            form = AddScores(initial={'game_type': game_played,
-                                      'score': score_got})
+            scoreForm = AddScores(initial={'game_type': game_played,
+                                           'score': score_got})
+            emailForm = EmailUser()
 
             # change the shortcuts to real stream names before passing it to the page
             if stream_type == 'BI':
@@ -245,7 +256,8 @@ def results(request):
 
             # pass stuff to the page on load
             context = {
-                'form': form,
+                'form': scoreForm,
+                'emailForm': emailForm,
                 'stream_type': stream_type,
                 'game': game_played,
                 'tweetURL': 'https://twitter.com/intent/tweet?'
