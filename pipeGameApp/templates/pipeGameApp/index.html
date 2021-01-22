@@ -1,28 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="../../static/css/stylesheet.css">
+        <meta charset="UTF-8">
     </head>
 
-        <div id="question">
-        <h6> {{ question_1 }}</h6>
+    <body id="home">
+
+    <div class="main-container">
+        <div id="child-class-id">
+            <div id = "boxes">
+                <p id="status" align="center" class="status-bar">Each answer corresponds
+                    to the pipe next to it. Answer the question right, by helping the water reach the pipe which corresponds to the right answer. </p>
+            <div id = "leftbox">
+                <br><br><br><br><br><br><br><br><br><br>
+                <div id="question">{{ question_1 }}</div>
+            </div>
+
+            <div id = "middlebox">
+                <div id="grid">
+                    <script type="text/javascript" src="../../static/js/board.js"></script>
+                </div>
+                <div class="container-2">
+                    <div id="timer">02:00</div>
+                     <div align="center">
+                        <form method="post" class="timer">
+                        {% csrf_token %}
+
+                                <button id="sub-btn" type="submit" align="center" class="hide btn_end">Results Page</button>
+
+                                <button type="button" id="mybutton-1" onclick="location.href = '/';" title="link to homepage" class="hide btn_end">Back to Homepage</button>
+                                <button type="button" id="mybutton-2" onclick="window.location.href=window.location.href" title="link to homepage" class="hide btn_end">Play Again</button>
+
+                                <input type="hidden" name="score-holder" id="score-holder" value="blank">
+                                <input type="hidden" name="stream-holder" id="stream-holder" value={{ steam_type }}>
+
+            {#                <input type="hidden" name="score-holder" id="stream-holder" value='BI'>#}
+                    </form>
+
         </div>
 
-        <div id="grid"></div>
+       </div>
+            </div>
 
-        <script type="text/javascript" src="../../static/js/board.js"></script>
-        <div id="answers" class="my_answers">
-        <div class="answers">
-        <h6 id="answer1"> </h6>
+            <div id = "rightbox">
+               <div id="answers" class="my_answers">
+                   <div id = "rightbox-up">
+                        <div class="answers"><h6 id="answer1"> </h6></div><br><br><br><br><br><br><br><br>
+                   </div>
+                   <div id = "rightbox-middle">
+                        <div  class="answers"><h6 id="answer2"> </h6></div><br><br><br><br><br><br><br><br>
+                   </div>
+                   <div id = "rightbox-down">
+                        <div class="answers"><h6 id="answer3"> </h6></div>
+                   </div>
+                      {# TODO: Hide id "computer" which indicates the answer (for obvious reasons)#}
+                      <h6 id="computer"></h6>
+                  </div>
             </div>
-        <div  class="answers">
-        <h6 id="answer2"> </h6>
-            </div>
-        <div class="answers">
-        <h6 id="answer3"> </h6>
-            </div>
-            <h6 id="computer"></h6>
-            </div><br>
+        </div>
+      </div>
+
+    </div>
+
+    </body>
+
     <div>
         <input  value="{{ question_1 }}" name="value" id='q1' type="hidden"/>
         <input  value="{{ answer_1 }}" name="value" id='a1' type="hidden"/>
@@ -30,8 +74,6 @@
         <input  value="{{ answer_3 }}" name="value" id='a3' type="hidden"/>
 
     </div>
-
-    <div id="timer"></div>
     <script>
         document.getElementById("computer").innerHTML = sessionStorage.getItem("computerResponse");
         if (sessionStorage.getItem("computerResponse")==1){
@@ -52,16 +94,10 @@
 
     </script>
 
-    <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="score-holder" id="score-holder" value="blank">
-
-        <input type="submit" value="Submit" id="submit-btn">
-    </form>
-
 
 {#    document.getElementById("score-holder").value = score.text#}
 {#    document.getElementById("submit-btn").classList.remove("hide")#}
 
     </body>
+        </div>
 </html>
