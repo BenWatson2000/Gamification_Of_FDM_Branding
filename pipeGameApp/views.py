@@ -10,7 +10,7 @@ def index(request):
     if request.method == 'POST':
         score = request.POST.get("score-holder")
         request.session["my_score"] = score
-        request.session["my_game"] = "Memory"
+        request.session["my_game"] = "Pipe"
 
         # boolean check for path traversals on results page
         request.session["played"] = True
