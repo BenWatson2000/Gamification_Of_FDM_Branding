@@ -516,7 +516,10 @@ function startTimer() {
         }
     }, 1000);
 }
-var startgame=true;
+//start timer when page is loaded
+window.onload = function () {
+    startTimer();
+};
 
 /**
  * function to rotate the pipe called on click
@@ -524,10 +527,6 @@ var startgame=true;
 function rotatePipe(element) {
     var x = element.dataset.x;
     var y = element.dataset.y;
-    if(startgame===true){
-        startTimer();
-        startgame=false;
-    }
     grid.getThisPipe(x,y).rotate();
     grid.checkPipesConnection();
     grid.drawGrid();
