@@ -35,8 +35,8 @@ class HelperProfile(models.Model):
 
 class GameQuestion(models.Model):
     stream_type = models.CharField(max_length=50)
-    question = models.TextField()
-    answer = models.TextField()
+    question = models.TextField(max_length=200)
+    answer = models.TextField(max_length=400)
 
     def __str__(self):
         return self.question

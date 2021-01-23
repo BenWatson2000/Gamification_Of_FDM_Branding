@@ -21,13 +21,13 @@ class AddQuestion(forms.Form):
                                                                'placeholder': 'Select Stream Type',
                                                                'aria-label': 'Default select', 'id': 'floatingSelect'}),
                                     choices=STREAM_TYPES)
-    question = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'height:100px',
+    question = forms.CharField(max_length=200, widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'height:70px',
                                                             'placeholder': 'Question',
                                                             'title': 'Add your question here!',
                                                             'id': 'floatingQuestion'}))
 
-    answer = forms.CharField(widget=forms.Textarea(attrs={'type': "text", 'class': 'form-control',
-                                                          'style': 'height: 70px', 'placeholder': 'Answer',
+    answer = forms.CharField(max_length=400, widget=forms.Textarea(attrs={'type': "text", 'class': 'form-control',
+                                                          'style': 'height: 100px', 'placeholder': 'Answer',
                                                           'title': 'Add the correct answer here!',
                                                           'id': 'floatingAnswer'}))
 
