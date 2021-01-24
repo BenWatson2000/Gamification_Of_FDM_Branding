@@ -2,6 +2,8 @@ from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
+from myApp.settings import DEFAULT_FROM_EMAIL
+
 
 def dispatch(choice, user):
 
@@ -20,7 +22,6 @@ def dispatch(choice, user):
         html_message = render_to_string('streamEmails/technicalOperations.html', {'context': 'values'})
 
     plain_message = strip_tags(html_message)
-    from_email = 'MyCareerPath'
     to = user
 
-    mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+    mail.send_mail(subject, plain_message, DEFAULT_FROM_EMAIL, [to], html_message=html_message)
