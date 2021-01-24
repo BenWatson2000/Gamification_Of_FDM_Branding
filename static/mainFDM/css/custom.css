@@ -282,6 +282,10 @@ body {
     /*border-bottom: None;*/
 }
 
+td{
+    word-break: break-word;
+}
+
 .card{
     background-clip:padding-box;
     border: 10px solid rgba(255, 255, 255, 0.5);
