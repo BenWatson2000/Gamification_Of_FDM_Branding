@@ -96,16 +96,15 @@
                           <div class="column-text">The game you played was based on the <b>{{stream_type}}</b> stream.<br>
                             You can find out more about it on the FDM Group website using the button below.</div>
 
-
                          <!-- the form starts here -->
                           <!-- based on the stream chosen before the game started, redirect to the correct page -->
                         {% with s=stream_type %}
                           {%  if s == "Business Intelligence" %}
-                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/business-graduate/business-intelligence-graduate-programme/'>
+                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/business-graduate/business-intelligence-graduate-programme/' target="_blank">
                           {% elif s == "Software Testing" %}
-                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/technical-graduate-programme/software-testing-graduate-programme/'>
+                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/technical-graduate-programme/software-testing-graduate-programme/' target="_blank">
                           {% elif s == "Technical Operations" %}
-                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/technical-graduate-programme/technical-operations-graduate-programme/'>
+                              <form method="POST" action='https://www.fdmgroup.com/careers/graduates/technical-graduate-programme/technical-operations-graduate-programme/' target="_blank">
                           {% else %}
                               <form method="POST" action='/'>
                           {% endif %}
