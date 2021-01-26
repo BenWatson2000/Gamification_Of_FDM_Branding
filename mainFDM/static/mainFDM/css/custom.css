@@ -1,16 +1,3 @@
-/*!* Sticky footer styles - in case the fixed navbar is messing up/covers the rest
--------------------------------------------------- *!
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  !* Margin bottom by footer height *!
-  margin-bottom: 60px;
-}*/
-
-/*When the page is bigger and needs a scroll use this to keep the footer down*/
-
 html {
   position: relative;
     min-width: fit-content;
@@ -23,6 +10,7 @@ body {
     font-family: open sans, sans-serif;
 }
 
+/* specific body styling for Home page */
 #home{
     background-image: url('https://www.fdmgroup.com/wp-content/uploads/herobanner-uk-homepage-2.jpg');
     background-position: bottom right;
@@ -31,6 +19,7 @@ body {
     min-height: 60rem; /*this causes the page to scroll*/
 }
 
+/* specific body styling for all pages extending base.html */
 #base{
     background-color: #ffffff;
     padding-bottom: 8rem;
@@ -39,6 +28,7 @@ body {
     min-width: fit-content;
 }
 
+/* navbar styling starts here */
 .navbar {
     padding-bottom: 0;
     margin: 0;
@@ -67,6 +57,16 @@ body {
 #upper-bar{
     height:14px
 }
+/* end of navbar styling */
+
+/* styling of the main body of the page */
+
+.background-block{
+    min-width: fit-content;
+    max-width: border-box;
+    padding-inline: 2rem;
+    background-color: #f5f5f5;
+}
 
 :root {
   --jumbotron-padding-y: 1rem;
@@ -93,12 +93,9 @@ body {
 .jumbotron-heading {
     font-style: normal;
     font-weight: 600;
-    /*font-size: 64px;*/
     font-size: 4.4em;
     text-align: center;
-
     color: #FFFFFF;
-
     text-shadow: 0 8px 4px #212026;
 }
 
@@ -137,20 +134,15 @@ body {
 .jumbotron .container {
   max-width: 100%;
 }
-/*.form-select:focus{
-    border-color: #FF0000;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.3);
-    outline: 0;
-    outline: thin dotted \9;
-    border-width: 2px;
-}*/
 
+/* form fields highlight when selected */
 .form-control:focus, .form-select:focus{
     border-color: #1541c8;
     box-shadow: inset 0 0 3px 1px rgba(21, 65, 200, 1), 0 0 2px 3px rgba(21, 65, 200, 1);
     border-width: 1px;
 }
 
+/* form labels */
 .form-label{
     color: #ffffff;
     font-weight: 500;
@@ -159,6 +151,7 @@ body {
     width: 8rem;
 }
 
+/* unrelated text inside the blue column cards */
 .column-text{
     color: #FFFFFF;
     text-shadow: 0 1px 2px #212026;
@@ -172,16 +165,13 @@ body {
     color: #202025;
 }
 
+/* any card or column with content */
 .form-col{
     background: #1daded;
     border-radius: 30px;
     background-clip: border-box;
     margin-bottom: 20px;
     min-width: fit-content;
-    /*box-shadow:*/
-    /*        0.2rem 0.2rem 0.55rem 0.1rem rgb(21, 65, 200),*/
-    /*        0.5rem 0.5rem 0.55rem 0.1rem rgb(136,32,187);*/
-    /* horizontal offset, vertical offset, blur radius, spread radius, colour */
 
     /*FDM's blue on black shadow*/
     -webkit-box-shadow: 0 0 25px 0 #202025, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
@@ -201,10 +191,12 @@ body {
     text-shadow: 0 4px 2px #212026;
 }
 
+/* redirection links on forms, e.g. forgotten password link */
 .form-link{
     color: #ffffff;
 }
 
+/* our general button styling */
 .btn-grad{
     border-radius: 50px;
     background: #1541c8;
@@ -226,42 +218,16 @@ body {
     font-weight: 300;
 }
 
+/* success messages */
 #success{
     margin-top: 20px;
     margin-inline: 10px;
     margin-bottom: 10px;
 }
 
-.board-username{
-    border-right: 2px solid #FFFFFF;
-    padding-block: 10px;
-    word-wrap: break-word;
-    text-align: center;
-}
-
-.board-score{
-    padding-block: 10px;
-    word-wrap: break-word;
-    text-align: center;
-}
-
-.board-header{
-    font-size: large;
-    font-weight: bold;
-    text-shadow: 0 4px 1px #212026;
-}
-
-.board-row{
-    background: linear-gradient(45deg, #1541c8 50%,#8820bb 50%);
-    border-left: 1px solid #FFFFFF;
-    border-right: 1px solid #FFFFFF;
-    border-top: 1px solid #FFFFFF;
-    border-bottom: 1px solid #FFFFFF;
-    color: #FFFFFF;
-}
+/* beginning of leader board and tables styling */
 
 .table{
-    /*background: linear-gradient(40deg,#1541c8 0,#8820bb 100%);*/
     background: #202025;
     color: #FFFFFF;
     border-collapse: collapse;
@@ -274,18 +240,14 @@ body {
 
 .table-head{
     border-bottom: 2px solid #FFFFFF;
-    /*word-break: keep-all;*/
 }
 
-.table-row{
-    /*background: linear-gradient(45deg, #1541c8 50%,#8820bb 50%);*/
-    /*border-bottom: None;*/
-}
-
+/* table row */
 td{
     word-break: break-word;
 }
 
+/* styling of the stream cards on Home page */
 .card{
     background-clip:padding-box;
     border: 10px solid rgba(255, 255, 255, 0.5);
@@ -327,11 +289,13 @@ td{
     color: white;
 }
 
+/* button container on home page */
 .btn-container {
     position: absolute;
     bottom: 10px;
 }
 
+/* quiz button on home page */
 .quiz-btn{
     font-style: normal;
     font-weight: 600;
@@ -342,23 +306,15 @@ td{
     border: none;
 }
 
+/* footer styling starts here */
+
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     margin-bottom:0;
-    /*padding-bottom: 0;*/
-    /*padding-top: 3rem;*/
     border-bottom: 8px solid #1daded;
 }
-
-/*TODO delete if proves unnecessary*/
-/*#lower-bar{
-    position: absolute;
-    height: 12px;
-    max-width: 100%;
-    top: -12px;
-}*/
 
 #helper-login-btn{
     font-weight: 600;
@@ -378,9 +334,9 @@ td{
     font-weight: 300;
 }
 
+/* social media icons */
 .icon-effect{
     align-items: center;
-
     padding-left: 0;
     list-style-type: disc;
     font-weight: 300;
@@ -399,11 +355,6 @@ td{
     font-size: 20px;
 }
 
-#link-fb{
-    width: 20px;
-    height: 15px;
-}
-
 .icon-effect a {
     color: #fff;
     text-align: center;
@@ -417,6 +368,7 @@ td{
     cursor: pointer;
 }
 
-
-/*TODO delete if proves unnecessary*/
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+#link-fb{
+    width: 20px;
+    height: 15px;
+}
