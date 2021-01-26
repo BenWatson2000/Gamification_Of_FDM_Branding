@@ -1,6 +1,7 @@
 from django.conf.global_settings import DEFAULT_FROM_EMAIL
 from django.core import mail
 from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 def dispatch(choice, user):

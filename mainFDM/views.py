@@ -261,6 +261,6 @@ def results(request):
                 'tweetURL': 'https://twitter.com/intent/tweet?'
                             'text=I%20just%20got%20a%20time%20of%20' + score_got + '%20on%20the%20' + game_played +
                             ' Game%21%20Try%20and%20beat%20my%20time%20at%20https%3A//mycareerpath.co.uk%20and%20di'
-                            'scover%20many%20different%20career%20sectors%20in%20technology%21&hashtags=MYCAREERPATH',
+                            'scover%20many%20different%20career%20sectors%20in%20technology%21&hashtags=FDMCareers',
             }
             return render(request, 'mainFDM/results.html', context)

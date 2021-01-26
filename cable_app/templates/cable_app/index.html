@@ -6,6 +6,10 @@
         <title>Cable Game</title>
         <script type="text/javascript" src="../../static/js/phaser.min.js"></script>
         <link href="../../static/css/styles.css" rel="stylesheet">
+
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'mainFDM/images/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" href="{% static 'mainFDM/images/favicon.ico' %}">
+
     </head>
     <body>
 
@@ -147,18 +151,18 @@
                 var bg = this.add.image(400, 300, 'background').setInteractive();
                 bg.setScale(2);
 
-                //TODO left question number indicators so I can know the right answers (remove them when they are not needed)
+                // uncomment question number indicators only for testing purposes
                     // set all questions and answers
-                    var question1 = finalQ1 + "Q1"
+                    var question1 = finalQ1 //+ "Q1"
                     var answer1 = finalA1
 
-                    var question2 = finalQ2+"Q2"
+                    var question2 = finalQ2 //+"Q2"
                     var answer2 = finalA2
 
-                    var question3 = finalQ3+"Q3"
+                    var question3 = finalQ3 //+"Q3"
                     var answer3 = finalA3
 
-                    var question4 = finalQ4+"Q4"
+                    var question4 = finalQ4 //+"Q4"
                     var answer4 = finalA4
 
                     // array with coordinates for randomizing question cables
