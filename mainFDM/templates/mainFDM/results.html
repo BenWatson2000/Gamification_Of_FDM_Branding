@@ -5,25 +5,25 @@
 {%block header%}Do you want to upload your scores?{%endblock%}
 
 {% block navtext %}
-    <!-- if the user is logged in add a message and log out button to the navbar
-              and collapse it under the toggle button on smaller screens -->
+    <!-- if the user is logged in, show a welcoming message and a log out button on the navbar
+       and collapse it under the toggle button on smaller screens -->
     {% if request.user.is_authenticated %}
         <span class="navbar-text text-info mx-2">Hello, {{ request.user }} </span>
         <a class="nav-link link-light mx-2" href="/helper/logout/">Log out <span class="sr-only"></span></a>
     {% endif %}
 {% endblock %}
 
-<!-- row of for columns -->
+<!-- container for the main row of columns -->
 {% block forcolumns %}
-              <!-- row of for 2 columns on the page -->
+              <!-- row of for 2 columns of content on the page -->
               <div class="row justify-content-center justify-content-md-around justify-content-lg-between pt-5">
 
-                  <div class="col-auto col-lg-5"> <!-- outer container for upload/leaderboard -->
+                  <div class="col-auto col-lg-5"> <!-- outer container for upload scores form/leaderboard AND twitter -->
 
-                      <!-- add scores / leaderboard column -->
+                      <!-- upload scores / leaderboard column -->
                       <div class="container form-col p-3 p-sm-3 pb-4 pb-sm-3 justify-content-center" id="upload-form-col">
 
-                          <!-- ajax result for successful submission of the score form -->
+                          <!-- ajax result for successful submission of the upload form -->
                           <div class="" id="success"></div>
 
                           <!-- 'upload scores' form starts here -->
@@ -34,6 +34,7 @@
                                   <h3 class="form-title" id="form-title">Upload</h3>
                               </div>
 
+                              <!-- form fields -->
                               <div class="mb-3">
                                   <label class="form-label">{{ form.player_username.label }}</label>
                                   {{ form.player_username }}
@@ -51,9 +52,9 @@
                               <div class="d-flex pt-1 justify-content-center">
                                   <button type="submit" class="btn btn-grad btn-lg" id="form-btn" >Submit</button>
                               </div>
-                          </form>
+                          </form> <!-- end of upload scores form -->
 
-                          <!-- leader board starts here -->
+                          <!-- leader board starts here (still the same column as the upload form) -->
                           <div class="container justify-content-center d-none" id="leaderboard">
                               <!-- leaderboard title -->
                               <div id="leaderboard-title-div">
@@ -73,7 +74,7 @@
                                       </tbody>
                                     </table>
                           </div>
-                      </div> <!-- end of add scores / leaderboard column -->
+                      </div> <!-- end of upload scores / leaderboard column -->
 
                       <!-- share results on twitter component -->
                       <div class="container form-col p-4">
@@ -85,12 +86,13 @@
                           </div>
                       </div><!-- end of share results on twitter component -->
 
-                  </div> <!-- outer container for upload/leaderboard -->
+                  </div> <!-- end of outer container for upload/leaderboard AND twitter -->
 
-                  <!-- proceed to streams container (same size as outer container on the left but invisible) -->
+                  <!-- proceed to streams & info container (same size as outer container on the left but invisible) -->
                   <div class="col-sm-auto col-md-5">
                       <!-- actual column with the proceed to streams button (small) -->
                       <div class="container form-col p-4" style="min-width: fit-content">
+
                         <!-- 'take me to the streams' form -->
                         <h3 class="form-title">Find out more about the stream</h3>
                           <div class="column-text">The game you played was based on the <b>{{stream_type}}</b> stream.<br>
@@ -111,6 +113,7 @@
                         {% endwith %}
                                 <!-- the rest of the form -->
                                 {% csrf_token %}
+                                  <!-- 'let's go' button -->
                                 <div class="d-flex pt-1 justify-content-center">
                                    <button type="submit" class="btn btn-grad btn-lg" id="form-btn2" >Let's Go</button>
                                 </div>
@@ -120,7 +123,7 @@
                               </form>
                       </div> <!-- end of proceed to stream component -->
 
-                      <div class="container form-col p-4"> <!-- receive-email component -->
+                      <div class="container form-col p-4"> <!-- receive-info-email component -->
 
                           <h3 class="form-title">Receive information about graduate programme</h3>
 
@@ -138,12 +141,12 @@
                                   </div>
                               </form>
 
-                      </div> <!-- end of receive-email component -->
+                      </div> <!-- end of receive-info-email component -->
 
                   </div> <!-- end of proceed to stream/receive email outer container -->
-              </div> <!-- end of the row of for 2 columns with 2 forms-->
+              </div> <!-- end of the outer row with the two columns-->
 
-                {% endblock %}
+{% endblock %}
 
 
 <!-- footer  -->

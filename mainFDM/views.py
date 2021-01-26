@@ -2,7 +2,6 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-
 from .dispatchMail import dispatch
 from .models import GameQuestion, Score
 from .forms import AddQuestion, CreateHelperForm, AddScores, EmailUser
@@ -15,27 +14,24 @@ import memoryApp.views as m
 import pipeGameApp.views as p
 
 
-# Create your views here.
-
-# view of the intro to FDM Technical Graduate Programmes page
-def index(request):
-    return render(request, 'mainFDM/index.html')
-
-
-def base(response):
-    return render(response, 'mainFDM/base.html')
-
+# All views for the pages are here
 
 def home(request):
-    # update the results page boolean check
+    """
+    Home page view. Mainly used to manipulate the session attributes for the games and redirect to correct games.
+    :param request: web request
+    :return: web response with the home page HTML template
+    """
+    # update the results page boolean check for played game
     request.session["played"] = False
     if request.method == "POST":
 
+        # get the stream and game types from the home page buttons
         request.session["stream-type"] = request.POST.get("stream-type-holder")
-
         game_type = request.POST.get("game-type-holder")
         request.session["my_game"] = game_type
 
+        # redirect to correct games from the stream cards
         if game_type == 'Cable':
             return redirect(c.index)
         elif game_type == "Pipe":
@@ -47,18 +43,31 @@ def home(request):
 
 
 def helper_register(request):
+    """
+    Helper registration view.
+    :param request: Web request
+    :return: Register page if the user is not authenticated, helper home page if they are
+    or helper login if they already have an account
+    """
+
+    # take the user to helper home page if they are already logged in
     if request.user.is_authenticated:
         return redirect('helperHome')
     else:
+        # get the create account form
         form = CreateHelperForm()
 
         if request.method == 'POST':
             form = CreateHelperForm(request.POST)
             if form.is_valid():
+                # save the user's data to the database
                 form.save()
+                # get the entered username
                 username = form.cleaned_data.get('username')
+                # display a success message with the given username on the log in page
                 messages.success(request, ((username[:50] + '...') if len(username) > 50 else username) +
                                  ',\nyou have successfully created a helper account!')
+                # take to login page
                 return redirect('helperLogin')
             else:
                 return render(request, 'mainFDM/helper_register.html', {'form': form})
@@ -68,9 +77,13 @@ def helper_register(request):
 
 
 def helper_login(request):
+    """View for the login page. Allows users to log in, go register or go reset their passwords."""
+
+    # take the user to helper home page if they are already logged in
     if request.user.is_authenticated:
         return redirect('helperHome')
     else:
+        # get the log in form
         form = AuthenticationForm()
         if request.method == 'POST':
 
@@ -92,47 +105,55 @@ def helper_login(request):
                 if user.helper.admin_approved:
                     login(request, user)
                     return redirect('helperHome')
-                # not approved yet
+
                 else:
+                    # not approved yet
                     messages.info(request, 'Your account has not yet been approved by the admins.\nThis may take up to '
                                            '24h.')
             else:
+                # non-existent user or incorrect credentials entered
                 messages.error(request, 'Please enter a correct username and password.\nNote that both fields '
                                         'may be case-sensitive.')
 
         context = {'form': form}
-        # using the django.shortcut render to add templates
-        return render(request, 'mainFDM/helper_login.html', context)  # passing information into our intro_tgp template
+        # pass the login template
+        return render(request, 'mainFDM/helper_login.html', context)
 
 
 def helper_logout(request):
+    """View to log users out. Uses built-in django log out functionality."""
     logout(request)
     return redirect('helperLogin')
 
 
 @login_required
 def helper_home(request):
-    # data to be passed to the template
+    """View for the helper home page. Cannot be accessed unless the user is logged in."""
+    # data to be passed to the helper home template
     context = {}
 
     # the question form functionality
     if request.method == "POST":
         q_form = AddQuestion(request.POST)
         if q_form.is_valid():
+            # get the question model
             question = GameQuestion()
+            # create a new entry from the form data
             question.stream_type = q_form.cleaned_data.get("stream_type")
             question.question = q_form.cleaned_data.get("question")
             question.answer = q_form.cleaned_data.get("answer")
+            # add the data to the database
             question.save()
 
     q_form = AddQuestion()
     context['q_form'] = q_form
 
-    # the best score functionality
+    # the best score functionality - query the Score table to get the best score for each game type
     best_cable = Score.objects.filter(game_type='Cable').order_by('score')[:1]
     best_memo = Score.objects.filter(game_type='Memory').order_by('score')[:1]
     best_pipes = Score.objects.filter(game_type='Pipe').order_by('score')[:1]
 
+    # for each score, assign it to a context variable
     for ca in best_cable:
         context['best_cable'] = ca
     for me in best_memo:
@@ -140,15 +161,11 @@ def helper_home(request):
     for pi in best_pipes:
         context['best_pipes'] = pi
 
-    # display the list of questions already in the database
-    # query the database
+    # display the list of questions already in the database - query the database to get the questions
     qs = GameQuestion.objects.all()
+
     # create a list of values from the queryset to prepare for passing to template
     qs_list = list(qs.values())
-
-    # previous methods, don't delete yet
-    # context['questions'] = qs
-    # context['qscount'] = range(1, qs.count()+1)
 
     # pass the list as json to template
     context['qsjson'] = json.dumps(qs_list)
@@ -156,16 +173,11 @@ def helper_home(request):
     return render(request, 'mainFDM/helper_home.html', context)
 
 
-# view of the pre-stream quiz page
-def quiz(request):
-    return render(request, 'mainFDM/quiz.html', {})  # passing info to the quiz.html template
-
-
-# view of the results page
 def results(request):
-    # check if the key exists yet - in case someone opens results page from url before opening home page
-    # if they key does not exist, create it as False (not played yet) and throw them to the home page
+    """ Results page view """
 
+    # check if the key exists yet - in case someone opens results page directly from url before opening home page
+    # if they key does not exist, create it as False (not played yet) and throw them to the home page
     if "played" not in request.session:
         request.session["played"] = False
         return redirect(home)
@@ -174,8 +186,8 @@ def results(request):
     if request.session["played"] is None or not request.session["played"]:
         return redirect(home)
 
-    else:  # if they have played - display the results page for them
-
+    # if they have played - display the results page for them
+    else:
         # set the game type to the one the user played
         game_played = request.session["my_game"]
         # set the score to the one the user got
@@ -186,62 +198,74 @@ def results(request):
         # send data to ajax
         data = {'game': game_played}
 
-        # the score adding form functionality
+        # if a form needs submitting
         if request.method == "POST":
             form = AddScores(request.POST)
 
+            # check if the submission concerns the get-info-email form
             if 'email' in request.POST:
 
+                # dispatch an email to the given address
                 email = request.POST.get("email")
                 dispatch(stream_type, email)
 
                 return redirect(results)
 
+            # the score adding form functionality
             else:
 
+                # if the username is valid
                 if form.is_valid():
-                    print("form is valid")
+
+                    # get the score model
                     score = Score()
-                    # get the username
+                    # get the username of the current user
                     score.player_username = request.POST.get('player_username')
-                    # manually set the game type and score to be added to the table as the fields are disabled
+                    # manually set the game type and score to be added to the table as these fields are disabled
                     score.game_type = game_played
                     score.score = score_got
+
+                    # if all validation is passed (including UniqueConstraint)
                     try:
+                        # save the data to the database
                         score.save()
 
-                        # leaderboard query set
+                        # get the data for the leaderboard
                         leaderboard_set = Score.objects.filter(game_type=game_played).order_by('score')[:10]
                         leaderboard_set_list = list(leaderboard_set.values())
 
+                        # pass data to ajax
                         data['result'] = 'Submitted'
                         data['message'] = 'Your score has been uploaded!'
                         data['leaderboard'] = leaderboard_set_list
 
                         return JsonResponse(data, safe=False)
 
+                    # if the UniqueConstraint for the score and game type fails
                     except IntegrityError as e:
-                        print("we've got an integrity error")
                         data['result'] = 'Integrity Error'
                         data['message'] = 'It seems someone with this username has already played this game. ' \
                                           'Choose a different one to save your score!'
                         return JsonResponse(data)
                 else:
-                    print('not valid')
+
+                    # if the UniqueConstraint for the score and game type fails
                     if KeyError:
-                        print("we've got a key error")
                         data['result'] = 'Key Error'
                         data['message'] = 'It seems someone with this username has already played this game. ' \
                                           'Choose a different one to save your score!'
                         return JsonResponse(data)
+
+                    # if something else happens
                     else:
-                        print('some other errors')
                         data['result'] = 'Other Errors'
                         data['message'] = 'Something went wrong, please try again.'
                         return JsonResponse(data)
         else:
+            # pass the upload scores form with the user's result and game they played
             score_form = AddScores(initial={'game_type': game_played,
                                             'score': score_got})
+            # pass the info-email form
             email_form = EmailUser()
 
             # change the shortcuts to real stream names before passing it to the page
