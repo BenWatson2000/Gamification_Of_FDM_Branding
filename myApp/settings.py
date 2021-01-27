@@ -124,12 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 # SMTP Configuration - simple mail transfer protocol for the reset password functionality
-# if DEBUG:
-#     # FOR DEVELOPMENT ONLY - sends the email to console
-#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#
-# # FOR PRODUCTION
-# else:
+# FOR PRODUCTION
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'team4helper@gmail.com'
