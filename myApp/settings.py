@@ -124,20 +124,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 # SMTP Configuration - simple mail transfer protocol for the reset password functionality
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # FOR DEVELOPMENT ONLY - sends the email to console
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = 'team4helper@gmail.com'
-    EMAIL_HOST_PASSWORD = 'ppvjxlyqglrpzuvm'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    DEFAULT_FROM_EMAIL = 'MyCareerPath Team <noreply@mycareerpath.co.uk>'
+# if DEBUG:
+#     # FOR DEVELOPMENT ONLY - sends the email to console
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#
+# # FOR PRODUCTION
+# else:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'team4helper@gmail.com'
+EMAIL_HOST_PASSWORD = 'ppvjxlyqglrpzuvm'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'MyCareerPath Team <noreply@mycareerpath.co.uk>'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# login redirection centre
 LOGIN_URL = '/helper/login/'
 LOGIN_REDIRECT_URL = '/helper/home/'
 LOGOUT_REDIRECT_URL = '/helper/login/'

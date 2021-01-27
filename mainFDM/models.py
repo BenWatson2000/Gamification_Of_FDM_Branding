@@ -1,19 +1,8 @@
 from django.db import models
-from django.forms import ModelForm
 from django.contrib.auth.models import User
 
 
-# Create your models here.
-class HelperAccount(models.Model):
-    # this is just a mock so it will use the auto created id as PK
-    username = models.CharField(max_length=20, unique=True)
-    firstname = models.CharField(max_length=40, unique=False)
-    surname = models.CharField(max_length=40, unique=False)
-    password = models.CharField(max_length=15, unique=True)
-
-    def __str__(self):
-        return self.username
-
+# All custom database models are here
 
 # extending django User model with a one-to-one field
 class HelperProfile(models.Model):
@@ -29,10 +18,12 @@ class HelperProfile(models.Model):
     # this field is accessible by querying user.helper.admin_approved
     admin_approved = models.BooleanField(default=False)
 
+    # this is how the entries are labelled on the Django admin page
     def __str__(self):
         return self.user.username
 
 
+# table for the game questions
 class GameQuestion(models.Model):
     stream_type = models.CharField(max_length=50)
     question = models.TextField(max_length=200)
@@ -42,6 +33,7 @@ class GameQuestion(models.Model):
         return self.question
 
 
+# table with the players' scores
 class Score(models.Model):
     class Meta:
         constraints = [

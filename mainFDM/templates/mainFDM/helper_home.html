@@ -5,17 +5,17 @@
 {%block header%}Helper Page{%endblock%}
 
 {% block navtext %}
- <!-- if the user is logged in add a message and log out button to the navbar
-              and collapse it under the toggle button on smaller screens -->
+    <!-- if the user is logged in, show a welcoming message and a log out button on the navbar
+    and collapse it under the toggle button on smaller screens -->
     {% if request.user.is_authenticated %}
         <span class="navbar-text text-info mx-2">Hello, {{ request.user }} </span>
         <a class="nav-link link-light mx-2" href="/helper/logout/">Log out <span class="sr-only"></span></a>
     {% endif %}
 {% endblock %}
 
-<!-- row of for columns -->
+<!-- container for the main row of columns -->
 {% block forcolumns %}
-                  <!-- row of 2 columns with 2 forms -->
+                  <!-- row of 2 columns with helper question form and check scores form -->
                   <div class="row justify-content-center justify-content-md-around justify-content-lg-between pb-3">
 
                     <!-- helper question adding form column -->
@@ -110,12 +110,7 @@
                   </tbody>
                 </table>
     </div>
-
-
-{% endblock %}
-
-{% block lower %}{% endblock %}
-
+{% endblock %} <!-- block forcolumns -->
 
 <!-- footer  -->
 {% block helper-button %}
@@ -124,7 +119,7 @@
 </a>
 {% endblock %}
 
-
+<!-- JavaScript -->
 {% block scripts %}
     <script>
         // Using IIFE - Immediately Invoked Function Expression to speed up the table rendering
@@ -135,17 +130,20 @@
 
         }(function($, window, document) {
 
-            // the usual jquery stuff that would normally end up in $(document).read() :
+            // the usual jquery stuff that would normally end up in $(document).read():
 
+            // get the json data with the questions from the views
             let qs_json = JSON.parse('{{ qsjson | escapejs }}');
 
+            // iterate over a range equal to the number of questions
             for (let i = 0; i < qs_json.length; i++){
+                // add indexing to the rows with questions and answers that are being added
                 $('#questions-table').append('<tr class="table-row"> ' +
                     '<th class="row-index">' + (i+1) + '</th>' +
                             '<td>' + qs_json[i].stream_type +  '</td> <td>' + qs_json[i].question + '</td> <td>' + qs_json[i].answer + '</td></tr>')
-
             }
 
+            // retrieve the best scores
              $("#get-b-score").click(function(){
                 $("#best-scores-table").removeClass("d-none");
                 });

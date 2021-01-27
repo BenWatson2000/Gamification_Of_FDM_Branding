@@ -2,18 +2,19 @@
 
 {%block title%}Helper Login{%endblock%}
 
-
 {%block header%}Please log in to your helper account{%endblock%}
 
-<!-- row of for columns -->
+<!-- inside the main row for columns, attributes specified within base.html -->
 {% block row1 %}
     <div class="col-auto form-col p-4 justify-content-center" id="login-form-col">
-        <!-- helper login form: -->
+
+        <!-- helper login form -->
         <h3 class="form-title">Log In</h3>
 
         <form method="post">
             {% csrf_token %}
 
+            <!-- show errors and messages -->
             {% for field in form %}
                 {% for error in field.errors %}
                     <div class="alert alert-danger">{{ error }}</div>
@@ -34,7 +35,7 @@
                 {% endif %}
             {% endfor %}
 
-
+            <!-- form fields -->
             <div class="form-floating mb-3">
               <input name="username" type="text" class="form-control" id="username_field" placeholder="Username" required>
               <label class="form-label-float" for="username_field">{{ form.username.label }}</label>
@@ -57,11 +58,10 @@
         <div class="d-flex mt-4 justify-content-center links">
             Don't have a helper account? <a href="{% url 'helperRegister' %}" class="form-link ms-3">Sign Up</a>
         </div>
+        <!-- option to reset password if forgotten -->
         <div class="d-flex mt-4 justify-content-center links">
             <a class="form-link m-auto" href="{% url 'password_reset' %}">Forgotten password?</a>
         </div>
 
     </div>
 {% endblock %}
-
-{% block lower %}{% endblock %}

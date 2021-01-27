@@ -4,6 +4,6 @@ from django.apps import AppConfig
 class MainConfig(AppConfig):
     name = 'mainFDM'
 
-    # make sure to load the signals file
+    # loading the signals file to make sure the HelperProfiles model will get updated simultaneously with the User model
     def ready(self):
         from mainFDM import signals
