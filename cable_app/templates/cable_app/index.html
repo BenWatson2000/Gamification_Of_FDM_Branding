@@ -15,6 +15,7 @@
 
     <div>
 
+        {# using hidden inputs to get and store questions and answers from views.py #}
         <input  value="{{ question_1 }}" name="value" id='q1' type="hidden"/>
         <input  value="{{ question_2 }}" name="value" id='q2' type="hidden"/>
         <input  value="{{ question_3 }}" name="value" id='q3' type="hidden"/>
@@ -26,8 +27,8 @@
 
     </div>
 
+    {# used to post results on the results page#}
      <form name="cablegame" method="post" id="cable_game">
-
          {% csrf_token %}
 
          {#phaser game#}
@@ -61,6 +62,7 @@
 
             var game = new Phaser.Game(config);
 
+            //variables to use in the game
             var imagesCon=[];
             var line;
             var lineActive = false;
@@ -103,7 +105,7 @@
 
 
 
-            // load images to use in create
+            // load images from static to use in create() function
             function preload ()
             {
                 this.load.image('background',"{% static "images/background.jpg" %}")
@@ -153,22 +155,22 @@
 
                 // uncomment question number indicators only for testing purposes
                     // set all questions and answers
-                    var question1 = finalQ1 //+ "Q1"
+                    var question1 = finalQ1 //+ "A1"
                     var answer1 = finalA1
 
-                    var question2 = finalQ2 //+"Q2"
+                    var question2 = finalQ2 //+"A2"
                     var answer2 = finalA2
 
-                    var question3 = finalQ3 //+"Q3"
+                    var question3 = finalQ3 //+"A3"
                     var answer3 = finalA3
 
-                    var question4 = finalQ4 //+"Q4"
+                    var question4 = finalQ4 //+"A4"
                     var answer4 = finalA4
 
                     // array with coordinates for randomizing question cables
                     var array = [93, 278, 463, 648]
 
-                    // function to shuffle array
+                    // function to shuffle array with coordinates
                     var shuffle = function (array) {
                         for (var i = array.length - 1; i > 0; i--) {
                             var j = Math.floor(Math.random() * (i + 1));
@@ -178,7 +180,7 @@
                         }
                         return array;
                     };
-                    // new shuffled array
+                    // new shuffled array with coordinates
                     var newArray = shuffle(array)
 
 
@@ -240,7 +242,7 @@
                     ]
 
 
-                    //array of all images and their matches and randomizing question cables
+                    //created array of all images and their matches and used randomized array for question Y coordinate
                     images = [
                         this.add.image(397, newArray[0], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable1').setData('name', 'questioncable1'),
                         this.add.image(397, newArray[1], 'questioncable').setInteractive({useHandCursor: true}).setData('match', 'answercable2').setData('name', 'questioncable2'),
@@ -252,7 +254,7 @@
                         this.add.image(803, 648, 'answercable').setInteractive({useHandCursor: true}).setData('match', 'questioncable4').setData('name', 'answercable4'),
                     ];
 
-                    // adding images for when cables connect right  and setting them invisible
+                    // adding green cable images for when cables connect correctly and setting them invisible
                     var q1a1 = this.add.image(600, 315, 'q1a1');
                     q1a1.visible = false;
 
@@ -301,7 +303,7 @@
                     var q4a1 = this.add.image(600, 369, 'q4a1')
                     q4a1.visible = false;
 
-                    // adding images for when cables connect wrong  and setting them invisible
+                    // adding red cable images for when cables connect wrong and setting them invisible
                     var q1a1f = this.add.image(600, 315, 'q1a1f');
                     q1a1f.visible = false;
 
@@ -399,7 +401,7 @@
 
                 //border for displaying final score
                 var score_border = this.add.image(600,370,'textBorder')
-                // text for final score
+                // texts for final score board
                 var score = this.add.text(590, 360, (120 - this.initialTime), {fill: "#FFFFFF ",font: "30px Sans-Serif" , align: "center"});
                 var score_text = this.add.text(514,310,'Final score', {fill: "#FFFFFF ",font: "35px Sans-Serif"})
                 var redirectText = this.add.text(470,420,' Directing to results page in', {fill: "#FFFFFF ",font: "20px Sans-Serif"})
@@ -546,13 +548,13 @@
                         }
                     }
 
-                    //for each image in array images
+                    //function for when clicking on every image in the images array
                     images.forEach(function (image) {
                         image.on('pointerdown', function (pointer) {
                             //set tint for when image is clicked
                             this.setTint(0x888888);
 
-                            // if an object is already selected and second object is answer
+                            // if an object is already selected and second object is an answer cable
                             if (lineActive === true && image.x===803) {
                                 main.input.removeListener('pointermove');
                                 // if images match
@@ -779,7 +781,7 @@
                             if (lineActive === false && !image.getData('selected') && !reset) {
                                 // Make sure it's not one that's already been completed and the first option is a question
                                 if (!completedNodes.includes(image.getData('name')) && image.x===397) {
-                                    //if questions cable is selected again delete the red cable connected to it
+                                    //if a question cable is selected again delete the red cable connected to it
                                     if (image.y === 93) {
                                         if(answsr1===93){
                                             images[4].visible = true;
@@ -935,6 +937,7 @@
 
          </script>
 
+            {# input to hold score for passing to results page #}
           <input type="hidden" name="score-holder" id="score-holder" value="blank">
 
 
