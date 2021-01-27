@@ -459,7 +459,7 @@ var grid = {
                     pipe_div.className += " l";
                 }
 
-                //make active pipes that are connected with the first pipe and the ones that corresponds to the answers
+                //makes pipes that are connected to the stream and the ones that corresponds to the answers look active
                 if ((pipe.active === 1)||(pipe.x ===1 && pipe.y===7)||(pipe.x ===4 && pipe.y===7)||(pipe.x ===7 && pipe.y===7)) {
                     pipe_div.className += " a";
                 }
@@ -493,6 +493,7 @@ function startTimer() {
 
             display.textContent = minutes + ":" + seconds;
 
+            //if timer reaches 0 end game
             if (--timer < 0) {
                 timer = 0;
                 document.getElementById("status").innerText = "Game Over"
@@ -511,8 +512,6 @@ function startTimer() {
                 a3.style.display = "none";
             }
 
-
-            // timer = duration; // uncomment this line to reset timer automatically after reaching 0
         }
     }, 1000);
 }

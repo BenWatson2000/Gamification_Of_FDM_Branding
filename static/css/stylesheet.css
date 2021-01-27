@@ -155,7 +155,10 @@ body {
     font-size: 25px;
 }
 
-
+#sub-btn{
+    position: relative;
+    left: -3.5%;
+}
 
 
 /* end points */
