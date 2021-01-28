@@ -98,7 +98,7 @@ Safari and Microsoft Edge, so we recommend you use one of these.
 Along with this local instance of the web app, we also have hosted an instance on the web at the domain 
 https://mycareerpath.co.uk/.
 
-###A note on the test suite:
+### A note on the test suite:
 
 If you would like to run the test suite then you must install the latest version of
 Node.js and run ```npm test``` in the terminal.
