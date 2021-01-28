@@ -1,16 +1,3 @@
-/*!* Sticky footer styles - in case the fixed navbar is messing up/covers the rest
--------------------------------------------------- *!
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  !* Margin bottom by footer height *!
-  margin-bottom: 60px;
-}*/
-
-/*When the page is bigger and needs a scroll use this to keep the footer down*/
-
 html {
   position: relative;
   min-height: 100%;
@@ -369,7 +356,3 @@ body {
     padding-inline: 40%;
     cursor: pointer;
 }
-
-
-/*TODO delete if proves unnecessary*/
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
